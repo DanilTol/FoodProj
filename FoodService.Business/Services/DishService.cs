@@ -30,30 +30,35 @@ namespace FoodService.Business.Services
             return allDishes;
         }
 
-        public List<DishModelShortInfo> FilterDishes(int page, int pageSize, string filter = null)
+        public IEnumerable<DishModelShortInfo> FilterDishes(int page, int pageSize, string filter = null)
         {
             List<Dish> shortDish = new List<Dish>();
+            IEnumerable<DishModelShortInfo> allDishes;
             if (!string.IsNullOrEmpty(filter))
             {
-                shortDish = Database.Dish.GetAll.Where(m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
-                    .OrderBy(m => m.ID)
-                    .Skip(page*pageSize)
-                    .Take(pageSize)
-                    .ToList();
+                    allDishes = Mapper.Map<IQueryable<Dish>, IEnumerable<DishModelShortInfo>>(
+                    Database.Dish.GetAll.Where(m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
+                        .OrderBy(m => m.ID)
+                        .Skip(page*pageSize)
+                        .Take(pageSize));
 
             }
             else
             {
-                shortDish = Database.Dish.GetAll
-                    .OrderBy(m => m.ID)
-                    .Skip(page * pageSize)
-                    .Take(pageSize)
-                    .ToList();
-                }
+                allDishes = Mapper.Map<IQueryable<Dish>, IEnumerable<DishModelShortInfo>>(
+                    Database.Dish.GetAll
+                        .OrderBy(m => m.ID)
+                        .Skip(page*pageSize)
+                        .Take(pageSize));
+            }
+            foreach (var plate in allDishes)
+            {
+                var plateImg = Database.DishToImage.GetAll.FirstOrDefault(x => x.Dish.ID == plate.ID);
+                plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
+            }
 
 
-
-            return Mapper.Map<List<Dish>, List<DishModelShortInfo>>(shortDish);
+            return allDishes;
         }
 
         public int TotalFilteredDish(string filter = null)
@@ -72,12 +77,7 @@ namespace FoodService.Business.Services
             return totalDishes;
         }
 
-
-        public IEnumerable<DishModelShortInfo> FilterDishes()
-        {
-            throw new System.NotImplementedException();
-        }
-
+        
         public void CreateDish(DishModelDetailsInfo dish)
         {
             var toDb = Mapper.Map<DishModelDetailsInfo, Dish>(dish);

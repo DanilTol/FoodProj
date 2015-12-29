@@ -9,23 +9,26 @@
         $scope.pageClass = 'page-dishes';
         $scope.page = 0;
         $scope.pagesCount = 0;
+        $scope.pageSize = 5;
+        $scope.filterDishes = '';
 
         $scope.search = search;
         $scope.clearSearch = clearSearch;
         
         function search(page) {
             page = page || 0;
+            var pageSize = 6;
 
-            var config = {
-                params: {
-                    page: page,
-                    pageSize: 6,
-                    filter: $scope.filterDishes
-                }
-            };
+            //var config = {
+            //    params: {
+            //        page: page,
+            //        pageSize: 6,
+            //        filter: $scope.filterDishes
+            //    }
+            //};
 
             var deferred = $q.defer();
-            $http.get('api/dishes/search?page=2&pageSize=2').
+            $http.get('api/dishes/search?page=' + page + '&pageSize='+ pageSize + '&filter=' + $scope.filterDishes).
               success(function (data) {
 
 
