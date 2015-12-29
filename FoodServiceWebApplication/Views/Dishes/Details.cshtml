@@ -1,0 +1,104 @@
+﻿@model FoodService.Business.DTO.DishModelDetailsInfo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+<h2>Details</h2>
+
+<div/>
+<h4>Dish</h4>
+<hr />
+<div class="row">
+    <div class="col-sm-4">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ingridients)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingridients)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Energy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Energy)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Weight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Weight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+    <div class="container col-sm-6">
+        <!-- parent div -->
+        <div id="imgcarousel" class="carousel " data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#imgcarousel" data-slide-to="0" class="active"></li>
+                @for (var i = 1; i < @Model.ImagePath.Length; i++)
+                     {
+                         <li data-target="#imgcarousel" data-slide-to="@i"></li>
+                     }
+                
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="~/Images/Dish/@Model.Name/@Model.ImagePath[0]"
+                         alt="@Model.Name" class="img-responsive"/>
+                    <div class="carousel-caption">
+                        <h1>First Image</h1>
+                        <p>@Model.Price</p>
+                    </div>
+                </div>
+
+                @for (int i = 1; i < @Model.ImagePath.Length; i++)
+                {
+                    <div class="item">
+                        <img src="~/Images/Dish/@Model.Name/@Model.ImagePath[i]" height="300" width="550" 
+                             alt="@Model.Name" class="img-responsive"  />
+                        <div class="carousel-caption">
+                            <h1>Second Image</h1>
+                            <p>@Model.Price</p>
+                        </div>
+                    </div>
+
+                }
+                
+            </div>
+
+            <!-- Navigation Controls -->
+            <a class="left carousel-control" href="#imgcarousel" data-slide="prev">
+                <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#imgcarousel" data-slide="next">
+                <span class="icon-next"></span>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Home Dishes</h4>
+            <div class="input-group">
+                <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control shortInputSearch" placeholder="Filter, search dishes..">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <a ng-href="#/dishes/add" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"> Add</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+               <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="dish in Dishes">
+                    <div class="col-xs-4 col-lg-2 " style="padding: 15px">
+                        <a ng-href="#/dishes/{{dish.ID}}"  >
+                            <img ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
+                            <div class="carousel-caption " >
+                                <p>{{dish.Name}}</p>
+                            </div>
+                        </a>
+                    </div>
+                    <br/><br/>
+                </div>
+                </div>
+        </div>
+        <div class="panel-footer">
+            <div class="text-center">
+                <custom-pager page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
+            </div>
+        </div>
+    </div>
+</div>

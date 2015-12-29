@@ -1,0 +1,66 @@
+﻿<hr />
+<div class="jumbotron">
+    <div class="container text-center">
+        <img class="media-object" style="margin: 0 auto" height="320" ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath[0]}}" alt="{{dish.Name}}" alt="{{dish.Name}}" class="pull-left" />
+        <div class="movieDescription"><i><i class="fa fa-quote-left"></i>{{dish.Description}}<i class="fa fa-quote-right"></i></i></div>
+        <br />
+        <div class="btn-group">
+            <a ng-href="#/dishes/edit/{{dish.ID}}" class="btn btn-sm btn-default">Edit dish<i class="fa fa-pencil-square-o pull-right"></i></a>
+        </div> <!-- end btn-group -->
+    </div> <!-- end container -->
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5>{{dish.Name}}</h5>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <a class="pull-right" ng-href="#/dishes/{{dish.ID}}" title="View {{dish.Name}} details">
+                        <img class="media-object" height="120" ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath[0]}}" alt="{{dish.Name}}" alt="{{dish.Name}}" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{dish.Name}}</h4>
+                        Weight: <label>{{dish.Weight}}</label><br />
+                        Price: <label>{{dish.Price}}</label><br />
+                        Ingridients: <label>{{dish.Ingridients}}</label><br />
+                        <br />
+                        <label class="label label-info">{{dish.Name}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer clearfix">
+                <div class="pull-right">
+                    <a ng-href="#/dishes/edit/{{dish.ID}}" class="btn btn-default">Edit dish <i class="fa fa-pencil-square pull-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading clearfix">
+                <h5 class="pull-left">See also</h5>
+            </div>
+            <div class="table-responsive" ng-if="!loadingRentals">
+
+            </div>
+            <div ng-if="loadingRentals">
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4">
+                    <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Loading rental history...</label>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>

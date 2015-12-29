@@ -1,0 +1,18 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Changing password";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Password change</h2>
+
+@using (Html.BeginForm("ChangePass", "MyManage"))
+{
+    <input type="text" id="oldPass" name="oldPass"/>
+    <input type="text" id="newPass" name="newPass" />
+    <input type="text" id="repeatNewPass" name="repeatNewPass"/>
+
+   <input type="submit"/>
+
+}

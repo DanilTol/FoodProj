@@ -1,0 +1,29 @@
+﻿<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">Food service</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/dishes/">Dishes</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#about">About<i class="fa fa-info-circle fa-fw pull-right"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-if="isUserLoggedIn()" class="userinfo"><a href="#/">{{getUserData()}}<i class="fa fa-user fa-fw"></i></a></li>
+                    <li ng-if="isUserLoggedIn()" class="userinfo"> <input class="btn-danger" style="height: 50px; margin-right: 10px" type="button" ng-click="logout()" value="Log Out"/> </li>
+                    <li ng-if="!isUserLoggedIn()" class="userinfo"><a href="#/login">Login</a></li>
+                </ul>
+
+            </ul>
+        </div>
+    </div>
+</nav>
