@@ -7,7 +7,14 @@
                    var getModelAsFormData = function (data) {
                        var dataAsFormData = new FormData();
                        angular.forEach(data, function (value, key) {
-                           dataAsFormData.append(key, value);
+                           if (key == "Attachment") {
+                               console.log(value);
+                               for (var i = 0; i < value.length; i++) {
+                                   dataAsFormData.append(value[i].name, value[i]);
+                               }
+                           } else {
+                               dataAsFormData.append(key, value);
+                           }
                        });
                        return dataAsFormData;
                    };
@@ -40,7 +47,7 @@
                             var modelSetter = model.assign;
                             element.bind("change", function () {
                                 scope.$apply(function () {
-                                    modelSetter(scope, element[0].files[0]);
+                                    modelSetter(scope, element[0].files);
                                 });
                             });
                         }
