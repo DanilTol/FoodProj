@@ -266,6 +266,7 @@
     <Content Include="Scripts\spa\dish\dishAddCtrl.js" />
     <Content Include="Scripts\spa\dish\dishEditCtrl.js" />
     <Content Include="Scripts\spa\dish\dishModule.js" />
+    <Content Include="Scripts\spa\dish\dishService.js" />
     <Content Include="Scripts\spa\dish\edit.html" />
     <Content Include="Scripts\spa\dish\dishDetailsCtrl.js" />
     <Content Include="Scripts\spa\dish\details.html" />

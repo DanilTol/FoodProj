@@ -80,7 +80,7 @@
             register: register,
             logoutUser: logoutUser,
             isUserLoggedIn: isUserLoggedIn,
-            getUserData: getUserData,
+            getUserData: getUserData
         }
         return service;
     }
