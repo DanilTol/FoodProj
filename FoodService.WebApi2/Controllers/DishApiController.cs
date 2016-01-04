@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
@@ -64,7 +65,7 @@ namespace FoodService.WebApi2.Controllers
         //[MyAuth("admin")]
         [HttpPost]
         [Route("add")]
-        public HttpResponseMessage AddDish(DishModelDetailsInfo detailsDish)
+        public HttpResponseMessage AddDish(DishModelDetailsInfo detailsDish, HttpPostedFileBase dishImg)
         {
             return CreateHttpResponse(this.Request, () =>
            {
@@ -83,7 +84,30 @@ namespace FoodService.WebApi2.Controllers
                return response;
            });
         }
-        
+
+
+        [HttpPost]
+        [Route("imageup")]
+        public HttpResponseMessage UploadImage(HttpPostedFileBase dishImg)
+        {
+            return CreateHttpResponse(this.Request, () =>
+            {
+                HttpResponseMessage response;
+
+                if (!ModelState.IsValid)
+                {
+                    response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+
+                    response = this.Request.CreateResponse(HttpStatusCode.OK);
+                }
+
+                return response;
+            });
+        }
+
 
         [HttpPost]
         [Route("update")]

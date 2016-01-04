@@ -55,7 +55,8 @@ namespace FoodService.WebApi2
                //Services
                "~/Scripts/spa/services/apiservice.js",
                "~/Scripts/spa/services/sessionInjector.js",
-
+               "~/Scripts/spa/services/fileUploadService.js",
+               
                 //home
                 "~/Scripts/spa/home/rootCtrl.js",
                 "~/Scripts/spa/home/indexCtrl.js",

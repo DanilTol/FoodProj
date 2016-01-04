@@ -13,7 +13,7 @@ namespace FoodService.DAL.RepositoryBag
             _context = con;
         }
 
-        public IQueryable<RolesForUser> GetAll { get { return _context.RolesForUsers; } }
+        public IQueryable<RolesForUser> QueryToTable { get { return _context.RolesForUsers; } }
         public void Add(RolesForUser entity)
         {
             //empty

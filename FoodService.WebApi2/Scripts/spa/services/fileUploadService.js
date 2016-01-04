@@ -1,79 +1,49 @@
 ﻿(function (app) {
     'use strict';
 
-    app.factory('fileUploadService', fileUploadService);
+    app.factory("fileUploadService", ["$q", "$http",
+               function ($q, $http) {
 
-    fileUploadService.$inject = ['$rootScope', '$http', '$timeout', '$upload'];
+                   var getModelAsFormData = function (data) {
+                       var dataAsFormData = new FormData();
+                       angular.forEach(data, function (value, key) {
+                           dataAsFormData.append(key, value);
+                       });
+                       return dataAsFormData;
+                   };
 
-    function fileUploadService($rootScope, $http, $timeout, $upload) {
+                   var saveModel = function (data, url) {
+                       var deferred = $q.defer();
+                       $http({
+                           url: url,
+                           method: "POST",
+                           data: getModelAsFormData(data),
+                           transformRequest: angular.identity,
+                           headers: { 'Content-Type': undefined }
+                       }).success(function (result) {
+                           deferred.resolve(result);
+                       }).error(function (result, status) {
+                           deferred.reject(status);
+                       });
+                       return deferred.promise;
+                   };
 
-        $rootScope.upload = [];
-
-        var service = {
-            uploadImage: uploadImage
-        }(function (app) {
-    'use strict';
-
-    app.factory('fileUploadService', fileUploadService);
-
-    fileUploadService.$inject = ['$rootScope', '$http', '$timeout', '$upload', 'notificationService'];
-
-    function fileUploadService($rootScope, $http, $timeout, $upload, notificationService) {
-
-        $rootScope.upload = [];
-
-        var service = {
-            uploadImage: uploadImage
-        }
-
-        function uploadImage($files, movieId, callback) {
-            //$files: an array of files selected
-            for (var i = 0; i < $files.length; i++) {
-                var $file = $files[i];
-                (function (index) {
-                    $rootScope.upload[index] = $upload.upload({
-                        url: "api/movies/images/upload?movieId=" + movieId, // webapi url
-                        method: "POST",
-                        file: $file
-                    }).progress(function (evt) {
-                    }).success(function (data, status, headers, config) {
-                        // file is uploaded successfully
-                        notificationService.displaySuccess(data.FileName + ' uploaded successfully');
-                        callback();
-                    }).error(function (data, status, headers, config) {
-                        notificationService.displayError(data.Message);
-                    });
-                })(i);
-            }
-        }
-
-        return service;
-    }
-
-})(angular.module('common.core'));
-
-        function uploadImage($files, movieId, callback) {
-            //$files: an array of files selected
-            for (var i = 0; i < $files.length; i++) {
-                var $file = $files[i];
-                (function (index) {
-                    $rootScope.upload[index] = $upload.upload({
-                        url: "api/movies/images/upload?movieId=" + movieId, // webapi url
-                        method: "POST",
-                        file: $file
-                    }).progress(function (evt) {
-                    }).success(function (data, status, headers, config) {
-                        // file is uploaded successfully
-                        //notificationService.displaySuccess(data.FileName + ' uploaded successfully');
-                        callback();
-                    }).error(function (data) {
-                        //notificationService.displayError(data.Message);
-                    });
-                })(i);
-            }
-        }
-
-        return service;
-    }
-
+                   return {
+                       saveModel: saveModel
+                   }}])
+         .directive("akFileModel", ["$parse",
+                function ($parse) {
+                    return {
+                        restrict: "A",
+                        link: function (scope, element, attrs) {
+                            var model = $parse(attrs.akFileModel);
+                            var modelSetter = model.assign;
+                            element.bind("change", function () {
+                                scope.$apply(function () {
+                                    modelSetter(scope, element[0].files[0]);
+                                });
+                            });
+                        }
+                    };
+                }]);
 })(angular.module('common.core'));

@@ -11,19 +11,20 @@
                 //    fileUploadService.uploadImage(dishImage, $scope.dish.ID, updateDishModel);
                 //}
                 //else
+                var indata = {
+                    dish: $scope.dish,
+                    attachment: $scope.attachment };
 
-                dishService.addDish($scope.dish).then(
+                dishService.addDish(indata).then(
                     //success
                     function (data) {
                         $scope.dish = data;
                         dishImage = null;
                         $location.path('/dishes');
                     });;
-            }
 
-            $scope.prepareFiles = function($files) {
-                dishImage = $files;
-            }
+                };
+
 
         }
     ]);

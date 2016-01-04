@@ -15,7 +15,7 @@ namespace FoodService.DAL.RepositoryBag
             _context = context;
         }
 
-        public IQueryable<User> GetAll {
+        public IQueryable<User> QueryToTable {
             get { return _context.Users; }
                 }
         public void Add(User entity)

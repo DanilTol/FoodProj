@@ -3,9 +3,9 @@
 
     app.factory('dishService', dishService);
 
-    dishService.$inject = ['$http', '$q'];
+    dishService.$inject = ['$http', '$q', 'fileUploadService'];
 
-    function dishService($http, $q) {
+    function dishService($http, $q, fileUploadService) {
 
 
         function search(page, pageSize, filterDishes) {
@@ -59,13 +59,14 @@
               success(function (data) {
                   deferred.resolve(data);
               }).
-             error(function (data, status) {
+             error(function (status) {
                  deferred.reject(status);
              });
 
             return deferred.promise;
         }
         
+
         var service = {
             search: search,
             loadDishDetails: loadDishDetails,

@@ -14,7 +14,7 @@ namespace FoodService.WebApi2.Controllers
     public class AccountController : ApiController
     {
         private readonly IUserService _userService;
-        private const string secretKey = "G";
+        private const string SecretKey = "G";
 
         public AccountController(IUserService user)
         {
@@ -23,7 +23,7 @@ namespace FoodService.WebApi2.Controllers
 
         [HttpPost]
         [Route("login")]
-        public HttpResponseMessage Login(HttpRequestMessage request, LogInUser user)
+        public HttpResponseMessage Login( LogInUser user)
         {
             HttpResponseMessage response;
             var boolLogin = _userService.Login(new LogInUser()
@@ -39,13 +39,13 @@ namespace FoodService.WebApi2.Controllers
                     {"email", user.Email},
                     {"exp", now}
                 };
-                string token = JWT.JsonWebToken.Encode(payload, secretKey, JWT.JwtHashAlgorithm.HS256);
+                string token = JWT.JsonWebToken.Encode(payload, SecretKey, JWT.JwtHashAlgorithm.HS256);
                 token = user.Email;
-                response = request.CreateResponse<string>(HttpStatusCode.OK, token);
+                response = this.Request.CreateResponse<string>(HttpStatusCode.OK, token);
             }
             else
             {
-                response = request.CreateResponse(HttpStatusCode.Unauthorized);
+                response = this.Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
             return response;
         }
@@ -54,32 +54,32 @@ namespace FoodService.WebApi2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("register")]
-        public HttpResponseMessage Register(HttpRequestMessage request, UserDTO newUser)
+        public HttpResponseMessage Register(UserDTO newUser)
         {
             if (ModelState.IsValid)
             {
                 newUser.Salt = newUser.Salt.GetHashCode().ToString();
                 _userService.CreateUser(newUser);
                 LogInUser a = new LogInUser() { Email = newUser.EmailAddress, Salt = newUser.Salt };
-                return Login(request, a);
+                return Login(a);
             }
-            return request.CreateResponse(HttpStatusCode.BadRequest);
+            return this.Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
 
         [HttpGet]
         [MyAuth]
         [Route("profileInfo")]
-        public HttpResponseMessage LoginUserName(HttpRequestMessage request)
+        public HttpResponseMessage LoginUserName()
         {
-            IEnumerable<string> headerValues = request.Headers.GetValues("Token");
+            IEnumerable<string> headerValues = this.Request.Headers.GetValues("Token");
             var requestToken = headerValues.FirstOrDefault();
 
             //TODO:decode token
 
             var userName = _userService.GetUserInfo(requestToken);
 
-            return request.CreateResponse<UserDTO>(HttpStatusCode.OK, userName);
+            return this.Request.CreateResponse<UserDTO>(HttpStatusCode.OK, userName);
         }
     }
 }

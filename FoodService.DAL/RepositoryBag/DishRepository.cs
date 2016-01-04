@@ -19,7 +19,7 @@ namespace FoodService.DAL.RepositoryBag
             _context = new EntityContext();
         }
 
-        public IQueryable<Dish> GetAll
+        public IQueryable<Dish> QueryToTable
         {
             get { return _context.Dishes; }
         }

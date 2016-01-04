@@ -19,7 +19,7 @@ namespace FoodService.DAL.RepositoryBag
         }
 
 
-        public IQueryable<Order> GetAll
+        public IQueryable<Order> QueryToTable
         {
             get { return _context.Orders; }
         }

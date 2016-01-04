@@ -34,14 +34,14 @@ namespace FoodService.Business.Services
 
         public bool Login(LogInUser inUser)
         {
-            return  Database.User.GetAll.Any(x => x.EmailAddress == inUser.Email && x.Salt == inUser.Salt);
-            //Database.User.GetAll.Where(x => x.EmailAddress == inUser.Email && x.Salt == inUser.Salt);
+            return  Database.User.QueryToTable.Any(x => x.EmailAddress == inUser.Email && x.Salt == inUser.Salt);
+            //Database.User.QueryToTable.Where(x => x.EmailAddress == inUser.Email && x.Salt == inUser.Salt);
             //return answer;
         }
 
         public UserDTO GetUserInfo(string email)
         {
-            var z = Database.User.GetAll.FirstOrDefault(x => x.EmailAddress == email);
+            var z = Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == email);
             var userdto = Mapper.Map<User, UserDTO>(z);
             userdto.Role = z.Role.Name;
             return userdto;

@@ -13,11 +13,11 @@ namespace FoodService.DAL
         //bool Delete<TE>(TE entity);
 
         //void Create(T entity);
-        //IQueryable<T> GetAll(T entity);
+        //IQueryable<T> QueryToTable(T entity);
         //void Update(T entity);
         //void Delete(T entity);
 
-        IQueryable<T> GetAll { get; }
+        IQueryable<T> QueryToTable { get; }
         void Add(T entity);
         void Delete(int id);
         void Update(T entity);

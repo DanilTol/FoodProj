@@ -22,7 +22,7 @@ namespace FoodService.DAL.RepositoryBag
             this.context = context;
         }
 
-        public IQueryable<WeekDishSet> GetAll
+        public IQueryable<WeekDishSet> QueryToTable
         {
             get { return context.WeekDishSets; }
         }
@@ -32,7 +32,7 @@ namespace FoodService.DAL.RepositoryBag
             
             //int weekNumber = GetWeekOfYearNumber(date);
             //List<WeekDishSet> needeDishSets = new List<WeekDishSet>();
-            //var fromDB = GetAll;
+            //var fromDB = QueryToTable;
 
             //foreach (var s in fromDB.ToList())
             //{

@@ -22,7 +22,7 @@
 //        {
 //            var membershipCtx = new MembershipContext();
 
-//            var user = Database.User.GetAll.FirstOrDefault(x => x.EmailAddress == email);
+//            var user = Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == email);
 //            if (user != null && isUserValid(user, password))
 //            {
 //                var userRoles = GetUserRoles(user.Username);
