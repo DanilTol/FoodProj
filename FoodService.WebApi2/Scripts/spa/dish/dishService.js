@@ -26,8 +26,51 @@
             return deferred.promise;
         }
 
+        function loadDishDetails(idDish) {
+            var deferred = $q.defer();
+            $http.get('/api/dishes/details/' + idDish).
+              success(function (data) {
+                  deferred.resolve(data);
+              }).
+             error(function (data, status) {
+                 deferred.reject(status);
+             });
+
+            return deferred.promise;
+        }
+
+
+        function updateDish(dish) {
+            var deferred = $q.defer();
+            $http.post('/api/dishes/update', dish).
+              success(function (data) {
+                  deferred.resolve(data);
+              }).
+             error(function (data, status) {
+                 deferred.reject(status);
+             });
+
+            return deferred.promise;
+        }
+
+        function addDish(dish) {
+            var deferred = $q.defer();
+            $http.post('/api/dishes/add', dish).
+              success(function (data) {
+                  deferred.resolve(data);
+              }).
+             error(function (data, status) {
+                 deferred.reject(status);
+             });
+
+            return deferred.promise;
+        }
+        
         var service = {
-            search: search
+            search: search,
+            loadDishDetails: loadDishDetails,
+            updateDish: updateDish,
+            addDish: addDish
         }
         return service;
     }

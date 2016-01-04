@@ -4,14 +4,14 @@
         <!-- left column -->
         <div class="col-xs-3">
             <div class="text-center">
-                <img ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath[0]}}" class="img-responsive" alt="avatar">
+                <img class="img-responsive" alt="avatar">
                 <h6>Change photo...</h6>
                 <input type="file" ng-file-select="prepareFiles($files)">
             </div>
         </div>
         <!-- edit form column -->
         <div class="col-xs-9">
-            <form class="form-horizontal" role="form" name="editdishForm" ng-submit="UpdateDish()">
+            <form class="form-horizontal" role="form" name="editdishForm" ng-submit="addDish()">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-8 col-md-12">
@@ -57,9 +57,9 @@
                     <br />
                     <div class="row">
 
-                        <input type="submit" class="btn btn-primary" value="Update" />
+                        <input type="submit" class="btn btn-primary" value="Add" />
                         <span></span>
-                        <a class="btn btn-default" ng-href="#/dishes/{{dish.ID}}">Cancel</a>
+                        <a class="btn btn-default" ng-href="#/dishes/">Cancel</a>
 
                     </div>
                 </div>

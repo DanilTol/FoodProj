@@ -3,28 +3,17 @@
 
     app.controller('dishDetailsCtrl', dishDetailsCtrl);
 
-    dishDetailsCtrl.$inject = ['$scope', '$location', '$routeParams', 'apiService'];
+    dishDetailsCtrl.$inject = ['$scope', '$routeParams', 'dishService'];
 
-    function dishDetailsCtrl($scope, $location, $routeParams, apiService) {
-        $scope.pageClass = 'page-dishes';
-   
-        function loadDish() {
-            apiService.get('/api/dishes/details/' + $routeParams.id, null,
-            dishLoadCompleted,
-            dishLoadFailed);
+    function dishDetailsCtrl($scope, $routeParams, dishService) {
+
+         function loadDetails() {
+             dishService.loadDishDetails($routeParams.id).then(
+            //success
+            function (data) {
+                $scope.dish = data;
+            });;
         }
-
-        function dishLoadCompleted(result) {
-            $scope.dish = result.data;
-            $scope.loadingMovie = false;
-        }
-
-        function dishLoadFailed(response) {
-            //notificationService.displayError(response.data);
-        }
-
-        loadDish();
+        loadDetails();
     }
-
 })(angular.module('dishModule'));
-//(angular.module('homeFoodService'));

@@ -87,15 +87,15 @@ namespace FoodService.Business.Services
                 dish.ImagePath = new[] { DefaultPathToImage };
 
             //add images to dish
-            foreach (var imgPath in dish.ImagePath)
-            {
-                var imgRow = new DishToImage
-                {
-                    Dish = toDb,
-                    PathToImageOnServer = imgPath
-                };
-                toDb.DishToImages.Add(imgRow);
-            }
+            //foreach (var imgPath in dish.ImagePath)
+            //{
+            //    var imgRow = new DishToImage
+            //    {
+            //        Dish = toDb,
+            //        PathToImageOnServer = imgPath
+            //    };
+            //    toDb.DishToImages.Add(imgRow);
+            //}
 
             //add dish to database
             Database.Dish.Add(toDb);

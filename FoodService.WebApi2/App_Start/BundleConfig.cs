@@ -68,6 +68,7 @@ namespace FoodService.WebApi2
                 //dish
                 "~/Scripts/spa/dish/dishService.js",
                 "~/Scripts/spa/dish/dishDetailsCtrl.js",
+                "~/Scripts/spa/dish/dishAddCtrl.js",
                 "~/Scripts/spa/dish/dishEditCtrl.js",
                 "~/Scripts/spa/dish/dishesCtrl.js",
                 

@@ -21,7 +21,7 @@ namespace FoodService.WebApi2.Controllers
         }
 
         // GET: api/DishApi/5
-        [MyAuth]
+        //[MyAuth]
         [Route("details/{id:int}")]
         public HttpResponseMessage Get(int id)
         {
@@ -61,7 +61,7 @@ namespace FoodService.WebApi2.Controllers
 
 
         // POST: api/DishApi
-        [MyAuth("admin")]
+        //[MyAuth("admin")]
         [HttpPost]
         [Route("add")]
         public HttpResponseMessage AddDish(DishModelDetailsInfo detailsDish)
