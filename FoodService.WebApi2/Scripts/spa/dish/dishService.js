@@ -55,11 +55,11 @@
 
         function addDish(dish) {
             var deferred = $q.defer();
-            $http.post('/api/dishes/add', dish).
-              success(function (data) {
+            fileUploadService.saveModel(dish, '/api/dishes/add').then
+              (function (data) {
                   deferred.resolve(data);
-              }).
-             error(function (status) {
+              },
+             function (status) {
                  deferred.reject(status);
              });
 

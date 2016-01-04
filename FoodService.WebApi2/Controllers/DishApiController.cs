@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using FoodService.Business.DTO;
@@ -60,31 +64,46 @@ namespace FoodService.WebApi2.Controllers
             });
         }
 
-
-        // POST: api/DishApi
-        //[MyAuth("admin")]
         [HttpPost]
         [Route("add")]
-        public HttpResponseMessage AddDish(DishModelDetailsInfo detailsDish, HttpPostedFileBase dishImg)
+        public async Task<HttpResponseMessage> PostFormData()
         {
-            return CreateHttpResponse(this.Request, () =>
-           {
-               HttpResponseMessage response;
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            
+            string root = HttpContext.Current.Server.MapPath("~/Images/Dish");
+            var provider = new MultipartFormDataStreamProvider(root);
 
-               if (!ModelState.IsValid)
-               {
-                   response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-               }
-               else
-               {
-                   _dishService.CreateDish(detailsDish);
-                   response = this.Request.CreateResponse<DishModelDetailsInfo>(HttpStatusCode.Created, detailsDish);
-               }
+            try
+            {
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+                
+                var pathArray = provider.FileData.Select(file => file.LocalFileName.Substring(root.Length+1)).ToArray();
+                
+                var detailsDish = new DishModelDetailsInfo
+                {
+                    Description = provider.FormData.Get("Description"),
+                    Energy = Convert.ToInt32(provider.FormData.Get("Energy")),
+                    ImagePath = pathArray,
+                    Ingridients = provider.FormData.Get("Ingridients"),
+                    Name = provider.FormData.Get("Name"),
+                    Price = Convert.ToInt32(provider.FormData.Get("Price")),
+                    Weight = Convert.ToInt32(provider.FormData.Get("Weight"))
+                };
 
-               return response;
-           });
+                _dishService.CreateDish(detailsDish);
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
-
 
         [HttpPost]
         [Route("imageup")]

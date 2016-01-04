@@ -81,21 +81,21 @@ namespace FoodService.Business.Services
         public void CreateDish(DishModelDetailsInfo dish)
         {
             var toDb = Mapper.Map<DishModelDetailsInfo, Dish>(dish);
-
+            toDb.DishToImages = new List<DishToImage>();
             //if images were not uploaded
-            if (dish.ImagePath == null || dish.ImagePath.Length < 1 || string.IsNullOrEmpty(dish.ImagePath[0]))
-                dish.ImagePath = new[] { DefaultPathToImage };
+            //if (dish.ImagePath == null || dish.ImagePath.Length < 1 || string.IsNullOrEmpty(dish.ImagePath[0]))
+            //    dish.ImagePath = new[] { DefaultPathToImage };
 
             //add images to dish
-            //foreach (var imgPath in dish.ImagePath)
-            //{
-            //    var imgRow = new DishToImage
-            //    {
-            //        Dish = toDb,
-            //        PathToImageOnServer = imgPath
-            //    };
-            //    toDb.DishToImages.Add(imgRow);
-            //}
+            foreach (var imgPath in dish.ImagePath)
+            {
+                var imgRow = new DishToImage
+                {
+                    Dish = toDb,
+                    PathToImageOnServer = imgPath,
+                };
+                toDb.DishToImages.Add(imgRow);
+            }
 
             //add dish to database
             Database.Dish.Add(toDb);

@@ -11,7 +11,7 @@ namespace FoodService.Business.DTO
 
         public int Weight { get; set; }
         public int Price { get;  set; }
-        HttpPostedFileBase Attachment { get; set; }
+        public HttpPostedFileBase Attachment { get; set; }
         public string Description { get; set; }
     }
 }

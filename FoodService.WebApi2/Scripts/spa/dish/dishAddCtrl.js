@@ -11,11 +11,11 @@
                 //    fileUploadService.uploadImage(dishImage, $scope.dish.ID, updateDishModel);
                 //}
                 //else
-                var indata = {
-                    dish: $scope.dish,
-                    attachment: $scope.attachment };
+                //var indata = {
+                //    dish: $scope.dish,
+                //    attachment: $scope.attachment };
 
-                dishService.addDish(indata).then(
+                dishService.addDish($scope.dish).then(
                     //success
                     function (data) {
                         $scope.dish = data;
