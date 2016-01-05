@@ -9,7 +9,6 @@
             $scope.filterDishes = '';
 
             $scope.search = function () {
-                //$scope.page = page || 0;
                 $scope.page = $location.search().page || 0;
                 $scope.pageSize = $location.search().pageSize || 5;
 
@@ -29,34 +28,11 @@
                 $scope.search();
             }
 
-            $scope.range = function () {
-                if (!$scope.pagesCount) { return []; }
-                var step = 2;
-                var doubleStep = step * 2;
-                var start = Math.max(0, $scope.page - step);
-                var end = start + 1 + doubleStep;
-                if (end > $scope.pagesCount) { end = $scope.pagesCount; }
-
-                var ret = [];
-                for (var i = start; i != end; ++i) {
-                    ret.push(i);
-                }
-
-                return ret;
-            };
-
             $scope.pageRoute = function (page) {
                 $location.search('page', page);
                 $location.search('pageSize', $scope.pageSize);
                 $scope.search();
-                //$location.path('/dishes?page='+ page + "&pageSize=" + $scope.pageSize);
             }
-
-
-
-
-
-
 
             $scope.search();
         }
