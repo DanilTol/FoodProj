@@ -2,15 +2,15 @@
     'use strict';
 
     app.controller('dishesCtrl', [
-        '$scope', '$routeParams', 'dishService', function($scope, $routeParams, dishService) {
+        '$scope', '$routeParams', '$location', 'dishService', function($scope, $routeParams, $location, dishService) {
             $scope.page = 0;
             $scope.pagesCount = 0;
             $scope.pageSize = 5;
             $scope.filterDishes = '';
 
-            $scope.search = function (page) {
-                $scope.page = page || 0;
-                //$scope.page = $routeParams.page || 0;
+            $scope.search = function () {
+                //$scope.page = page || 0;
+                $scope.page = $routeParams.page || 0;
                 $scope.pageSize = $routeParams.pageSize || 5;
 
                 dishService.search($scope.page, $scope.pageSize, $scope.filterDishes)
@@ -45,9 +45,17 @@
                 return ret;
             };
 
+            $scope.pageRoute = function (page) {
+                $location.path('/dishes/'+ page + "/" + $scope.pageSize);
+            }
 
 
-            $scope.search($scope.page);
+
+
+
+
+
+            $scope.search();
         }
     ]);
 })(angular.module('dishModule'));

@@ -10,7 +10,8 @@
                     //new
                     .when("/dishes/:page/:pageSize", {
                         templateUrl: "scripts/spa/dish/dishes.html",
-                        controller: "dishesCtrl"
+                        controller: "dishesCtrl",
+                        reloadOnSearch: false
                     })
                     .when("/dishes/add", {
                         templateUrl: "scripts/spa/dish/add.html",
