@@ -77,7 +77,10 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/navbar/sideBar.directive.js",
                 "~/Scripts/spa/navbar/topBar.directive.js",
                 "~/Scripts/spa/navbar/bottomBar.directive.js",
+                "~/Scripts/spa/navbar/pagination.directive.js",
                 "~/Scripts/spa/account/userName.directive.js"
+
+                
         ));
             
 

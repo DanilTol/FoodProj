@@ -2,13 +2,17 @@
     'use strict';
 
     app.controller('dishesCtrl', [
-        '$scope', 'dishService', function($scope, dishService) {
+        '$scope', '$routeParams', 'dishService', function($scope, $routeParams, dishService) {
             $scope.page = 0;
             $scope.pagesCount = 0;
             $scope.pageSize = 5;
             $scope.filterDishes = '';
 
-            $scope.search = function() {
+            $scope.search = function (page) {
+                $scope.page = page || 0;
+                //$scope.page = $routeParams.page || 0;
+                $scope.pageSize = $routeParams.pageSize || 5;
+
                 dishService.search($scope.page, $scope.pageSize, $scope.filterDishes)
                     .then(
                         //success
@@ -25,7 +29,25 @@
                 $scope.search();
             }
 
-            $scope.search();
+            $scope.range = function () {
+                if (!$scope.pagesCount) { return []; }
+                var step = 2;
+                var doubleStep = step * 2;
+                var start = Math.max(0, $scope.page - step);
+                var end = start + 1 + doubleStep;
+                if (end > $scope.pagesCount) { end = $scope.pagesCount; }
+
+                var ret = [];
+                for (var i = start; i != end; ++i) {
+                    ret.push(i);
+                }
+
+                return ret;
+            };
+
+
+
+            $scope.search($scope.page);
         }
     ]);
 })(angular.module('dishModule'));

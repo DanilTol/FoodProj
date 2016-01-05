@@ -7,6 +7,11 @@
                         templateUrl: "scripts/spa/dish/dishes.html",
                         controller: "dishesCtrl"
                     })
+                    //new
+                    .when("/dishes/:page/:pageSize", {
+                        templateUrl: "scripts/spa/dish/dishes.html",
+                        controller: "dishesCtrl"
+                    })
                     .when("/dishes/add", {
                         templateUrl: "scripts/spa/dish/add.html",
                         controller: "dishAddCtrl"

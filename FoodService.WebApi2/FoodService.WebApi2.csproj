@@ -270,9 +270,11 @@
     <Content Include="Scripts\spa\dish\edit.html" />
     <Content Include="Scripts\spa\dish\dishDetailsCtrl.js" />
     <Content Include="Scripts\spa\dish\details.html" />
+    <Content Include="Scripts\spa\navbar\pagination.html" />
     <Content Include="Scripts\spa\navbar\bottomBar.directive.js" />
     <Content Include="Scripts\spa\navbar\bottomBar.html" />
     <Content Include="Scripts\spa\navbar\common.ui.js" />
+    <Content Include="Scripts\spa\navbar\pagination.directive.js" />
     <Content Include="Scripts\spa\navbar\topBar.html" />
     <Content Include="Scripts\spa\navbar\sideBar.html" />
     <Content Include="Scripts\spa\home\indexCtrl.js" />
