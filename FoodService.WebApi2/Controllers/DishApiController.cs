@@ -46,22 +46,19 @@ namespace FoodService.WebApi2.Controllers
             
             int currentPage = page;
             int currentPageSize = pageSize;
+            var shortDish = _dishService.FilterDishes(currentPage, currentPageSize, filter);
+            var totalDishes = _dishService.TotalFilteredDish(filter);
 
-            return CreateHttpResponse(this.Request, () =>
+            PaginationSet<DishModelShortInfo> pagedSet = new PaginationSet<DishModelShortInfo>
             {
-                var shortDish = _dishService.FilterDishes(currentPage, currentPageSize, filter);
-                var totalDishes = _dishService.TotalFilteredDish(filter);
-                
-                PaginationSet<DishModelShortInfo> pagedSet = new PaginationSet<DishModelShortInfo>
-                {
-                    Page = currentPage,
-                    TotalCount = totalDishes,
-                    TotalPages = (int)Math.Ceiling((decimal)totalDishes / currentPageSize),
-                    Items = shortDish
-                };
+                Page = currentPage,
+                TotalCount = totalDishes,
+                TotalPages = (int)Math.Ceiling((decimal)totalDishes / currentPageSize),
+                Items = shortDish
+            };
 
-                return this.Request.CreateResponse(HttpStatusCode.OK, pagedSet);
-            });
+            return this.Request.CreateResponse(HttpStatusCode.OK, pagedSet);
+
         }
 
         [HttpPost]

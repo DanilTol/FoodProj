@@ -8,7 +8,7 @@
                         controller: "dishesCtrl"
                     })
                     //new
-                    .when("/dishes/:page/:pageSize", {
+                    .when("/dishes", {
                         templateUrl: "scripts/spa/dish/dishes.html",
                         controller: "dishesCtrl",
                         reloadOnSearch: false

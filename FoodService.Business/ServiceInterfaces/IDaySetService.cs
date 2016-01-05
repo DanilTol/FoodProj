@@ -6,7 +6,7 @@ namespace FoodService.Business.ServiceInterfaces
 {
     public interface IDaySetService
     {
-        IEnumerable<DishModelShortInfo> GetWeekInfo(DateTime dateTime);
+        IEnumerable<DishModelShortInfo> GetDayInfo(DateTime dateTime);
         void DeleteAndEditWeekDishSet(DateTime date, int[] dishIds);
         void Dispose();
 

@@ -85,7 +85,7 @@ namespace FoodServiceWebApplication.Controllers
             {
                 date = DateTime.Today;
             }
-            IEnumerable<DishModelShortInfo> result = _daySetService.GetWeekInfo((DateTime) date);
+            IEnumerable<DishModelShortInfo> result = _daySetService.GetDayInfo((DateTime) date);
             foreach (var item in result.Where(item => string.IsNullOrEmpty(item.ImagePath)))
             {
                 item.ImagePath = DefaultPathToImage;
@@ -143,7 +143,7 @@ namespace FoodServiceWebApplication.Controllers
             }
 
 
-            var result = _daySetService.GetWeekInfo((DateTime)date);
+            var result = _daySetService.GetDayInfo((DateTime)date);
             foreach (var item in result.Where(item => string.IsNullOrEmpty(item.ImagePath)))
             {
                 item.ImagePath = DefaultPathToImage;

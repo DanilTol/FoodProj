@@ -3,15 +3,15 @@
 
     app.controller('dishesCtrl', [
         '$scope', '$routeParams', '$location', 'dishService', function($scope, $routeParams, $location, dishService) {
-            $scope.page = 0;
+            $scope.page = $location.search().page || 0;
             $scope.pagesCount = 0;
-            $scope.pageSize = 5;
+            $scope.pageSize = $location.search().pageSize || 5;
             $scope.filterDishes = '';
 
             $scope.search = function () {
                 //$scope.page = page || 0;
-                $scope.page = $routeParams.page || 0;
-                $scope.pageSize = $routeParams.pageSize || 5;
+                $scope.page = $location.search().page || 0;
+                $scope.pageSize = $location.search().pageSize || 5;
 
                 dishService.search($scope.page, $scope.pageSize, $scope.filterDishes)
                     .then(
@@ -46,7 +46,10 @@
             };
 
             $scope.pageRoute = function (page) {
-                $location.path('/dishes/'+ page + "/" + $scope.pageSize);
+                $location.search('page', page);
+                $location.search('pageSize', $scope.pageSize);
+                $scope.search();
+                //$location.path('/dishes?page='+ page + "&pageSize=" + $scope.pageSize);
             }
 
 

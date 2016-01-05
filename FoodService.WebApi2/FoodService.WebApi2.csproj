@@ -228,6 +228,7 @@
     <Compile Include="Attribute\MyAuthAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DishApiController.cs" />
+    <Compile Include="Controllers\DishSetApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Dependency\ControllerInstaller.cs" />
@@ -261,7 +262,10 @@
     <Content Include="Scripts\spa\account\register.html" />
     <Content Include="Scripts\spa\account\loginCtrl.js" />
     <Content Include="Scripts\spa\account\registerCtrl.js" />
+    <Content Include="Scripts\spa\dishset\dishsetCtrl.js" />
+    <Content Include="Scripts\spa\dishset\dishsetEditCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
+    <Content Include="Scripts\spa\dishset\dishsetService.js" />
     <Content Include="Scripts\spa\dish\add.html" />
     <Content Include="Scripts\spa\dish\dishAddCtrl.js" />
     <Content Include="Scripts\spa\dish\dishEditCtrl.js" />

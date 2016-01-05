@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201512181620028_AddUserFieldLocked.Designer.cs">
       <DependentUpon>201512181620028_AddUserFieldLocked.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601051132366_weekToDay.cs" />
+    <Compile Include="Migrations\201601051132366_weekToDay.Designer.cs">
+      <DependentUpon>201601051132366_weekToDay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositoryBag\DishToImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
@@ -81,7 +85,7 @@
     <Compile Include="Entity\DishToImage.cs" />
     <Compile Include="Entity\Order.cs" />
     <Compile Include="Entity\UserSet.cs" />
-    <Compile Include="Entity\WeekDishSet.cs" />
+    <Compile Include="Entity\DayDishSet.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryBag\Repository.cs" />
@@ -89,7 +93,7 @@
     <Compile Include="RepositoryBag\OrderRepository.cs" />
     <Compile Include="RepositoryBag\RoleForUserRepository.cs" />
     <Compile Include="RepositoryBag\UserRepository.cs" />
-    <Compile Include="RepositoryBag\WeekDishSetRepository.cs" />
+    <Compile Include="RepositoryBag\DayDishSetRepository.cs" />
     <Compile Include="RepositoryBag\UnityOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512181620028_AddUserFieldLocked.resx">
       <DependentUpon>201512181620028_AddUserFieldLocked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601051132366_weekToDay.resx">
+      <DependentUpon>201601051132366_weekToDay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

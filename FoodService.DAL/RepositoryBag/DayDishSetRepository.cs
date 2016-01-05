@@ -8,26 +8,26 @@ using FoodService.DAL.Interfaces;
 
 namespace FoodService.DAL.RepositoryBag
 {
-    public class WeekDishSetRepository : IRepository<WeekDishSet>
+    public class DayDishSetRepository : IRepository<DayDishSet>
     {
         readonly EntityContext context;
 
-        public WeekDishSetRepository()
+        public DayDishSetRepository()
         {
             context = new EntityContext();
         }
 
-        public WeekDishSetRepository(EntityContext context)
+        public DayDishSetRepository(EntityContext context)
         {
             this.context = context;
         }
 
-        public IQueryable<WeekDishSet> QueryToTable
+        public IQueryable<DayDishSet> QueryToTable
         {
             get { return context.WeekDishSets; }
         }
 
-        public IQueryable<WeekDishSet> GetAllDishSetsOnDay(DateTime date)
+        public IQueryable<DayDishSet> GetAllDishSetsOnDay(DateTime date)
         {
             
             //int weekNumber = GetWeekOfYearNumber(date);
@@ -63,7 +63,7 @@ namespace FoodService.DAL.RepositoryBag
         //}
 
 
-        public void Add(WeekDishSet entity)
+        public void Add(DayDishSet entity)
         {
             var result = (from r in context.Dishes where r.ID == entity.DishId select r).FirstOrDefault();
             entity.Dish = result;
@@ -78,7 +78,7 @@ namespace FoodService.DAL.RepositoryBag
             context.SaveChanges();
         }
 
-        public void Update(WeekDishSet entity)
+        public void Update(DayDishSet entity)
         {
             var result = (from r in context.WeekDishSets where entity.ID == r.ID select r).FirstOrDefault();
             if (result != null)
@@ -92,13 +92,13 @@ namespace FoodService.DAL.RepositoryBag
             context.SaveChanges();
         }
 
-        public WeekDishSet FindById(int id)
+        public DayDishSet FindById(int id)
         {
             var result = (from r in context.WeekDishSets where r.ID == id select r).FirstOrDefault();
             return result;
         }
 
-        public IQueryable<WeekDishSet> Find(Func<WeekDishSet, bool> predicate)
+        public IQueryable<DayDishSet> Find(Func<DayDishSet, bool> predicate)
         {
             throw new NotImplementedException();
         }

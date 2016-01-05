@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodService.DAL.Entity
 {
-    public class WeekDishSet : CommonClass
+    public class DayDishSet : CommonClass
     {
         [Key]
         public int ID { get; set; }

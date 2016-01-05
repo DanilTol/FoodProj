@@ -16,6 +16,6 @@ namespace FoodService.DAL.Entity
 
         public virtual ICollection<DishToImage> DishToImages { get; set; }
         public virtual ICollection<UserSet> UserSets { get; set; }
-        public virtual ICollection<WeekDishSet> WeekDishSets { get; set; }
+        public virtual ICollection<DayDishSet> WeekDishSets { get; set; }
     }
 }

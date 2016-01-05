@@ -9,7 +9,7 @@ namespace FoodService.DAL
         private readonly EntityContext _context = new EntityContext();
         private DishRepository _dishRepository;
         private OrderRepository _orderRepository;
-        private WeekDishSetRepository _weekDishSetRepository;
+        private DayDishSetRepository _dayDishSetRepository;
         private DishToImageRepository _dishToImageRepository;
         private UserRepository _userRepository;
         private RoleForUserRepository _roleForUser;
@@ -21,7 +21,7 @@ namespace FoodService.DAL
 
         public UserRepository User => _userRepository ?? (_userRepository = new UserRepository(_context));
 
-        public WeekDishSetRepository WeekDish => _weekDishSetRepository ?? (_weekDishSetRepository = new WeekDishSetRepository(_context));
+        public DayDishSetRepository DayDish => _dayDishSetRepository ?? (_dayDishSetRepository = new DayDishSetRepository(_context));
 
         public DishRepository Dish => _dishRepository ?? (_dishRepository = new DishRepository(_context));
 
