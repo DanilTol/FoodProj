@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201601051132366_weekToDay.Designer.cs">
       <DependentUpon>201601051132366_weekToDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601051253133_clearDaySet.cs" />
+    <Compile Include="Migrations\201601051253133_clearDaySet.Designer.cs">
+      <DependentUpon>201601051253133_clearDaySet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositoryBag\DishToImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601051132366_weekToDay.resx">
       <DependentUpon>201601051132366_weekToDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601051253133_clearDaySet.resx">
+      <DependentUpon>201601051253133_clearDaySet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

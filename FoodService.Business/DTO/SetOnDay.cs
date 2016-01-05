@@ -5,9 +5,9 @@ namespace FoodService.Business.DTO
 {
     public class SetOnDay
     {
-        public IEnumerable<DishModelShortInfo> DishModelShortInfos { get; set; }
+        //public IEnumerable<DishModelShortInfo> DishModelShortInfos { get; set; }
         public DateTime Date { get; set; }
-        public int Id { get; set; }
+        public int[] DishId { get; set; }
          
     }
 }

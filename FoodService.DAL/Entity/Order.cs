@@ -9,12 +9,10 @@ namespace FoodService.DAL.Entity
     {
         [Key]
         public int ID { get; set; }
-        //public int UserId { get; set; }
         [Column(TypeName = "Date")]
         public DateTime Date { get; set; }
 
         public virtual User User { get; set; }
-        //public virtual ICollection<Dish> OrderDishesDishes { get; set; } 
         public virtual ICollection<UserSet> UserSetes { get; set; }
     }
 }

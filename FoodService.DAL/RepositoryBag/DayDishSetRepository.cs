@@ -63,12 +63,18 @@ namespace FoodService.DAL.RepositoryBag
         //}
 
 
+        public void Add(int dishId, DateTime date)
+        {
+            var result = (from r in context.Dishes where r.ID == dishId select r).FirstOrDefault();
+            DayDishSet entity = new DayDishSet {Date = date, Dish = result};
+            //entity.Dish = result;
+            context.WeekDishSets.Add(entity);
+            //context.SaveChanges();
+        }
+
         public void Add(DayDishSet entity)
         {
-            var result = (from r in context.Dishes where r.ID == entity.DishId select r).FirstOrDefault();
-            entity.Dish = result;
-            context.WeekDishSets.Add(entity);
-            context.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void Delete(int id)

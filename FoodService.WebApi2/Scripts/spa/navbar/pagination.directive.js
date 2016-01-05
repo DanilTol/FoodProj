@@ -1,4 +1,4 @@
-﻿(function(app) {
+﻿(function (app) {
     'use strict';
 
     app.directive('pagination', pagination);
@@ -9,19 +9,31 @@
                 page: '@',
                 pagesCount: '@',
                 totalCount: '@',
-                pageRoute: '&'
+                pageRoute: '='
             },
             restrict: "E",
             replace: true,
             templateUrl: "/Scripts/spa/navbar/pagination.html",
-            controller: ['$scope', function($scope) {
-                $scope.search  = function(i) {
-                    if ($scope.pageRoute) {
-                        $scope.pageRoute({ page: i });
-                    }
-                }
+            controller: ['$scope', function ($scope) {
+                //$scope.search  = function(i) {
+                //    if ($scope.pageRoute) {
+                //        $scope.pageRoute({ page: i });
+                //    }
+                //}
 
-                $scope.range = function () {
+                $scope.$watch(
+                    function (scope) { return scope.page },
+                    function () {
+                        $scope.range = range();
+                    });
+
+                $scope.$watch(
+                   function (scope) { return scope.pagesCount },
+                   function () {
+                       $scope.range = range();
+                   });
+
+                function range() {
                     if (!$scope.pagesCount) {
                         return [];
                     }

@@ -1,54 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
-using FoodService.WebApi2.Infrastructure.Core;
 
 namespace FoodService.WebApi2.Controllers
 {
     [RoutePrefix("api/dishset")]
-    public class DishSetApiController : ApiControllerBase
+    public class DishSetApiController : ApiController
     {
         private readonly IDaySetService _daySetService;
 
-       public DishSetApiController(IDaySetService service)
-       {
-           _daySetService = service;
-       }
-
-            [HttpGet]
-        [Route("getdishmenu/{date:DateTime}")]
-        public HttpResponseMessage GetDishMenuOnDay(DateTime date)
+        public DishSetApiController(IDaySetService service)
         {
-            return CreateHttpResponse(this.Request, () =>
-            {
-                var detailsInfo = _daySetService.GetDayInfo(date);
-                return this.Request.CreateResponse(HttpStatusCode.OK);
-            });
+            _daySetService = service;
         }
 
-        // GET: api/DishMenuApi/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("getdishmenu/{date:int}")]
+        public HttpResponseMessage GetDishMenuOnDay(int date)
         {
-            return "value";
+            var dayInfo = _daySetService.GetDayInfo(new DateTime(date));
+            return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 
-        // POST: api/DishMenuApi
-        public void Post([FromBody]string value)
+        [HttpPost]
+        [Route("editdishmenu")]
+        //[Route("editdishmenu/{date:DateTime}")]
+        public HttpResponseMessage UpdatingMenuOnDay(SetOnDay setOnDay)
         {
+            _daySetService.DeleteAndEditDayDishSet(setOnDay.Date,setOnDay.DishId);
+            return this.Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        // PUT: api/DishMenuApi/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/DishMenuApi/5
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
-using FoodService.DAL.Entity;
 using FoodService.DAL.Interfaces;
 
 namespace FoodService.Business.Services
@@ -15,8 +14,6 @@ namespace FoodService.Business.Services
         {
             Database = uow;
         }
-
-
 
         public IEnumerable<DishModelShortInfo> GetDayInfo(DateTime dateTime)
         {
@@ -38,12 +35,12 @@ namespace FoodService.Business.Services
             return result;
         }
 
-        public void DeleteAndEditWeekDishSet(DateTime date, int[] dishIds)
+        public void DeleteAndEditDayDishSet(DateTime date, int[] dishIds)
         {
             Database.DayDish.DeleteByDate(date);
             foreach (var i in dishIds)
             {
-                Database.DayDish.Add(new DayDishSet() {Date = date, Dish = Database.Dish.FindById(i), DishId = i});
+                Database.DayDish.Add(i, date);
             }
             Database.Save();
         }

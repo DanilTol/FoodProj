@@ -67,17 +67,7 @@ namespace FoodServiceWebApplication.Controllers
                 return RedirectToAction("Index");
             }
         }
-
-        //[HttpPost]
-        //[MultipleButton(Name = "action", Argument = "Edit")]
-        //public void Edit(FormCollection form)
-        //{
-
-        //    RedirectToAction("Index", new DateTime());
-        //}
-
-
-
+        
         // GET: WeekMenu
         public ActionResult Index(DateTime? date)
         {
@@ -95,38 +85,7 @@ namespace FoodServiceWebApplication.Controllers
             
             return View(result);
         }
-
-
-        //// GET: WeekMenu/Details/5
-        //public ActionResult Details(int id)
-        //{
-
-
-        //    return View();
-        //}
-
-        // GET: WeekMenu/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: WeekMenu/Create
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
+        
         // GET: WeekMenu/Edit/5
         public ActionResult Edit(DateTime? date)
         {
@@ -148,11 +107,7 @@ namespace FoodServiceWebApplication.Controllers
             {
                 item.ImagePath = DefaultPathToImage;
             }
-
-
-
-
-
+            
             ViewBag.DateWeek = date.Value.ToShortDateString();
             toView.AllDishes = re;
             toView.CertainDishSets = result;
@@ -177,29 +132,7 @@ namespace FoodServiceWebApplication.Controllers
                 return RedirectToAction("Index");
             }
         }
-
-        //// GET: WeekMenu/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: WeekMenu/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
+        
         public FileContentResult WeekSetToCsv(FormCollection collection)
         {
             string csv = String.Empty;
@@ -231,7 +164,7 @@ namespace FoodServiceWebApplication.Controllers
             int[] ia = Array.ConvertAll(dishIds, int.Parse);
             //int[] ia = dishIds.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
 
-            _daySetService.DeleteAndEditWeekDishSet(dateTime,ia);
+            _daySetService.DeleteAndEditDayDishSet(dateTime,ia);
             
             return RedirectToAction("Index");
         }

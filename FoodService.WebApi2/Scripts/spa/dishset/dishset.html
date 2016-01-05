@@ -10,25 +10,29 @@
                     <a ng-href="#/dishes/add" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"> Add</i></a>
                 </div>
             </div>
+            
         </div>
         <div class="panel-body">
+            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">{{DayDate}}</h4>
+            <input type="date" id="dateInput" name="dateInput" ng-model="date" />
+
             <div class="row">
-               <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="dish in Dishes.Items">
-                   <div class="col-xs-4 col-lg-2 " style="padding: 15px">
-                       <a ng-href="#/dishes/{{dish.ID}}">
-                           <img ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
-                           <div class="carousel-caption ">
-                               <p>{{dish.Name}}</p>
-                           </div>
-                       </a>
-                   </div>
+                <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="dish in dishes">
+                    <div class="col-xs-4 col-lg-2 " style="padding: 15px">
+                        <a ng-href="#/dishes/{{dish.ID}}">
+                            <img ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
+                            <div class="carousel-caption ">
+                                <p>{{dish.Name}}</p>
+                            </div>
+                        </a>
+                    </div>
                     <br/><br/>
                 </div>
-                </div>
+            </div>
         </div>
         <div class="panel-footer">
             <div class="text-center">
-                <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute" ></pagination>
+                <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-Route="pageRoute(page)" ></pagination>
             </div>
         </div>
     </div>
