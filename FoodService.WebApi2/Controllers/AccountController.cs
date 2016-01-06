@@ -79,7 +79,7 @@ namespace FoodService.WebApi2.Controllers
 
             var userName = _userService.GetUserInfo(requestToken);
 
-            return this.Request.CreateResponse<UserDTO>(HttpStatusCode.OK, userName);
+            return this.Request.CreateResponse(HttpStatusCode.OK, userName);
         }
     }
 }

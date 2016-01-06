@@ -230,9 +230,7 @@
     <Compile Include="Controllers\DishApiController.cs" />
     <Compile Include="Controllers\DishSetApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Dependency\ControllerInstaller.cs" />
-    <Compile Include="Dependency\PoorMansCompositionRoot.cs" />
     <Compile Include="Dependency\WindsorCompositionRoot.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -262,7 +260,6 @@
     <Content Include="Scripts\spa\account\register.html" />
     <Content Include="Scripts\spa\account\loginCtrl.js" />
     <Content Include="Scripts\spa\account\registerCtrl.js" />
-    <Content Include="Scripts\spa\dishset\dishsetEdit.html" />
     <Content Include="Scripts\spa\dishset\dishset.html" />
     <Content Include="Scripts\spa\dishset\dishsetCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetEditCtrl.js" />

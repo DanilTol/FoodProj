@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -11,17 +12,29 @@ namespace FoodService.WebApi2.Controllers
     public class DishSetApiController : ApiController
     {
         private readonly IDaySetService _daySetService;
+        private readonly IDishService _dishService;
 
-        public DishSetApiController(IDaySetService service)
+        public DishSetApiController(IDaySetService service, IDishService serv)
         {
             _daySetService = service;
+            _dishService = serv;
         }
 
         [HttpGet]
-        [Route("getdishmenu/{date:int}")]
-        public HttpResponseMessage GetDishMenuOnDay(int date)
+        [Route("getdishmenu")]
+        public HttpResponseMessage GetDishMenuOnDay(string datestr)
         {
-            var dayInfo = _daySetService.GetDayInfo(new DateTime(date));
+            //var date =Convert.ToDateTime(datestr);
+            //var datestr = DateTime.Now.ToString();
+
+            var date = DateTime.ParseExact("Wed Dec 16 00:00:00 UTC-0400 2009",
+                                  "ddd MMM d HH:mm:ss UTCzzzzz yyyy",
+                                  CultureInfo.InvariantCulture);
+
+
+            var dayInfo1 = _daySetService.GetDayInfo(date);
+
+            var dayInfo = _dishService.GetAllDishes();
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 

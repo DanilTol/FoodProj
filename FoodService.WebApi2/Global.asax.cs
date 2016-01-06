@@ -5,11 +5,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
 using CommonServiceLocator.WindsorAdapter;
 using FoodService.Business.Mapping;
 using FoodService.WebApi2.Dependency;
-using FoodServiceWebApplication.Installers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace FoodService.WebApi2

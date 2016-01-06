@@ -5,7 +5,8 @@
              $routeProvider
                   .when("/dishset", {
                       templateUrl: "scripts/spa/dishset/dishset.html",
-                      controller: "dishsetCtrl"
+                      controller: "dishsetCtrl",
+                      reloadOnSearch: false
                   })
                   //.when("/dishset/edit/:date", {
                       .when("/dishset/edit", {

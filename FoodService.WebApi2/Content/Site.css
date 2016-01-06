@@ -70,3 +70,12 @@ textarea {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
+
+.textOnImage {
+    position: absolute;
+    bottom: 20px;
+    color: #ffffff;
+    width: 160px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}

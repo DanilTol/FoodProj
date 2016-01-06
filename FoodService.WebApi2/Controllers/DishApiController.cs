@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -33,32 +31,27 @@ namespace FoodService.WebApi2.Controllers
             return CreateHttpResponse(this.Request, () =>
             {
                 var detailsInfo = _dishService.GetDishById(id);
-                return this.Request.CreateResponse<DishModelDetailsInfo>(HttpStatusCode.OK, detailsInfo);
+                return this.Request.CreateResponse(HttpStatusCode.OK, detailsInfo);
             });
         }
-
-
-        //[AllowAnonymous]
+        
+        [MyAuth]
         [HttpGet]
         [Route("search")]
         public HttpResponseMessage Search(int page = 1, int pageSize = 2, string filter = null)
         {
-            
-            int currentPage = page;
-            int currentPageSize = pageSize;
-            var shortDish = _dishService.FilterDishes(currentPage, currentPageSize, filter);
+            var shortDish = _dishService.FilterDishes(page, pageSize, filter);
             var totalDishes = _dishService.TotalFilteredDish(filter);
 
             PaginationSet<DishModelShortInfo> pagedSet = new PaginationSet<DishModelShortInfo>
             {
-                Page = currentPage,
+                Page = page,
                 TotalCount = totalDishes,
-                TotalPages = (int)Math.Ceiling((decimal)totalDishes / currentPageSize),
+                TotalPages = (int)Math.Ceiling((decimal)totalDishes / pageSize),
                 Items = shortDish
             };
 
             return this.Request.CreateResponse(HttpStatusCode.OK, pagedSet);
-
         }
 
         [HttpPost]
@@ -96,34 +89,11 @@ namespace FoodService.WebApi2.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-
-        [HttpPost]
-        [Route("imageup")]
-        public HttpResponseMessage UploadImage(HttpPostedFileBase dishImg)
-        {
-            return CreateHttpResponse(this.Request, () =>
-            {
-                HttpResponseMessage response;
-
-                if (!ModelState.IsValid)
-                {
-                    response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-                else
-                {
-
-                    response = this.Request.CreateResponse(HttpStatusCode.OK);
-                }
-
-                return response;
-            });
-        }
-
 
         [HttpPost]
         [Route("update")]

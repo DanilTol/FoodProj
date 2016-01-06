@@ -8,7 +8,7 @@
                 date = date || new Date();
 
                 var deferred = $q.defer();
-                $http.get('api/dishset/getdishmenu/' + date).
+                $http.get('api/dishset/getdishmenu?datestr=' + date).
                     success(function (data) {
                         deferred.resolve(data);
                     }).
