@@ -11,7 +11,7 @@ namespace FoodService.Business.Services
     public class DishService : IDishService
     {
         IUnitOfWork Database { get; }
-        private const string DefaultPathToImage = "../../Dish/Common.gif";
+        private const string DefaultPathToImage = "../Dish/Common.gif";
 
         public DishService(IUnitOfWork uow)
         {

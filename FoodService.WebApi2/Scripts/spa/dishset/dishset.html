@@ -12,9 +12,9 @@
             <div class="row">
 
                 <!--here show list of menu on day-->
-                <div class="col-md-5 pull-left" id="dishMenu" style="margin-left: 60px;">
+                <div class="col-md-5 pull-left"  style="margin-left: 60px;">
                     <h3>Dish menu</h3>
-                    <div style="border: 1px solid #aaaaaa; height: 100px" ondrop="drop(event)" ondragover="allowDrop(event)" >
+                    <div style="border: 1px solid #aaaaaa; height: 380px;   overflow:auto ;" ondrop="drop(event)" ondragover="allowDrop(event)" id="dishMenu" >
                         <div ng-repeat="dish in dishes.set1">
                             <div class="col-md-6" style="padding: 15px" id={{dish.ID}}>
                                 <a ng-href="#/dishes/{{dish.ID}}">
@@ -27,7 +27,7 @@
                 </div>
 
 
-                <div class="col-md-5 pull-right" id="allDishes" style="margin-right: 60px;">
+                <div class="col-md-5 pull-right" style="margin-right: 60px;">
                     <h3>All availible dishes</h3>
 
                     <!--<div class="input-group pull-left">
@@ -38,13 +38,17 @@
                         </div>
                     </div>
                     <br/><br/><br/>-->
-                    <div style="border: 1px solid #aaaaaa;">
-                        <div ng-repeat="dish in dishes.allDishes">
+                    <div style="border: 1px solid #aaaaaa;" id="allDishes" >
+                        <div ng-repeat="dish in dishes.allDishes" id="{{dish.ID}}1"  draggable="true" ondragstart="drag(event)" >
 
-                            <div class="col-md-6" id={{dish.ID}} 
-                                 style="padding: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;"
-                                 draggable="true" ondragstart="drag(event)"
-                                 ><p class="textOnImage">{{dish.Name}}</p>
+                            <div class="col-md-6 img-circle" id={{dish.ID}}
+                                 draggable="true" ondragstart="drag(event)" 
+                                 onclick=""
+                                 style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;"
+                                 >
+                                <p class="textOnImage">
+                                    {{dish.Name}}
+                                </p>
                                 <!--<a ng-href="#/dishes/{{dish.ID}}">
                                     <img ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
                                     <p class="textOnImage">{{dish.Name}}</p>
@@ -70,22 +74,4 @@
 </div>
 
 
-
-<script>
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-    }
-
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
-    }
-
-
-
-</script>
+<!--<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>-->

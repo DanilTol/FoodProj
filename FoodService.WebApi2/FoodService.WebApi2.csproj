@@ -265,6 +265,7 @@
     <Content Include="Scripts\spa\dishset\dishsetEditCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
     <Content Include="Scripts\spa\dishset\dishsetService.js" />
+    <Content Include="Scripts\spa\dishset\dndDishset.js" />
     <Content Include="Scripts\spa\dish\add.html" />
     <Content Include="Scripts\spa\dish\dishAddCtrl.js" />
     <Content Include="Scripts\spa\dish\dishEditCtrl.js" />
