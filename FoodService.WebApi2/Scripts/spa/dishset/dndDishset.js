@@ -9,12 +9,12 @@ function drag(ev) {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    var dishDiv = document.getElementById("dishMenu").childNodes[data];
+    var dishDiv = document.getElementById(data);
 
-    if (typeof dishDiv == "undefined")
+    if ($(dishDiv).parent().parent().attr('id') == 'allDishes')
     {
-        //data = ev.dataTransfer.getData("text");
-        var draggableEl = document.getElementById("allDishes").childNodes[parseInt(data)+1].childNodes(data).cloneNode(true);
+        var draggableEl = dishDiv.cloneNode(true);
+
         draggableEl.removeAttribute("draggable");
         draggableEl.removeAttribute("ondragstart");
         draggableEl.setAttribute("ondrop", "e.preventDefault(); return false;");
