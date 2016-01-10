@@ -41,12 +41,12 @@
 
                     <div class="input-group pull-left">
                             <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 70%" placeholder="Filter, search dishes..">
-                            <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-primary" ng-click="filterClick();"><i class="glyphicon glyphicon-search"></i></button>
                             <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </div>
                     <br/><br/><br/>
                     <div id="allDishes">
-                        <div ng-repeat="dish in dishes.allDishes" id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
+                        <div ng-repeat="dish in dishes.allDishes | unchosenDishes:dishes.set" id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
 
                             <div class="col-md-6 img-circle" id={{dish.ID}}
                                  draggable="true" ondragstart="drag(event)"

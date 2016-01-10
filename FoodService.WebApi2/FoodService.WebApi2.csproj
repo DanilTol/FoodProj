@@ -267,6 +267,7 @@
     <Content Include="Scripts\spa\dishset\dishsetService.js" />
     <Content Include="Scripts\spa\dishset\dndDishset.js" />
     <Content Include="Scripts\spa\dishset\editVMonDnD.directive.js" />
+    <Content Include="Scripts\spa\dishset\FilterForChosenDishes.js" />
     <Content Include="Scripts\spa\dish\add.html" />
     <Content Include="Scripts\spa\dish\dishAddCtrl.js" />
     <Content Include="Scripts\spa\dish\dishEditCtrl.js" />
