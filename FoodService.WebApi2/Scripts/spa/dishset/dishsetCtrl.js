@@ -1,7 +1,7 @@
 ﻿(function (app) {
     "use strict";
     app.controller('dishsetCtrl', [
-        '$scope', '$location', 'dishService', 'dishsetService', function ($scope, $location, dishService, dishsetService) {
+        '$scope', '$location', '$filter', 'dishService', 'dishsetService', function ($scope, $location, $filter, dishService, dishsetService) {
 
             $scope.dishes = [];
             $scope.dateInput = new Date();
@@ -9,7 +9,11 @@
             $scope.DateShow = new Date($location.search().date);
 
             $scope.editDayMenu = function () {
-                dishsetService.editDayMenu($scope.dateInputMiliSec, $scope.dishes.set).then(
+                var dishId = [];
+                for (var i = 0; i <  $scope.dishes.set.length; i++) {
+                    dishId.push($scope.dishes.set[i].ID);
+                }
+                dishsetService.editDayMenu($scope.dateInputMiliSec, dishId).then(
                     //success
                     function (data) {
                         var k = 10;
@@ -44,6 +48,7 @@
                     //success
                     function (data) {
                         $scope.dishes.set = data;
+                        //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
                     });
             }
 
@@ -66,6 +71,7 @@
                              $scope.page = data.Page;
                              $scope.pagesCount = data.TotalPages;
                              $scope.totalCount = data.TotalCount;
+                             $scope.dishes.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
                          });;
             }
 

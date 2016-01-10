@@ -17,7 +17,6 @@
                         <div ng-repeat="dish in dishes.set">
 
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"
-                                 onclick="{window.location = '#/dishes/'}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
                                 <p class="textOnImage">
                                     {{dish.Name}}
@@ -46,11 +45,10 @@
                     </div>
                     <br/><br/><br/>
                     <div id="allDishes">
-                        <div ng-repeat="dish in dishes.allDishes | unchosenDishes:dishes.set" id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
+                        <div ng-repeat="dish in dishes..allDishesFilter | unchosenDishes:dishes.set" id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
 
                             <div class="col-md-6 img-circle" id={{dish.ID}}
                                  draggable="true" ondragstart="drag(event)"
-                                 onclick="{window.location = '#/dishes/'}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
                                 <p class="textOnImage">
                                     {{dish.Name}}
