@@ -52,8 +52,7 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/navbar/common.ui.js",
                 "~/Scripts/spa/dishset/dishsetModule.js",
 
-               //Services
-               "~/Scripts/spa/services/apiservice.js",
+               //Services(common)
                "~/Scripts/spa/services/sessionInjector.js",
                "~/Scripts/spa/services/fileUploadService.js",
                
@@ -78,6 +77,7 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/dishset/dishsetCtrl.js",
                 "~/Scripts/spa/dishset/dishsetEditCtrl.js",
                 "~/Scripts/spa/dishset/dndDishset.js",
+                "~/Scripts/spa/dishset/editVMonDnD.directive.js",
 
                
                 //Nav bars

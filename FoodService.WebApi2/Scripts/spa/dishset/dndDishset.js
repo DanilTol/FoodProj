@@ -13,13 +13,15 @@ function drop(ev) {
 
     if ($(dishDiv).parent().parent().attr('id') == 'allDishes')
     {
-        var draggableEl = dishDiv.cloneNode(true);
+        var draggableEl = dishDiv.parentNode.cloneNode(true);
 
         draggableEl.removeAttribute("draggable");
         draggableEl.removeAttribute("ondragstart");
-        draggableEl.setAttribute("ondrop", "e.preventDefault(); return false;");
 
-        draggableEl.innerHTML = '<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>' + draggableEl.innerHTML;
+        //draggableEl.removeAttribute("ondragover");
+        //draggableEl.childNodes[1].removeAttribute("ondragover");
+        
+        draggableEl.childNodes[1].innerHTML = '<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>' + draggableEl.childNodes[1].innerHTML;
 
         ev.target.appendChild(draggableEl);
     }
@@ -27,6 +29,6 @@ function drop(ev) {
 
 function removeDishFromMenu(el) {
     var parent = document.getElementById('dishMenu');
-    var child = el.parentNode;
+    var child = el.parentNode.parentNode;
     parent.removeChild(child);
 }

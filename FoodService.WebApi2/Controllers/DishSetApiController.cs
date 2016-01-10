@@ -12,29 +12,20 @@ namespace FoodService.WebApi2.Controllers
     public class DishSetApiController : ApiController
     {
         private readonly IDaySetService _daySetService;
-        private readonly IDishService _dishService;
+        private static DateTime _jan1st1970 = new DateTime(1970, 1, 1);
 
-        public DishSetApiController(IDaySetService service, IDishService serv)
+
+        public DishSetApiController(IDaySetService service)
         {
             _daySetService = service;
-            _dishService = serv;
         }
 
         [HttpGet]
         [Route("getdishmenu")]
-        public HttpResponseMessage GetDishMenuOnDay(string datestr)
+        public HttpResponseMessage GetDishMenuOnDay(long miliSecFrom1970)
         {
-            //var date =Convert.ToDateTime(datestr);
-            //var datestr = DateTime.Now.ToString();
-
-            var date = DateTime.ParseExact("Wed Dec 16 00:00:00 UTC-0400 2009",
-                                  "ddd MMM d HH:mm:ss UTCzzzzz yyyy",
-                                  CultureInfo.InvariantCulture);
-
-
-            var dayInfo1 = _daySetService.GetDayInfo(date);
-
-            var dayInfo = _dishService.GetAllDishes();
+            var date = _jan1st1970.AddMilliseconds(miliSecFrom1970);
+            var dayInfo = _daySetService.GetDayInfo(date);
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 
@@ -43,7 +34,7 @@ namespace FoodService.WebApi2.Controllers
         //[Route("editdishmenu/{date:DateTime}")]
         public HttpResponseMessage UpdatingMenuOnDay(SetOnDay setOnDay)
         {
-            _daySetService.DeleteAndEditDayDishSet(setOnDay.Date,setOnDay.DishId);
+            _daySetService.DeleteAndEditDayDishSet(_jan1st1970.AddMilliseconds(setOnDay.Date),setOnDay.DishId);
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }
 

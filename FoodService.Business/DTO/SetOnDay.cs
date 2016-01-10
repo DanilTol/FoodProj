@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FoodService.Business.DTO
+﻿namespace FoodService.Business.DTO
 {
     public class SetOnDay
     {
-        //public IEnumerable<DishModelShortInfo> DishModelShortInfos { get; set; }
-        public DateTime Date { get; set; }
+        public long Date { get; set; }
         public int[] DishId { get; set; }
-         
     }
 }

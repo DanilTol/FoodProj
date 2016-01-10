@@ -5,8 +5,32 @@
             
             $scope.dishes = [];
             $scope.dateInput = new Date();
+            $scope.dateInputMiliSec = $scope.dateInput.getTime();
+            $scope.DateShow = new Date($location.search().date);
 
+            $scope.editDayMenu = function () {
+                dishsetService.editDayMenu($scope.dateInputMiliSec, $scope.dishes.set).then(
+                    //success
+                    function (data) {
+                        var k = 10;
+                        k++;
+                    });
+            }
+
+
+            function loadDishset() {
+                $location.search('date', $scope.dateInputMiliSec);
+                $scope.DateShow = convertDate($scope.dateInputMiliSec);
+
+                dishsetService.getDayMenu($scope.dateInputMiliSec).then(
+                    //success
+                    function (data) {
+                        $scope.dishes.set = data;
+                    });
+            }
+            
             function convertDate(date) {
+                date = new Date(date); 
                 var day =  date.getDate();        // yields day
                 day = day < 10 ? "0" + day :day;
                 var month = (date.getMonth() + 1);    // yields month
@@ -20,27 +44,18 @@
                 return time;
             }
 
-            $scope.DateShow = $location.search().Date || convertDate(new Date());
+            
 
-            function loadDishset() {
-                $location.search('date', $scope.dateInput);
-                $scope.DateShow = convertDate($scope.dateInput);
-
-                dishsetService.getDayMenu($scope.dateInput).then(
-                    //success
-                    function(data) {
-                        $scope.dishes.set = data;
-                    });
-            }
+            
 
             $scope.$watch("dateInput", function () {
-                $location.search('date', $scope.dateInput);
+                $scope.dateInputMiliSec = $scope.dateInput.getTime();
                 loadDishset();
             });
 
             $scope.page = 0;
             $scope.pagesCount = 0;
-            $scope.pageSize = 5;
+            $scope.pageSize = 6;
             $scope.filterDishes = '';
 
             $scope.search = function () {
@@ -55,21 +70,29 @@
                         });;
             }
 
-            //$scope.clearSearch = function clearSearch() {
-            //    $scope.filterDishes = '';
-            //    $scope.search();
-            //}
+            $scope.clearSearch = function clearSearch() {
+                $scope.filterDishes = '';
+                $scope.search();
+            }
 
-            //$scope.pageRoute = function (page) {
-            //    $scope.page = page;
-            //    //$scope.search();
-            //}
+            $scope.pageRoute = function (page) {
+                $scope.page = page;
+                $scope.search();
+            }
 
             function onStartPage() {
                 $scope.search();
 
-                loadDishset();
+                //loadDishset();
             }
+
+
+            $scope.$watch("menuDiv",
+              function () {
+                  $scope.DateShow = $scope.DateShow;
+              }
+                );
+
 
             onStartPage();
         }]);

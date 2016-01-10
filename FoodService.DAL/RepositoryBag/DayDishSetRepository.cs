@@ -23,8 +23,7 @@ namespace FoodService.DAL.RepositoryBag
 
         public IQueryable<DayDishSet> GetAllDishSetsOnDay(DateTime date)
         {
-            date = DateTime.Now.AddDays(-30);
-            var k = _context.DayDishSets.Where(x => x.Date.ToString() == "12/12/2015");
+            var k = _context.DayDishSets.Where(x => x.Date == date);
             return k;
         }
 

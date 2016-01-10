@@ -266,6 +266,7 @@
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
     <Content Include="Scripts\spa\dishset\dishsetService.js" />
     <Content Include="Scripts\spa\dishset\dndDishset.js" />
+    <Content Include="Scripts\spa\dishset\editVMonDnD.directive.js" />
     <Content Include="Scripts\spa\dish\add.html" />
     <Content Include="Scripts\spa\dish\dishAddCtrl.js" />
     <Content Include="Scripts\spa\dish\dishEditCtrl.js" />
@@ -1112,7 +1113,6 @@
     <Content Include="Scripts\Vendors\respond.min.js" />
     <Content Include="Scripts\spa\app.js" />
     <Content Include="Scripts\spa\dish\dishesCtrl.js" />
-    <Content Include="Scripts\spa\services\apiservice.js" />
     <Content Include="Scripts\Vendors\ui-bootstrap-tpls-0.13.1.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

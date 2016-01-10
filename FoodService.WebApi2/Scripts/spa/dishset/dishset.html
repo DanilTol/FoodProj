@@ -3,7 +3,6 @@
         <div class="panel-heading clearfix">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Menu on {{DateShow}}</h4>
 
-
         </div>
         <div class="panel-body">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Choose day to show menu </h4>
@@ -14,14 +13,24 @@
                 <!--here show list of menu on day-->
                 <div class="col-md-5 pull-left"  style="margin-left: 60px;">
                     <h3>Dish menu</h3>
-                    <div style="border: 1px solid #aaaaaa; height: 380px;   overflow:auto ;" ondrop="drop(event)" ondragover="allowDrop(event)" id="dishMenu" >
-                        <div ng-repeat="dish in dishes.set1">
-                            <div class="col-md-6" style="padding: 15px" id={{dish.ID}}>
+                    <div class="dishDnDZone" ondrop="drop(event)" ondragover="allowDrop(event)" editVMonDnD id="dishMenu" ng-model="menuDiv" >
+                        <div ng-repeat="dish in dishes.set">
+
+                            <div class="col-md-6 img-circle" id="{{dish.ID}}"
+                                 onclick="{window.location = '#/dishes/'}"
+                                 style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
+                                <p class="textOnImage">
+                                    {{dish.Name}}
+                                </p>
+                                <button class="btn btn-danger cancelButton" ondrop="event.preventDefault(); return false;" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>
+                            </div>
+
+                            <!--<div class="col-md-6" style="padding: 15px" id={{dish.ID}}>
                                 <a ng-href="#/dishes/{{dish.ID}}">
-                                    <img ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
+                                    <img ng-src="/Images/Dish/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
                                     <p class="textOnImage">{{dish.Name}}</p>
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -30,33 +39,31 @@
                 <div class="col-md-5 pull-right" style="margin-right: 60px;">
                     <h3>All availible dishes</h3>
 
-                    <!--<div class="input-group pull-left">
-                        <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 70px" placeholder="Filter, search dishes..">
-                        <div class="input-group-btn">
+                    <div class="input-group pull-left">
+                            <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 70%" placeholder="Filter, search dishes..">
                             <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
                             <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
-                        </div>
                     </div>
-                    <br/><br/><br/>-->
-                    <div style="border: 1px solid #aaaaaa;" id="allDishes" >
-                        <div ng-repeat="dish in dishes.allDishes" id="{{dish.ID}}1"  draggable="true" ondragstart="drag(event)" >
+                    <br/><br/><br/>
+                    <div id="allDishes">
+                        <div ng-repeat="dish in dishes.allDishes" id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
 
                             <div class="col-md-6 img-circle" id={{dish.ID}}
-                                 draggable="true" ondragstart="drag(event)" 
-                                 onclick=""
-                                 style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;"
-                                 >
+                                 draggable="true" ondragstart="drag(event)"
+                                 onclick="{window.location = '#/dishes/'}"
+                                 style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
                                 <p class="textOnImage">
                                     {{dish.Name}}
                                 </p>
-                                <!--<a ng-href="#/dishes/{{dish.ID}}">
-                                    <img ng-src="/Images/Dish/{{dish.Name}}/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
-                                    <p class="textOnImage">{{dish.Name}}</p>
-                                </a>-->
                             </div>
-
                         </div>
                     </div>
+
+                    <div class="text-center" style="clear: both;">
+                        <hr/>
+                        <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute"></pagination>
+                    </div>
+
 
                 </div>
                
@@ -65,13 +72,19 @@
             </div>
             <br />
             <div class="col-md-5 pull-right" style="margin-right: 60px;">
-                <button class="btn btn-primary pull-right" ng-click="clearSearch();">Edit menu <i class="glyphicon glyphicon-edit"></i></button>
+                <button class="btn btn-lg btn-primary pull-right" ng-click="editDayMenu();">Edit menu <i class="glyphicon glyphicon-edit"></i></button>
             </div>
 
         </div>
 
     </div>
 </div>
+
+<script>
+    function dishDetails(dishId) {
+        window.location = '#/dishes/'+dishId;
+    }
+</script>
 
 
 <!--<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>-->

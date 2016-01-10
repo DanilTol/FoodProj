@@ -5,10 +5,10 @@
         '$http', '$q', function ($http, $q) {
 
             function getDayMenu(date) {
-                date = date || new Date();
+                date = date || new Date().getTime();
 
                 var deferred = $q.defer();
-                $http.get('api/dishset/getdishmenu?datestr=' + date).
+                $http.get('api/dishset/getdishmenu?miliSecFrom1970=' + date).
                     success(function (data) {
                         deferred.resolve(data);
                     }).
@@ -18,9 +18,12 @@
                 return deferred.promise;
             }
 
-            function editDayMenu(dishes) {
+            function editDayMenu(date,dishes) {
                 var deferred = $q.defer();
-                $http.post('api/dishset/editdishmenu', dishes).
+                var setOnDay = [];
+                setOnDay.DishId = dishes;
+                setOnDay.Date = date;
+                $http.post('api/dishset/editdishmenu', setOnDay).
                     success(function (data) {
                         deferred.resolve(data);
                     }).
