@@ -262,7 +262,6 @@
     <Content Include="Scripts\spa\account\registerCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishset.html" />
     <Content Include="Scripts\spa\dishset\dishsetCtrl.js" />
-    <Content Include="Scripts\spa\dishset\dishsetEditCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
     <Content Include="Scripts\spa\dishset\dishsetService.js" />
     <Content Include="Scripts\spa\dishset\dndDishset.js" />
@@ -286,6 +285,9 @@
     <Content Include="Scripts\spa\home\indexCtrl.js" />
     <Content Include="Scripts\spa\home\rootCtrl.js" />
     <Content Include="Scripts\spa\navbar\topBar.directive.js" />
+    <Content Include="Scripts\spa\order\orderCtrl.js" />
+    <Content Include="Scripts\spa\order\orderModule.js" />
+    <Content Include="Scripts\spa\order\orderService.js" />
     <Content Include="Scripts\spa\services\fileUploadService.js" />
     <Content Include="Scripts\spa\services\sessionInjector.js" />
     <Content Include="Scripts\Vendors\angular-animate.js" />
@@ -1136,7 +1138,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\spa\customers\" />
-    <Folder Include="Scripts\spa\order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

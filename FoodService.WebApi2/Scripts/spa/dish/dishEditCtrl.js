@@ -2,42 +2,32 @@
     'use strict';
 
     app.controller('dishEditCtrl', [
-        '$scope', '$routeParams', 'dishService', function($scope, $routeParams, dishService) {
+        '$scope', '$routeParams', 'dishService', function ($scope, $routeParams, dishService) {
 
-            $scope.UpdateDish = updateDish;
-            $scope.prepareFiles = prepareFiles;
-
-            var dishImage = null;
-
-            function updateDish() {
-                //if (dishImage) {
-                //    fileUploadService.uploadImage(dishImage, $scope.dish.ID, updateDishModel);
-                //}
-                //else
-
+            $scope.UpdateDish = function () {
                 dishService.updateDish($scope.dish).then(
                     //success
-                    function(data) {
+                    function (data) {
                         $scope.dish = data;
-                        dishImage = null;
                     });;
             }
-
-            function prepareFiles($files) {
-                dishImage = $files;
-            }
-
 
             function loadDetails() {
                 dishService.loadDishDetails($routeParams.id).then(
                     //success
-                    function(data) {
+                    function (data) {
                         $scope.dish = data;
                     });;
             }
 
-            loadDetails();
+            $scope.deleteDish = function() {
+                dishService.deleteDish($scope.dish.ID).then(
+                    //success
+                    function (data) {
+                    });;
+            }
 
-        }
-    ]);
+
+            loadDetails();
+        }]);
 })(angular.module('dishModule'));

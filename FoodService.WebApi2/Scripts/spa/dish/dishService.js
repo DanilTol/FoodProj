@@ -18,11 +18,8 @@
                   deferred.resolve(data);
               }).
              error(function (data, status) {
-
-
                  deferred.reject(status);
              });
-
             return deferred.promise;
         }
 
@@ -38,7 +35,6 @@
 
             return deferred.promise;
         }
-
 
         function updateDish(dish) {
             var deferred = $q.defer();
@@ -62,16 +58,28 @@
              function (status) {
                  deferred.reject(status);
              });
-
             return deferred.promise;
         }
-        
+
+
+        function deleteDish(dishId) {
+            var deferred = $q.defer();
+            $http.post('/api/dishes/delete', dishId).
+              success(function (data) {
+                  deferred.resolve(data);
+              }).
+             error(function (data, status) {
+                 deferred.reject(status);
+             });
+            return deferred.promise;
+        }
 
         var service = {
             search: search,
             loadDishDetails: loadDishDetails,
             updateDish: updateDish,
-            addDish: addDish
+            addDish: addDish,
+            deleteDish: deleteDish
         }
         return service;
     }

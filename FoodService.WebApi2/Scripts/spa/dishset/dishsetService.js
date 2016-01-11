@@ -18,6 +18,22 @@
                 return deferred.promise;
             }
 
+
+             function filterDayMenu(date, filter) {
+                date = date || new Date().getTime();
+
+                var deferred = $q.defer();
+                 $http.get('api/dishset/filterdishmenu?miliSecFrom1970=' + date + "&filter=" + filter).
+                    success(function (data) {
+                        deferred.resolve(data);
+                    }).
+                    error(function (status) {
+                        deferred.reject(status);
+                    });
+                return deferred.promise;
+            }
+
+
             function editDayMenu(date,dishes) {
                 var deferred = $q.defer();
                 var setOnDay = [];
@@ -35,7 +51,8 @@
 
             var service = {
                 getDayMenu: getDayMenu,
-                editDayMenu: editDayMenu
+                editDayMenu: editDayMenu,
+                filterDayMenu:filterDayMenu
             }
             return service;
         }

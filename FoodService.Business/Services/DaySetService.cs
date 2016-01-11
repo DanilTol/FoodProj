@@ -38,6 +38,29 @@ namespace FoodService.Business.Services
             return result;
         }
 
+        public IEnumerable<DishModelShortInfo> Filter(DateTime dateTime, string filter)
+        {
+            var fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
+                .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
+                .OrderBy(m => m.ID);
+            var result = new List<DishModelShortInfo>();
+
+            foreach (var s in fromDb)
+            {
+                string pathImage = Database.DishToImage.FindByDishId(s.Dish.ID);
+                result.Add(new DishModelShortInfo()
+                {
+                    ID = s.Dish.ID,
+                    Name = s.Dish.Name,
+                    Weight = s.Dish.Weight,
+                    Price = s.Dish.Price,
+                    ImagePath = pathImage ?? DefaultPathToImage
+                });
+            }
+            return result;
+        }
+
+
         public void DeleteAndEditDayDishSet(DateTime date, int[] dishIds)
         {
             Database.DayDish.DeleteByDate(date);

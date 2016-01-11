@@ -122,5 +122,14 @@ namespace FoodService.WebApi2.Controllers
                 return response;
             });
         }
+
+        [HttpPost]
+        [Route("delete")]
+        public HttpResponseMessage Delete([FromBody]int dishId = 2)
+        {
+            _dishService.DeleteDish(dishId);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }

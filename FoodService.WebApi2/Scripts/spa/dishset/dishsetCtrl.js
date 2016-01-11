@@ -59,7 +59,7 @@
 
             $scope.page = 0;
             $scope.pagesCount = 0;
-            $scope.pageSize = 6;
+            $scope.pageSize = 16;
             $scope.filterDishes = "";
 
             function search() {

@@ -1,5 +1,5 @@
 ﻿(function (app) {
-    'use strict';
+    "use strict";
 
     app.directive('editVMonDnD', ['$sce', function($sce) {
             return {

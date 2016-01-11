@@ -8,6 +8,7 @@ namespace FoodService.Business.ServiceInterfaces
     {
         IEnumerable<DishModelShortInfo> GetDayInfo(DateTime dateTime);
         void DeleteAndEditDayDishSet(DateTime date, int[] dishIds);
+        IEnumerable<DishModelShortInfo> Filter(DateTime dateTime, string filter);
         void Dispose();
 
     }

@@ -28,6 +28,16 @@ namespace FoodService.WebApi2.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 
+        [HttpGet]
+        [Route("filterdishmenu")]
+        public HttpResponseMessage GetFilterDishMenuOnDay(long miliSecFrom1970, string filter = "")
+        {
+            var date = Jan1St1970.AddMilliseconds(miliSecFrom1970);
+            var dayInfo = _daySetService.Filter(date, filter);
+            return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
+        }
+
+
         [HttpPost]
         [Route("editdishmenu")]
         //[Route("editdishmenu/{date:DateTime}")]
