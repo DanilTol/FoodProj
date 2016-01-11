@@ -87,7 +87,8 @@ textarea {
 }
 
 .dishDnDZone {
-    border: 1px solid #aaaaaa; 
+    border: 1px solid #aaaaaa;
+    min-height: 200px;
     max-width:100%;
     max-height:100%;
     overflow:auto ;

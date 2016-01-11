@@ -1,0 +1,57 @@
+﻿<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Menu on {{DateShow}}</h4>
+        </div>
+        <div class="panel-body">
+            <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Choose day to show menu </h4>
+            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" />
+            <hr />
+            <div class="row">
+                <!--here show list of user set-->
+                <div class="col-md-5 pull-left" style="margin-left: 60px;">
+                    <h3>Your order</h3>
+                    <div class="dishDnDZone" ondrop="drop(event)" ondragover="allowDrop(event)" editVMonDnD id="dishMenu" ng-model="menuDiv">
+                        <div ng-repeat="dish in dishes.userSet">
+                            <div class="col-md-6 img-circle" id="{{dish.ID}}"
+                                 style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
+                                <p class="textOnImage">
+                                    {{dish.Name}}
+                                </p>
+                                <button class="btn btn-danger cancelButton" ondrop="event.preventDefault(); return false;" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--here show list of menu on day-->
+                <div class="col-md-5 pull-right" style="margin-right: 60px;">
+                    <h3>Dish menu</h3>
+                    <div class="input-group pull-left">
+                        <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 70%" placeholder="Filter, search dishes..">
+                        <button class="btn btn-primary" ng-click="filterClick();"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    </div>
+                    <br /><br /><br />
+                    <div id="allDishes">
+                        <div ng-repeat="dish in dishes.set " id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
+                            <div class="col-md-6 img-circle" id={{dish.ID}}
+                                 draggable="true" ondragstart="drag(event)"
+                                 style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
+                                <p class="textOnImage">
+                                    {{dish.Name}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-md-5 pull-right" style="margin-right: 60px;">
+                <button class="btn btn-lg btn-primary pull-right" ng-click="editUserSet();">Edit menu <i class="glyphicon glyphicon-edit"></i></button>
+            </div>
+            <div class="col-md-5 pull-left" style="margin-right: 60px;">
+                <button class="btn btn-lg btn-danger pull-right" ng-click="clearOrder();">Clear order <i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

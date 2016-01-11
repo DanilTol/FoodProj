@@ -15,12 +15,6 @@
             replace: true,
             templateUrl: "/Scripts/spa/navbar/pagination.html",
             controller: ['$scope', function ($scope) {
-                //$scope.search  = function(i) {
-                //    if ($scope.pageRoute) {
-                //        $scope.pageRoute({ page: i });
-                //    }
-                //}
-
                 $scope.$watch(
                     function (scope) { return scope.page },
                     function () {

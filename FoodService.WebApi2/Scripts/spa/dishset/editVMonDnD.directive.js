@@ -1,33 +1,24 @@
 ﻿(function (app) {
     "use strict";
 
-    app.directive('editVMonDnD', ['$sce', function($sce) {
-            return {
-                restrict: 'A',
-                require: '?ngModel',
-                link: function(scope, element, attrs, ngModel) {
-                    if (!ngModel) return;
-
-                    // Specify how UI should be updated
-                    ngModel.$render = function() {
-                        element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
-                    };
+    app.directive("editVMonDnD", function() {
+        return {
+            scope: { twoway: "=" },
+            restrict: 'A',
+                link: function(scope, element, attrs) {
+                    if (!scope.twoway) return;
 
                     function read() {
                         var html = element.html();
-                       
-                        if (attrs.stripBr && html == '<br>') {
-                            html = '';
-                        }
-                        ngModel.$setViewValue(html);
+
+                        scope.twoway.$setViewValue(html);
                     }
 
-                    element.on('ondrop', function() {
+                    element.on("ondrop keyup ondragover", function () {
                         scope.$evalAsync(read);
                     });
-                    read();
+                    read(); // initialize
                 }
             };
-        }
-    ]);
+        });
 })(angular.module('dishsetModule'));

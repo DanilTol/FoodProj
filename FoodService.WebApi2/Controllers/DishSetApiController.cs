@@ -13,7 +13,6 @@ namespace FoodService.WebApi2.Controllers
         private readonly IDaySetService _daySetService;
         private static readonly DateTime Jan1St1970 = new DateTime(1970, 1, 1);
 
-
         public DishSetApiController(IDaySetService service)
         {
             _daySetService = service;
@@ -34,13 +33,12 @@ namespace FoodService.WebApi2.Controllers
         {
             var date = Jan1St1970.AddMilliseconds(miliSecFrom1970);
             var dayInfo = _daySetService.Filter(date, filter);
+            
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 
-
         [HttpPost]
         [Route("editdishmenu")]
-        //[Route("editdishmenu/{date:DateTime}")]
         public HttpResponseMessage UpdatingMenuOnDay(SetOnDay setOnDay)
         {
             _daySetService.DeleteAndEditDayDishSet(Jan1St1970.AddMilliseconds(setOnDay.Date),setOnDay.DishId);

@@ -230,6 +230,7 @@
     <Compile Include="Controllers\DishApiController.cs" />
     <Compile Include="Controllers\DishSetApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderApiController.cs" />
     <Compile Include="Dependency\ControllerInstaller.cs" />
     <Compile Include="Dependency\WindsorCompositionRoot.cs" />
     <Compile Include="Global.asax.cs">
@@ -285,6 +286,7 @@
     <Content Include="Scripts\spa\home\indexCtrl.js" />
     <Content Include="Scripts\spa\home\rootCtrl.js" />
     <Content Include="Scripts\spa\navbar\topBar.directive.js" />
+    <Content Include="Scripts\spa\order\order.html" />
     <Content Include="Scripts\spa\order\orderCtrl.js" />
     <Content Include="Scripts\spa\order\orderModule.js" />
     <Content Include="Scripts\spa\order\orderService.js" />

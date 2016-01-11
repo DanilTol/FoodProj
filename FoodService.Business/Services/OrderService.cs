@@ -20,41 +20,15 @@ namespace FoodService.Business.Services
 
         public IEnumerable<DishModelShortInfo> GetPlatesByDate(DateTime date, string email)
         {
-            //IRepositorySecond a = new PublicRepository(entitiesContext);
-            //OrderRepository a = new OrderRepository();
-            //var DishToImageRepository = new DishToImageRepository();
-            // var k = a.GetDishesFromOrderByDate(date);
-            
-            //return k.Select( r => new DishModelShortInfo()
-            //{
-            //    ID = r.ID,
-            //    Name = r.Name,
-            //    Weight = r.Weight,
-            //    Price = r.Price,
-            //    ImagePath = DishToImageRepository.FindByDishId(r.ID)
-            //});
-
-            //Mapper.CreateMap<Dish, DishModelShortInfo>();
+            var fromDb = Database.Order.QueryToTable.Where(x => x.Date == date && x.User.EmailAddress == email);
             var allDishes = Mapper.Map<IQueryable<Dish>, IEnumerable<DishModelShortInfo>>(Database.Order.GetDishesFromOrderByDate(date, email));
             return allDishes;
-
-
         }
 
-        public void EditOrder(DateTime date, List<string> arraInts, string email)
+        public void EditOrder(DateTime date, int[] arraInts, string email)
         {
             DeleteOrder(date, email);
-            
-            for (int i = 0; i < 5; i++)
-            {
-                var ai = arraInts[i].Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                if (ai[0] == 0)
-                {
-                    continue;
-                }
-                //TODO: find solution
-                Database.Order.AddSeveralOrders(date.AddDays(i), ai, email);
-            }
+            Database.Order.AddSeveralOrders(date, arraInts, email);
             Database.Save();
         }
 

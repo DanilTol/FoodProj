@@ -13,7 +13,8 @@
                 <!--here show list of menu on day-->
                 <div class="col-md-5 pull-left"  style="margin-left: 60px;">
                     <h3>Dish menu</h3>
-                    <div class="dishDnDZone" ondrop="drop(event)" ondragover="allowDrop(event)" editVMonDnD id="dishMenu" ng-model="menuDiv" >
+                    <div class="dishDnDZone" ondrop="drop(event)" ondragover="allowDrop(event)" id="dishMenu"
+                         editVMonDnD twoway="dishes.set">
                         <div ng-repeat="dish in dishes.set">
 
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"

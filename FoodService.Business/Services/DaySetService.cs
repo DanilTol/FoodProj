@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
+using FoodService.DAL.Entity;
 using FoodService.DAL.Interfaces;
 
 namespace FoodService.Business.Services
@@ -40,11 +41,21 @@ namespace FoodService.Business.Services
 
         public IEnumerable<DishModelShortInfo> Filter(DateTime dateTime, string filter)
         {
-            var fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
-                .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
-                .OrderBy(m => m.ID);
+            IQueryable<DayDishSet> fromDb;
+            IQueryable<DayDishSet> lfromDb;
+            if (String.IsNullOrEmpty(filter))
+            {
+                 fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date).OrderBy(m => m.ID);
+                lfromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date).OrderBy(m => m.ID);
+            }
+            else
+            {
+                 fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
+                    .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
+                    .OrderBy(m => m.ID);
+            }
             var result = new List<DishModelShortInfo>();
-
+            var k = fromDb.ToList();
             foreach (var s in fromDb)
             {
                 string pathImage = Database.DishToImage.FindByDishId(s.Dish.ID);
