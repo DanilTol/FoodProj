@@ -21,9 +21,17 @@
                     });
             }
 
-            $scope.$watch("menuDiv", function () {
-                console.log("menu div change");
-            });
+            //$scope.$watch("menuDiv", function () {
+            //    //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
+            //    console.log("menu div change");
+            //});
+
+
+            //$scope.$watch("dishes.set.length", function () {
+            //    //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
+            //    console.log("menu div change");
+            //}, true);
+
 
             function convertDate(date) {
                 date = new Date(date);
@@ -43,6 +51,10 @@
             function loadDishset() {
                 $location.search("date", $scope.dateInputMiliSec);
                 $scope.DateShow = convertDate($scope.dateInputMiliSec);
+               
+                //var myEl = angular.element(document.querySelector('#emptyMe'));
+                //myEl.empty();
+                //$scope.dishes.set = {};
 
                 dishsetService.getDayMenu($scope.dateInputMiliSec).then(
                     //success
@@ -71,7 +83,7 @@
                              $scope.page = data.Page;
                              $scope.pagesCount = data.TotalPages;
                              $scope.totalCount = data.TotalCount;
-                             $scope.dishes.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
+                             //$scope.dishes.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
                          });;
             }
 
@@ -90,6 +102,15 @@
                 $scope.page = 0;
                 search();
             }
+
+            $scope.editDishSet = function(dishId) {
+                var inSet = {};
+                inSet.ID = dishId;
+                $scope.dishes.set.push(inSet);
+                //$scope.dishes.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
+            }
+
+
 
             search();
         }]);

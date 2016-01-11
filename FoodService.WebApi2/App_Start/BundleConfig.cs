@@ -79,6 +79,7 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/dishset/dndDishset.js",
                 "~/Scripts/spa/dishset/editVMonDnD.directive.js",
                 "~/Scripts/spa/dishset/FilterForChosenDishes.js",
+                "~/Scripts/spa/dishset/DnD.directive.js",
 
                 //order
                 "~/Scripts/spa/order/orderService.js",

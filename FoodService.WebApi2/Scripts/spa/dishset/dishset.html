@@ -13,8 +13,13 @@
                 <!--here show list of menu on day-->
                 <div class="col-md-5 pull-left"  style="margin-left: 60px;">
                     <h3>Dish menu</h3>
-                    <div class="dishDnDZone" ondrop="drop(event)" ondragover="allowDrop(event)" id="dishMenu"
-                         editVMonDnD twoway="dishes.set">
+                    <div class="dishDnDZone" 
+
+                         x-lvl-drop-target="true"
+                         dishSet="{{dishes.set}}" x-on-drop="editDishSet(dishId)"
+                         id="dishMenu">
+                        
+
                         <div ng-repeat="dish in dishes.set">
 
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"
@@ -46,7 +51,11 @@
                     </div>
                     <br/><br/><br/>
                     <div id="allDishes">
-                        <div ng-repeat="dish in dishes.allDishesFilter | unchosenDishes:dishes.set" id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
+                        <div ng-repeat="dish in dishes.allDishes | unchosenDishes:dishes.set" id="{{dish.ID}}1"
+
+                             x-lvl-draggable="true"
+                             
+                             >
 
                             <div class="col-md-6 img-circle" id={{dish.ID}}
                                  draggable="true" ondragstart="drag(event)"
@@ -62,12 +71,7 @@
                         <hr/>
                         <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute"></pagination>
                     </div>
-
-
                 </div>
-               
-
-
             </div>
             <br />
             <div class="col-md-5 pull-right" style="margin-right: 60px;">
