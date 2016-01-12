@@ -63,20 +63,27 @@
                     var dishDiv = document.getElementById(data);
 
                     if ($(dishDiv).parent().parent().attr('id') == 'allDishes') {
-                        var draggableEl = dishDiv.parentNode.cloneNode(true);
+                        var draggableEl = dishDiv.parentNode;//.cloneNode(true);
 
-                        draggableEl.removeAttribute("draggable");
-                        draggableEl.removeAttribute("ondragstart");
+                        var someDish = {};
+                        someDish.ID = parseInt(data);
+                        someDish.ImagePath = draggableEl.childNodes[1].style["backgroundImage"];//draggableEl.css("backgroundImage");
+                        var index = someDish.ImagePath.lastIndexOf("/") + 1;
+                        someDish.ImagePath = someDish.ImagePath.substring(index, someDish.ImagePath.length - 2);
+                        someDish.Name = draggableEl.childNodes[1].childNodes[1].innerHTML.trim();//draggableEl.children.html();
+
+                        //draggableEl.removeAttribute("draggable");
+                        //draggableEl.removeAttribute("ondragstart");
 
                         //draggableEl.removeAttribute("ondragover");
                         //draggableEl.childNodes[1].removeAttribute("ondragover");
 
-                        draggableEl.childNodes[1].innerHTML = '<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>' + draggableEl.childNodes[1].innerHTML;
+                        //draggableEl.childNodes[1].innerHTML = '<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>' + draggableEl.childNodes[1].innerHTML;
 
                         //scope.dishSet = [];
                         //scope.dishSet.push(data);
-                        scope.onDrop({dishId: data });
-                        e.target.appendChild(draggableEl);
+                        scope.onDrop({someDish: someDish });
+                        //e.target.appendChild(draggableEl);
                     }
 
 

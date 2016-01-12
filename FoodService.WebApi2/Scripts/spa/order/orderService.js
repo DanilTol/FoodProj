@@ -20,7 +20,7 @@
 
             function editUserSet(date, dishes) {
                 var deferred = $q.defer();
-                var setOnDay = [];
+                var setOnDay = {};
                 setOnDay.DishId = dishes;
                 setOnDay.Date = date;
                 $http.post('api/order/edituserset', setOnDay).

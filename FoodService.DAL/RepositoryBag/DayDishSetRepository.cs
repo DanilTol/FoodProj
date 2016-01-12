@@ -45,21 +45,21 @@ namespace FoodService.DAL.RepositoryBag
         {
             var result = (from r in _context.DayDishSets where id == r.ID select r).FirstOrDefault();
             _context.DayDishSets.Remove(result);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void Update(DayDishSet entity)
         {
-            var result = (from r in _context.DayDishSets where entity.ID == r.ID select r).FirstOrDefault();
-            if (result != null)
-            {
-                result.Date = entity.Date;
-                result.Dish = entity.Dish;
+            //var result = (from r in _context.DayDishSets where entity.ID == r.ID select r).FirstOrDefault();
+            //if (result != null)
+            //{
+            //    result.Date = entity.Date;
+            //    result.Dish = entity.Dish;
                 
-                _context.Entry(result).State = EntityState.Modified;
-            }
+            //    _context.Entry(result).State = EntityState.Modified;
+            //}
 
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public DayDishSet FindById(int id)
@@ -77,6 +77,13 @@ namespace FoodService.DAL.RepositoryBag
                 _context.SaveChanges();
                 result = (from r in _context.DayDishSets where date == r.Date select r).FirstOrDefault();
             }
+            //var dayMenu = _context.DayDishSets.Where(x => x.Date == date);
+            //foreach (var day in dayMenu)
+            //{
+            //    _context.DayDishSets.Remove(day);
+            //}
+
+
             //var result = (from r in context.WeekDishSets where date == r.Date select r).FirstOrDefault();
             //context.WeekDishSets.Remove(result);
             //context.SaveChanges();

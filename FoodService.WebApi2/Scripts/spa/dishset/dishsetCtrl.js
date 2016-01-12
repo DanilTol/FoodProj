@@ -54,7 +54,7 @@
                
                 //var myEl = angular.element(document.querySelector('#emptyMe'));
                 //myEl.empty();
-                //$scope.dishes.set = {};
+                $scope.dishes.set = {};
 
                 dishsetService.getDayMenu($scope.dateInputMiliSec).then(
                     //success
@@ -103,13 +103,35 @@
                 search();
             }
 
-            $scope.editDishSet = function(dishId) {
-                var inSet = {};
-                inSet.ID = dishId;
-                $scope.dishes.set.push(inSet);
+            $scope.editDishSet = function(someDish) {
+                var flag = true;
+                for (var i = 0; i < $scope.dishes.set.length; i++) {
+                    if ($scope.dishes.set[i].ID == someDish.ID) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    $scope.dishes.set.push(someDish);
+                }
+                $scope.$apply();
                 //$scope.dishes.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
             }
+            
+            $scope.removeClickBtn = function (el) {
+                var parent = document.getElementById('dishMenu');
+                var child = el.target.parentNode.parentNode;
+                var id = el.target.parentNode.attributes["id"].value;
+                parent.removeChild(child);
+                //for (var i = 0; i < $scope.dishes.set.length; i++) {
+                //    if ($scope.dishes.set[i].ID == id) {
+                //        $scope.dishes.set.splice(i, 1);
+                //        break;
+                //    }
+                //}
+                $scope.dishes.set = $.grep($scope.dishes.set, function (e) { return e.ID != id; });
 
+            }
 
 
             search();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mail;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
 using FoodService.DAL.Entity;
@@ -74,8 +75,32 @@ namespace FoodService.Business.Services
 
         public void DeleteAndEditDayDishSet(DateTime date, int[] dishIds)
         {
-            Database.DayDish.DeleteByDate(date);
-            foreach (var i in dishIds)
+            //Database.DayDish.DeleteByDate(date);
+
+            var dishIdsList = dishIds.ToList();
+          var equalList = new List<int>();
+
+            var menuDelete = Database.DayDish.QueryToTable.Where(x => x.Date == date.Date).ToList();
+            foreach (var daymenu in menuDelete)
+            {
+                foreach (var dishId in dishIdsList.Where(dishId => daymenu.Dish.ID == dishId))
+                {
+                    equalList.Add(dishId);
+                }
+            }
+
+            foreach (var eq in equalList)
+            {
+                dishIdsList.Remove(eq);
+                menuDelete.RemoveAll(x => x.Dish.ID == eq);
+            }
+
+            foreach (var dish in menuDelete)
+            {
+                Database.DayDish.Delete(dish.ID);
+            }
+
+            foreach (var i in dishIdsList)
             {
                 Database.DayDish.Add(i, date);
             }

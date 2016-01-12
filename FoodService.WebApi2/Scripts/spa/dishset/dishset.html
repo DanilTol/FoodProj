@@ -16,18 +16,17 @@
                     <div class="dishDnDZone" 
 
                          x-lvl-drop-target="true"
-                         dishSet="{{dishes.set}}" x-on-drop="editDishSet(dishId)"
+                         x-on-drop="editDishSet(someDish)"
                          id="dishMenu">
                         
-
                         <div ng-repeat="dish in dishes.set">
 
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
-                                <p class="textOnImage">
+                                <p class="textOnImage" style="margin-left: -15px">
                                     {{dish.Name}}
                                 </p>
-                                <button class="btn btn-danger cancelButton" ondrop="event.preventDefault(); return false;" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>
+                                <button class="btn btn-danger cancelButton" ng-click="removeClickBtn($event)"><i class="glyphicon glyphicon-remove"></i></button>
                             </div>
 
                             <!--<div class="col-md-6" style="padding: 15px" id={{dish.ID}}>
@@ -51,16 +50,12 @@
                     </div>
                     <br/><br/><br/>
                     <div id="allDishes">
-                        <div ng-repeat="dish in dishes.allDishes | unchosenDishes:dishes.set" id="{{dish.ID}}1"
-
-                             x-lvl-draggable="true"
-                             
-                             >
+                        <div ng-repeat="dish in dishes.allDishes | unchosenDishes:dishes.set" id="{{dish.ID}}1">
 
                             <div class="col-md-6 img-circle" id={{dish.ID}}
-                                 draggable="true" ondragstart="drag(event)"
+                                 x-lvl-draggable="true"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
-                                <p class="textOnImage">
+                                <p class="textOnImage" style="margin-left: -15px">
                                     {{dish.Name}}
                                 </p>
                             </div>

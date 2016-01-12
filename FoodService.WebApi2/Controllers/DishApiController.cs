@@ -125,7 +125,7 @@ namespace FoodService.WebApi2.Controllers
 
         [HttpPost]
         [Route("delete")]
-        public HttpResponseMessage Delete([FromBody]int dishId = 2)
+        public HttpResponseMessage Delete(int dishId = 2)
         {
             _dishService.DeleteDish(dishId);
             return Request.CreateResponse(HttpStatusCode.OK);
