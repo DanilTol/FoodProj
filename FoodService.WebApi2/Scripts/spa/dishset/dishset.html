@@ -2,25 +2,20 @@
     <div class="panel panel-primary">
         <div class="panel-heading clearfix">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Menu on {{DateShow}}</h4>
-
         </div>
         <div class="panel-body">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Choose day to show menu </h4>
-            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput"/>
-            <hr/>
+            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" />
+            <hr />
             <div class="row">
-
                 <!--here show list of menu on day-->
-                <div class="col-md-5 pull-left"  style="margin-left: 60px;">
+                <div class="col-md-5 pull-left" style="margin-left: 60px;">
                     <h3>Dish menu</h3>
-                    <div class="dishDnDZone" 
-
+                    <div class="dishDnDZone"
                          x-lvl-drop-target="true"
                          x-on-drop="editDishSet(someDish)"
                          id="dishMenu">
-                        
                         <div ng-repeat="dish in dishes.set">
-
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
                                 <p class="textOnImage" style="margin-left: -15px">
@@ -39,19 +34,16 @@
                     </div>
                 </div>
 
-
                 <div class="col-md-5 pull-right" style="margin-right: 60px;">
                     <h3>All availible dishes</h3>
-
                     <div class="input-group pull-left">
-                            <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 70%" placeholder="Filter, search dishes..">
-                            <button class="btn btn-primary" ng-click="filterClick();"><i class="glyphicon glyphicon-search"></i></button>
-                            <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                        <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 70%" placeholder="Filter, search dishes..">
+                        <button class="btn btn-primary" ng-click="filterClick();"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </div>
-                    <br/><br/><br/>
+                    <br /><br /><br />
                     <div id="allDishes">
                         <div ng-repeat="dish in dishes.allDishes | unchosenDishes:dishes.set" id="{{dish.ID}}1">
-
                             <div class="col-md-6 img-circle" id={{dish.ID}}
                                  x-lvl-draggable="true"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
@@ -61,9 +53,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="text-center" style="clear: both;">
-                        <hr/>
+                        <hr />
                         <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute"></pagination>
                     </div>
                 </div>
@@ -72,17 +63,6 @@
             <div class="col-md-5 pull-right" style="margin-right: 60px;">
                 <button class="btn btn-lg btn-primary pull-right" ng-click="editDayMenu();">Edit menu <i class="glyphicon glyphicon-edit"></i></button>
             </div>
-
         </div>
-
     </div>
 </div>
-
-<script>
-    function dishDetails(dishId) {
-        window.location = '#/dishes/'+dishId;
-    }
-</script>
-
-
-<!--<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>-->

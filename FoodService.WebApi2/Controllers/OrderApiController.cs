@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
+using FoodService.WebApi2.Attribute;
 
 namespace FoodService.WebApi2.Controllers
 {
@@ -22,9 +24,11 @@ namespace FoodService.WebApi2.Controllers
         string email = "mike@gmail.com";
 
         [HttpGet]
+        [MyAuth]
         [Route("getuserset")]
         public HttpResponseMessage GetUserDishSetOnDay(long miliSecFrom1970)
         {
+            var userEmail = Thread.CurrentPrincipal.Identity.Name;
             var date = Jan1St1970.AddMilliseconds(miliSecFrom1970);
             var dayInfo = _orderService.GetPlatesByDate(date, email);
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);

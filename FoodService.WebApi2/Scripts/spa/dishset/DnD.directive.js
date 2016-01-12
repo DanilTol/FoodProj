@@ -7,18 +7,17 @@
             link: function (scope, el, attrs, controller) {
                 angular.element(el).attr("draggable", "true");
 
-                var id = angular.element(el).attr("id");
-
-                console.log(id);
+                //var id = angular.element(el).attr("id");
+                //console.log(id);
                 el.bind("dragstart", function (e) {
                     e.originalEvent.dataTransfer.setData("text", e.target.id);
-                    console.log('drag');
-                    $rootScope.$emit("LVL-DRAG-START");
+                    //console.log('drag');
+                    //$rootScope.$emit("LVL-DRAG-START");
                 });
 
-                el.bind("dragend", function (e) {
-                    $rootScope.$emit("LVL-DRAG-END");
-                });
+                //el.bind("dragend", function (e) {
+                //    $rootScope.$emit("LVL-DRAG-END");
+                //});
             }
         };
     }]);
@@ -62,44 +61,39 @@
                     var data = e.originalEvent.dataTransfer.getData("text");
                     var dishDiv = document.getElementById(data);
 
-                    if ($(dishDiv).parent().parent().attr('id') == 'allDishes') {
+                    //if ($(dishDiv).parent().parent().attr('id') == 'allDishes')
+                    {
                         var draggableEl = dishDiv.parentNode;//.cloneNode(true);
 
                         var someDish = {};
                         someDish.ID = parseInt(data);
-                        someDish.ImagePath = draggableEl.childNodes[1].style["backgroundImage"];//draggableEl.css("backgroundImage");
+                        if (draggableEl.childNodes.length<5) {
+                            someDish.ImagePath = draggableEl.childNodes[1].style["backgroundImage"];//draggableEl.css("backgroundImage");
+                            someDish.Name = draggableEl.childNodes[1].childNodes[1].innerHTML.trim();//draggableEl.children.html();
+                        } else {
+                            someDish.ImagePath = draggableEl.childNodes[2].style["backgroundImage"];
+                            someDish.Name = draggableEl.childNodes[2].childNodes[1].innerHTML.trim();
+                        }
+                        //someDish.ImagePath = draggableEl.childNodes[1].style["backgroundImage"];//draggableEl.css("backgroundImage");
+                        //someDish.ImagePath = draggableEl.childNodes[2].style["backgroundImage"];
                         var index = someDish.ImagePath.lastIndexOf("/") + 1;
                         someDish.ImagePath = someDish.ImagePath.substring(index, someDish.ImagePath.length - 2);
-                        someDish.Name = draggableEl.childNodes[1].childNodes[1].innerHTML.trim();//draggableEl.children.html();
+                        
 
-                        //draggableEl.removeAttribute("draggable");
-                        //draggableEl.removeAttribute("ondragstart");
-
-                        //draggableEl.removeAttribute("ondragover");
-                        //draggableEl.childNodes[1].removeAttribute("ondragover");
-
-                        //draggableEl.childNodes[1].innerHTML = '<button class="btn btn-danger cancelButton" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>' + draggableEl.childNodes[1].innerHTML;
-
-                        //scope.dishSet = [];
-                        //scope.dishSet.push(data);
                         scope.onDrop({someDish: someDish });
-                        //e.target.appendChild(draggableEl);
                     }
-
-
-                    
                 });
 
-                $rootScope.$on("LVL-DRAG-START", function () {
-                    var el = document.getElementById(id);
-                    angular.element(el).addClass("lvl-target");
-                });
+                //$rootScope.$on("LVL-DRAG-START", function () {
+                //    var el = document.getElementById(id);
+                //    angular.element(el).addClass("lvl-target");
+                //});
 
-                $rootScope.$on("LVL-DRAG-END", function () {
-                    var el = document.getElementById(id);
-                    angular.element(el).removeClass("lvl-target");
-                    angular.element(el).removeClass("lvl-over");
-                });
+                //$rootScope.$on("LVL-DRAG-END", function () {
+                //    var el = document.getElementById(id);
+                //    angular.element(el).removeClass("lvl-target");
+                //    angular.element(el).removeClass("lvl-over");
+                //});
             }
         };
     }]);

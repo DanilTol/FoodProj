@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using FoodService.DAL.Entity;
 
@@ -31,9 +30,7 @@ namespace FoodService.DAL.RepositoryBag
         {
             var result = (from r in _context.Dishes where r.ID == dishId select r).FirstOrDefault();
             DayDishSet entity = new DayDishSet {Date = date, Dish = result};
-            //entity.Dish = result;
             _context.DayDishSets.Add(entity);
-            //context.SaveChanges();
         }
 
         public void Add(DayDishSet entity)
@@ -45,21 +42,10 @@ namespace FoodService.DAL.RepositoryBag
         {
             var result = (from r in _context.DayDishSets where id == r.ID select r).FirstOrDefault();
             _context.DayDishSets.Remove(result);
-            //_context.SaveChanges();
         }
 
         public void Update(DayDishSet entity)
         {
-            //var result = (from r in _context.DayDishSets where entity.ID == r.ID select r).FirstOrDefault();
-            //if (result != null)
-            //{
-            //    result.Date = entity.Date;
-            //    result.Dish = entity.Dish;
-                
-            //    _context.Entry(result).State = EntityState.Modified;
-            //}
-
-            //_context.SaveChanges();
         }
 
         public DayDishSet FindById(int id)

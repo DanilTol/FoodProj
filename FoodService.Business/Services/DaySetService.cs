@@ -21,7 +21,7 @@ namespace FoodService.Business.Services
 
         public IEnumerable<DishModelShortInfo> GetDayInfo(DateTime dateTime)
         {
-            
+
             var fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date);
             List<DishModelShortInfo> result = new List<DishModelShortInfo>();
             foreach (var s in fromDb)
@@ -34,7 +34,7 @@ namespace FoodService.Business.Services
                     Weight = s.Dish.Weight,
                     Price = s.Dish.Price,
                     ImagePath = pathImage ?? DefaultPathToImage
-            });
+                });
             }
 
             return result;
@@ -46,14 +46,14 @@ namespace FoodService.Business.Services
             IQueryable<DayDishSet> lfromDb;
             if (String.IsNullOrEmpty(filter))
             {
-                 fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date).OrderBy(m => m.ID);
+                fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date).OrderBy(m => m.ID);
                 lfromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date).OrderBy(m => m.ID);
             }
             else
             {
-                 fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
-                    .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
-                    .OrderBy(m => m.ID);
+                fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
+                   .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
+                   .OrderBy(m => m.ID);
             }
             var result = new List<DishModelShortInfo>();
             var k = fromDb.ToList();
@@ -75,19 +75,10 @@ namespace FoodService.Business.Services
 
         public void DeleteAndEditDayDishSet(DateTime date, int[] dishIds)
         {
-            //Database.DayDish.DeleteByDate(date);
-
             var dishIdsList = dishIds.ToList();
-          var equalList = new List<int>();
-
             var menuDelete = Database.DayDish.QueryToTable.Where(x => x.Date == date.Date).ToList();
-            foreach (var daymenu in menuDelete)
-            {
-                foreach (var dishId in dishIdsList.Where(dishId => daymenu.Dish.ID == dishId))
-                {
-                    equalList.Add(dishId);
-                }
-            }
+
+            var equalList = menuDelete.SelectMany(daymenu => dishIdsList.Where(dishId => daymenu.Dish.ID == dishId)).ToList();
 
             foreach (var eq in equalList)
             {

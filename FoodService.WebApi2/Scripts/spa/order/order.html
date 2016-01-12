@@ -11,14 +11,17 @@
                 <!--here show list of user set-->
                 <div class="col-md-5 pull-left" style="margin-left: 60px;">
                     <h3>Your order</h3>
-                    <div class="dishDnDZone" ondrop="drop(event)" ondragover="allowDrop(event)" editVMonDnD id="dishMenu" ng-model="menuDiv">
-                        <div ng-repeat="dish in dishes.userSet">
-                            <div class="col-md-6 img-circle" id="{{dish.ID}}"
+                    <div class="dishDnDZone"
+                         x-lvl-drop-target="true"
+                         x-on-drop="editDishSet(someDish)"
+                         id="dishMenu">
+                        <div ng-repeat="dish in dishes.userSet | unique:'id'">
+                            <div ng-if="dish.Name.length>0" class="col-md-6 img-circle" id="{{dish.ID}}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
-                                <p class="textOnImage">
+                                <p class="textOnImage" style="margin-left: -15px">
                                     {{dish.Name}}
                                 </p>
-                                <button class="btn btn-danger cancelButton" ondrop="event.preventDefault(); return false;" onclick="removeDishFromMenu(this)"><i class="glyphicon glyphicon-remove"></i></button>
+                                <button class="btn btn-danger cancelButton" ng-click="removeClickBtn($event)"><i class="glyphicon glyphicon-remove"></i></button>
                             </div>
                         </div>
                     </div>
@@ -35,9 +38,9 @@
                     <div id="allDishes">
                         <div ng-repeat="dish in dishes.set " id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
                             <div class="col-md-6 img-circle" id={{dish.ID}}
-                                 draggable="true" ondragstart="drag(event)"
+                                 x-lvl-draggable="true"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
-                                <p class="textOnImage">
+                                <p class="textOnImage" style="margin-left: -15px">
                                     {{dish.Name}}
                                 </p>
                             </div>

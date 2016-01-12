@@ -16,8 +16,6 @@
                 dishsetService.editDayMenu($scope.dateInputMiliSec, dishId).then(
                     //success
                     function (data) {
-                        var k = 10;
-                        k++;
                     });
             }
 
@@ -52,8 +50,6 @@
                 $location.search("date", $scope.dateInputMiliSec);
                 $scope.DateShow = convertDate($scope.dateInputMiliSec);
                
-                //var myEl = angular.element(document.querySelector('#emptyMe'));
-                //myEl.empty();
                 $scope.dishes.set = {};
 
                 dishsetService.getDayMenu($scope.dateInputMiliSec).then(

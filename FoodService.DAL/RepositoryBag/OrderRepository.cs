@@ -26,7 +26,6 @@ namespace FoodService.DAL.RepositoryBag
         public void Add(Order entity)
         {
             _context.Orders.Add(entity);
-            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -34,8 +33,6 @@ namespace FoodService.DAL.RepositoryBag
             var result = (from r in _context.Orders where id == r.ID select r).FirstOrDefault();
             //var result2 = _context.Orders.FirstOrDefault(x => x.ID == id);
             _context.Orders.Remove(result);
-            _context.SaveChanges();
-
         }
 
         public void Update(Order entity)
@@ -47,11 +44,6 @@ namespace FoodService.DAL.RepositoryBag
         {
             var result = (from r in _context.Orders where r.ID == id select r).FirstOrDefault();
             return result;
-        }
-
-        public IQueryable<Order> Find(Func<Order, bool> predicate)
-        {
-            throw new NotImplementedException();
         }
 
         public IQueryable<Dish> GetDishesFromOrderByDate(DateTime date, string email)
@@ -69,28 +61,19 @@ namespace FoodService.DAL.RepositoryBag
 
         public void DeleteByDate(DateTime date, string email)
         {
-            var rightdate = date.AddDays(5);
-            var leftdate = date.AddDays(-1);
-            _context.Orders.RemoveRange(_context.Orders.Where(x => (x.Date > leftdate) && (x.Date < rightdate)&& x.User.EmailAddress==email));
+            var deleteOrder = _context.Orders.Where(x => x.Date == date && x.User.EmailAddress == email);
+           _context.Orders.RemoveRange(deleteOrder);
         }
 
         public void AddSeveralOrders(DateTime date, int[] dishInts, string email)
         {
-
             var insert = new Order { Date = date , User = _context.Users.FirstOrDefault(x => x.EmailAddress == email)};
             Add(insert);
             foreach (var i in dishInts)
             {
-                var dish = (from z in _context.Dishes where z.ID == i select z).FirstOrDefault();
+                var dish = _context.Dishes.FirstOrDefault(z => z.ID == i);
                 _context.UserSets.Add(new UserSet() { Dish = dish, Order = insert });
-                SaveData();
             }
         }
-
-        public void SaveData()
-        {
-            _context.SaveChanges();
-        }
-
     }
 }
