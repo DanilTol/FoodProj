@@ -48,7 +48,6 @@ namespace FoodService.WebApi2.Attribute
                 //string email = jsonPayload["email"].ToString();
                 var email = requestToken;
 
-                //TODO: Database extract data
                 var user = _userService.GetUserInfo(email);
 
                 if (user == null || (user.Role != role && user.Role != "admin")) return auth;

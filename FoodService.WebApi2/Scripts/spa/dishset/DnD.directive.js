@@ -1,33 +1,25 @@
 ﻿(function (app) {
     "use strict";
 
-    app.directive('lvlDraggable', ['$rootScope',  function ($rootScope) {
+    app.directive("lvlDraggable", function () {
         return {
             restrict: "A",
             link: function (scope, el, attrs, controller) {
                 angular.element(el).attr("draggable", "true");
 
-                //var id = angular.element(el).attr("id");
-                //console.log(id);
                 el.bind("dragstart", function (e) {
                     e.originalEvent.dataTransfer.setData("text", e.target.id);
-                    //console.log('drag');
-                    //$rootScope.$emit("LVL-DRAG-START");
                 });
-
-                //el.bind("dragend", function (e) {
-                //    $rootScope.$emit("LVL-DRAG-END");
-                //});
             }
         };
-    }]);
+    });
 
-    app.directive('lvlDropTarget', ['$rootScope', function ($rootScope) {
+    app.directive("lvlDropTarget", function () {
         return {
-            restrict: 'A',
+            restrict: "A",
             scope: {
-                onDrop: '&',
-                dishSet: '='
+                onDrop: "&",
+                dishSet: "="
             },
             link: function (scope, el, attrs, controller) {
                 var id = angular.element(el).attr("id");
@@ -39,15 +31,6 @@
                     e.originalEvent.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
                     return false;
                 });
-
-                //el.bind("dragenter", function (e) {
-                //    // this / e.target is the current hover target.
-                //    angular.element(e.target).addClass('lvl-over');
-                //});
-
-                //el.bind("dragleave", function (e) {
-                //    angular.element(e.target).removeClass('lvl-over');  // this / e.target is previous target element.
-                //});
 
                 el.bind("drop", function (e) {
                     if (e.preventDefault) {
@@ -73,24 +56,11 @@
                         }
                         var index = someDish.ImagePath.lastIndexOf("/") + 1;
                         someDish.ImagePath = someDish.ImagePath.substring(index, someDish.ImagePath.length - 2);
-                        
 
                         scope.onDrop({someDish: someDish });
-                    
                 });
-
-                //$rootScope.$on("LVL-DRAG-START", function () {
-                //    var el = document.getElementById(id);
-                //    angular.element(el).addClass("lvl-target");
-                //});
-
-                //$rootScope.$on("LVL-DRAG-END", function () {
-                //    var el = document.getElementById(id);
-                //    angular.element(el).removeClass("lvl-target");
-                //    angular.element(el).removeClass("lvl-over");
-                //});
             }
         };
-    }]);
+    });
 
 })(angular.module("common.ui"));

@@ -45,7 +45,6 @@ namespace FoodServiceWebApplication.Controllers
                 day = DateTime.Parse(collection["date"]).AddDays(delta);
             }
     
-            //TODO: Take data from DB by date
             for (int i = 0; i < 5; i++)
             {
                 IEnumerable<DishModelShortInfo> orderPlateses = _orderService.GetPlatesByDate(day.AddDays(i), Thread.CurrentPrincipal.Identity.Name);

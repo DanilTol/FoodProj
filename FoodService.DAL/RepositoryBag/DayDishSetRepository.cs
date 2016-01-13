@@ -20,11 +20,11 @@ namespace FoodService.DAL.RepositoryBag
 
         public IQueryable<DayDishSet> QueryToTable => _context.DayDishSets;
 
-        public IQueryable<DayDishSet> GetAllDishSetsOnDay(DateTime date)
-        {
-            var k = _context.DayDishSets.Where(x => x.Date == date);
-            return k;
-        }
+        //public IQueryable<DayDishSet> GetAllDishSetsOnDay(DateTime date)
+        //{
+        //    var k = _context.DayDishSets.Where(x => x.Date == date);
+        //    return k;
+        //}
 
         public void Add(int dishId, DateTime date)
         {
@@ -44,14 +44,18 @@ namespace FoodService.DAL.RepositoryBag
             _context.DayDishSets.Remove(result);
         }
 
+        public void Delete(DayDishSet entity)
+        {
+            _context.DayDishSets.Remove(entity);
+        }
+
         public void Update(DayDishSet entity)
         {
         }
 
         public DayDishSet FindById(int id)
         {
-            var result = (from r in _context.DayDishSets where r.ID == id select r).FirstOrDefault();
-            return result;
+            return (from r in _context.DayDishSets where r.ID == id select r).FirstOrDefault();
         }
        
         public void DeleteByDate(DateTime date)

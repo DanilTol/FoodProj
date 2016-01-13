@@ -101,7 +101,7 @@
                 
             }
             if (flag) {
-                someDish.Number = 1
+                someDish.Number = 1;
                 $scope.dishes.userSet.push(someDish);
             }
             

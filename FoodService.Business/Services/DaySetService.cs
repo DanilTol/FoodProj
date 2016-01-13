@@ -21,8 +21,8 @@ namespace FoodService.Business.Services
 
         public IEnumerable<DishModelShortInfo> GetDayInfo(DateTime dateTime)
         {
-
-            var fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date);
+            //var fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date);
+            var fromDb = Database.DayDish.QueryToTable.Where(x => x.Date == dateTime.Date);
             List<DishModelShortInfo> result = new List<DishModelShortInfo>();
             foreach (var s in fromDb)
             {
@@ -43,20 +43,22 @@ namespace FoodService.Business.Services
         public IEnumerable<DishModelShortInfo> Filter(DateTime dateTime, string filter)
         {
             IQueryable<DayDishSet> fromDb;
-            IQueryable<DayDishSet> lfromDb;
             if (String.IsNullOrEmpty(filter))
             {
-                fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date).OrderBy(m => m.ID);
-                lfromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date).OrderBy(m => m.ID);
+                //fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date).OrderBy(m => m.ID);
+                fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date).OrderBy(m => m.ID);
             }
             else
             {
-                fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
-                   .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
-                   .OrderBy(m => m.ID);
+                fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date)
+                    .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
+                    .OrderBy(m => m.ID);
+
+                //fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
+                //   .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
+                //   .OrderBy(m => m.ID);
             }
             var result = new List<DishModelShortInfo>();
-            var k = fromDb.ToList();
             foreach (var s in fromDb)
             {
                 string pathImage = Database.DishToImage.FindByDishId(s.Dish.ID);
@@ -88,7 +90,8 @@ namespace FoodService.Business.Services
 
             foreach (var dish in menuDelete)
             {
-                Database.DayDish.Delete(dish.ID);
+                //Database.DayDish.Delete(dish.ID);
+                Database.DayDish.Delete(dish);
             }
 
             foreach (var i in dishIdsList)

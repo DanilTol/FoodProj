@@ -19,10 +19,7 @@ namespace FoodService.DAL.RepositoryBag
             _context = new EntityContext();
         }
 
-        public IQueryable<Dish> QueryToTable
-        {
-            get { return _context.Dishes; }
-        }
+        public IQueryable<Dish> QueryToTable => _context.Dishes;
 
         //private void Add(Dish entity, string imgpath)
         //{
@@ -34,15 +31,21 @@ namespace FoodService.DAL.RepositoryBag
         public void Add(Dish entity)
         {
             _context.Dishes.Add(entity);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var result = (from r in _context.Dishes where id == r.ID select r).FirstOrDefault();
-            _context.Dishes.Remove(result);
-            _context.SaveChanges();
+            //var result = (from r in _context.Dishes where id == r.ID select r).FirstOrDefault();
+            //_context.Dishes.Remove(result);
+            ////_context.SaveChanges();
         }
+
+        public void Delete(Dish entity)
+        {
+            _context.Dishes.Remove(entity);
+        }
+
 
         public void Update(Dish dish)
         {
@@ -57,18 +60,16 @@ namespace FoodService.DAL.RepositoryBag
                 result.Weight = dish.Weight;
                 _context.Entry(result).State = EntityState.Modified;
             }
-            _context.SaveChanges();
+           // _context.SaveChanges();
         }
 
         public Dish FindById(int id)
         {
-            var result = (from r in _context.Dishes where r.ID == id select r).FirstOrDefault();
-            return result;
+            //var result = (from r in _context.Dishes where r.ID == id select r).FirstOrDefault();
+            //return result;
+            return null;
         }
 
-        public IQueryable<Dish> Find(Func<Dish, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

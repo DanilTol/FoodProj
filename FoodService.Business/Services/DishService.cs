@@ -104,7 +104,7 @@ namespace FoodService.Business.Services
 
         public DishModelDetailsInfo GetDishById(int id)
         {
-            DishModelDetailsInfo details = Mapper.Map<Dish, DishModelDetailsInfo>(Database.Dish.FindById(id));
+            DishModelDetailsInfo details = Mapper.Map<Dish, DishModelDetailsInfo>(Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == id));
 
             List<string> imgList = new List<string>();
             var dishToImageCollection = Database.DishToImage.QueryToTable.Where(x => x.Dish.ID == details.ID);
@@ -138,11 +138,13 @@ namespace FoodService.Business.Services
             //}
 
             Database.Dish.Update(toDb);
+            Database.Save();
         }
 
         public void DeleteDish(int id)
         {
-            Database.Dish.Delete(id);
+            var toDelete = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == id);
+            Database.Dish.Delete(toDelete);
             Database.Save();
         }
 

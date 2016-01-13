@@ -49,7 +49,7 @@ namespace FoodService.Business.Services
 
         public UserDTO GetUserById(int id)
         {
-            return Mapper.Map<User,UserDTO>(Database.User.FindById(id));
+            return Mapper.Map<User,UserDTO>(Database.User.QueryToTable.FirstOrDefault(x => x.ID == id));
         }
 
         public IEnumerable<UserDTO> GetAllUsers()
