@@ -12,6 +12,7 @@ namespace FoodService.Business.Services
     public class OrderService : IOrderService
     {
         IUnitOfWork Database { get; set; }
+        private const string DefaultPathToImage = "../Dish/Common.gif";
 
         public OrderService(IUnitOfWork uow)
         {
@@ -20,8 +21,17 @@ namespace FoodService.Business.Services
 
         public IEnumerable<DishModelShortInfo> GetPlatesByDate(DateTime date, string email)
         {
-            var fromDb = Database.Order.QueryToTable.Where(x => x.Date == date.Date && x.User.EmailAddress == email);
-            var allDishes = Mapper.Map<IQueryable<Dish>, IEnumerable<DishModelShortInfo>>(Database.Order.GetDishesFromOrderByDate(date, email));
+            var fromDb = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.EmailAddress == email)?.UserSetes;
+            if (fromDb == null) return null;
+            var dishes = fromDb.Select(set => set.Dish);
+            var allDishes = Mapper.Map<IEnumerable<Dish>, IEnumerable<DishModelShortInfo>>(dishes);
+
+            foreach (var plate in allDishes)
+            {
+                var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
+                plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
+            }
+
             return allDishes;
         }
 

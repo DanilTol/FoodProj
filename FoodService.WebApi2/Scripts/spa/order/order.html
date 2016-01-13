@@ -5,8 +5,8 @@
         </div>
         <div class="panel-body">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Choose day to show menu </h4>
-            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" />
-            <hr />
+            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput"/>
+            <hr/>
             <div class="row">
                 <!--here show list of user set-->
                 <div class="col-md-5 pull-left" style="margin-left: 60px;">
@@ -15,13 +15,16 @@
                          x-lvl-drop-target="true"
                          x-on-drop="editDishSet(someDish)"
                          id="dishMenu">
-                        <div ng-repeat="dish in dishes.userSet | unique:'id'">
+                        <div ng-repeat="dish in dishes.userSet track by $index">
                             <div ng-if="dish.Name.length>0" class="col-md-6 img-circle" id="{{dish.ID}}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
                                 <p class="textOnImage" style="margin-left: -15px">
                                     {{dish.Name}}
                                 </p>
-                                <button class="btn btn-danger cancelButton" ng-click="removeClickBtn($event)"><i class="glyphicon glyphicon-remove"></i></button>
+                                <button class="btn btn-danger glyphicon glyphicon-remove cancelButton" ng-click="removeClickBtn($event)"></button>
+                                <div class="btn btn-default">
+                                    <input type="number" min="1" max="20" data-ng-model="dish.Number" style="width: 40px" /> <i class="glyphicon glyphicon-pushpin"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -34,7 +37,7 @@
                         <button class="btn btn-primary" ng-click="filterClick();"><i class="glyphicon glyphicon-search"></i></button>
                         <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </div>
-                    <br /><br /><br />
+                    <br/><br/><br/>
                     <div id="allDishes">
                         <div ng-repeat="dish in dishes.set " id="{{dish.ID}}1" draggable="true" ondragstart="drag(event)">
                             <div class="col-md-6 img-circle" id={{dish.ID}}
@@ -48,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <br />
+            <br/>
             <div class="col-md-5 pull-right" style="margin-right: 60px;">
                 <button class="btn btn-lg btn-primary pull-right" ng-click="editUserSet();">Edit menu <i class="glyphicon glyphicon-edit"></i></button>
             </div>
@@ -57,4 +60,5 @@
             </div>
         </div>
     </div>
+
 </div>
