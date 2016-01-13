@@ -1,9 +1,9 @@
 ﻿(function (app) {
-    'use strict';
+    "use strict";
 
     app.directive('lvlDraggable', ['$rootScope',  function ($rootScope) {
         return {
-            restrict: 'A',
+            restrict: "A",
             link: function (scope, el, attrs, controller) {
                 angular.element(el).attr("draggable", "true");
 
@@ -40,14 +40,14 @@
                     return false;
                 });
 
-                el.bind("dragenter", function (e) {
-                    // this / e.target is the current hover target.
-                    angular.element(e.target).addClass('lvl-over');
-                });
+                //el.bind("dragenter", function (e) {
+                //    // this / e.target is the current hover target.
+                //    angular.element(e.target).addClass('lvl-over');
+                //});
 
-                el.bind("dragleave", function (e) {
-                    angular.element(e.target).removeClass('lvl-over');  // this / e.target is previous target element.
-                });
+                //el.bind("dragleave", function (e) {
+                //    angular.element(e.target).removeClass('lvl-over');  // this / e.target is previous target element.
+                //});
 
                 el.bind("drop", function (e) {
                     if (e.preventDefault) {
@@ -60,28 +60,23 @@
 
                     var data = e.originalEvent.dataTransfer.getData("text");
                     var dishDiv = document.getElementById(data);
-
-                    //if ($(dishDiv).parent().parent().attr('id') == 'allDishes')
-                    {
-                        var draggableEl = dishDiv.parentNode;//.cloneNode(true);
+                    var draggableEl = dishDiv.parentNode;//.cloneNode(true);
 
                         var someDish = {};
                         someDish.ID = parseInt(data);
                         if (draggableEl.childNodes.length<5) {
-                            someDish.ImagePath = draggableEl.childNodes[1].style["backgroundImage"];//draggableEl.css("backgroundImage");
-                            someDish.Name = draggableEl.childNodes[1].childNodes[1].innerHTML.trim();//draggableEl.children.html();
+                            someDish.ImagePath = draggableEl.childNodes[1].style["backgroundImage"];
+                            someDish.Name = draggableEl.childNodes[1].childNodes[1].innerHTML.trim();
                         } else {
                             someDish.ImagePath = draggableEl.childNodes[2].style["backgroundImage"];
                             someDish.Name = draggableEl.childNodes[2].childNodes[1].innerHTML.trim();
                         }
-                        //someDish.ImagePath = draggableEl.childNodes[1].style["backgroundImage"];//draggableEl.css("backgroundImage");
-                        //someDish.ImagePath = draggableEl.childNodes[2].style["backgroundImage"];
                         var index = someDish.ImagePath.lastIndexOf("/") + 1;
                         someDish.ImagePath = someDish.ImagePath.substring(index, someDish.ImagePath.length - 2);
                         
 
                         scope.onDrop({someDish: someDish });
-                    }
+                    
                 });
 
                 //$rootScope.$on("LVL-DRAG-START", function () {
@@ -98,4 +93,4 @@
         };
     }]);
 
-})(angular.module('common.ui'));
+})(angular.module("common.ui"));

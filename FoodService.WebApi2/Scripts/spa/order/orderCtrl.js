@@ -1,6 +1,7 @@
 ﻿(function (app) {
     "use strict";
-    app.controller("orderCtrl", ["$scope", "$location", "$filter", "orderService", "dishsetService", function ($scope, $location, $filter, orderService, dishsetService) {
+    app.controller("orderCtrl",
+        ["$scope", "$location", "orderService", "dishsetService", function ($scope, $location, orderService, dishsetService) {
 
         $scope.dishes = [];
         $scope.dateInput = new Date();
@@ -49,34 +50,10 @@
             $location.search("date", $scope.dateInputMiliSec);
             $scope.DateShow = convertDate($scope.dateInputMiliSec);
 
-            
-
             orderService.getUserSet($scope.dateInputMiliSec).then(
                 //success
                 function (data) {
-                    //$scope.dishes.userSet = data;
-                    //$scope.dishes.userSet[0] = {};
-                    //$scope.dishes.userSet[0].ID = 1;
-                    //$scope.dishes.userSet[0].Name = 'Hello';
-                    //$scope.dishes.userSet[0].ImagePath = "01.jpg";
-                    //$scope.dishes.userSet[1] = {};
-                    //$scope.dishes.userSet[1].ID = 1;
-                    //$scope.dishes.userSet[1].Name = 'Hello';
-                    //$scope.dishes.userSet[1].ImagePath = "01.jpg";
-
-                    //$scope.dishes.userSet = data;
-                    //data = [];
-                    //data[0] = {};
-                    //data[0].ID = 1;
-                    //data[0].Name = 'Hello';
-                    //data[0].ImagePath = "01.jpg";
-                    //data[1] = {};
-                    //data[1].ID = 1;
-                    //data[1].Name = 'Hello';
-                    //data[1].ImagePath = "01.jpg";
-
                     $scope.dishes.userSet = [];
-                    //$scope.dishes.userSet[1] = {};
 
                     for (var i = 0; i < data.length; i++) {
                         if (angular.isUndefined($scope.dishes.userSet[data[i].ID])) {
@@ -108,35 +85,46 @@
         }
 
         $scope.editDishSet = function (someDish) {
+            var k = 10;
             var flag = true;
             for (var dish in $scope.dishes.userSet) {
-                if ($scope.dishes.userSet[someDish.ID] || false)
-                    flag = false;
+                
+                if ($scope.dishes.userSet[dish].ID === someDish.ID) {
+                    
+                    if ($scope.dishes.userSet[dish].Number > 0) {
+                        flag = false;
+                    }
+                    if (($scope.dishes.userSet[dish].Number || 0) < maxNumberOfDish)
+                    $scope.dishes.userSet[dish].Number = 1 + ($scope.dishes.userSet[dish].Number || 0);
+                    break;
+                }
+                
             }
             if (flag) {
-                $scope.dishes.userSet[someDish.ID] = someDish;
+                someDish.Number = 1
+                $scope.dishes.userSet.push(someDish);
             }
-            if (($scope.dishes.userSet[someDish.ID].Number || 0) < maxNumberOfDish)
-                $scope.dishes.userSet[someDish.ID].Number = 1 + ($scope.dishes.userSet[someDish.ID].Number || 0);
+            
             $scope.$apply();
         }
 
         $scope.removeClickBtn = function (el) {
             var id = el.target.parentNode.attributes["id"].value;
-            var flag = true;
 
-            if ($scope.dishes.userSet[id] || false) {
-                --$scope.dishes.userSet[id].Number;
-                if ($scope.dishes.userSet[id].Number > 0) {
-                    flag = false;
+            for (var dish in $scope.dishes.userSet) {
+                var flag = false;
+                if ($scope.dishes.userSet[dish].ID == id) {
+                    --$scope.dishes.userSet[dish].Number;
+                    if ($scope.dishes.userSet[dish].Number < 1) {
+                        flag = true;
+                    }
                 }
-            }
-            if (flag) {
-                var parent = document.getElementById('dishMenu');
-                var child = el.target.parentNode.parentNode;
-                parent.removeChild(child);
-                $scope.dishes.userSet.splice(id, 1);
-                //$scope.dishes.userSet = $.grep($scope.dishes.userSet, function (e) { return e.ID != id; });
+                if (flag) {
+                    var parent = document.getElementById("dishMenu");
+                    var child = el.target.parentNode.parentNode;
+                    parent.removeChild(child);
+                    $scope.dishes.userSet.splice(dish, 1);
+                }
             }
         }
         $scope.filterClick();
