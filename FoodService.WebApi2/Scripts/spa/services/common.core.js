@@ -1,4 +1,4 @@
 ﻿(function () {
-    'use strict';
-    angular.module('common.core', ['ngRoute', 'ngCookies']);
+    "use strict";
+    angular.module("common.core", ["ngRoute", "ngCookies"]);
 })();

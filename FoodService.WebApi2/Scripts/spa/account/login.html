@@ -1,16 +1,13 @@
 ﻿<div class="row">
-    <form class="form-signin" role="form" novalidate angular-validator name="userLoginForm" 
-          ng-submit="login()">
+    <form class="form-signin" role="form" name="userLoginForm" ng-submit="login()">
         <h3 class="form-signin-heading">Sign in</h3>
         <div class="form-group">
             <label for="inputUseremail" class="sr-only">Username</label>
-            <input type="email" id="inputUseremail" name="inputUseremail" class="form-control" ng-model="user.Email" placeholder="User email"
-                   validate-on="blur" required required-message="'User email is required'">
+            <input type="email" id="inputUseremail" name="inputUseremail" class="form-control" ng-model="user.Email" placeholder="User email" required>
         </div>
         <div class="form-group">
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" name="inputPassword" class="form-control" ng-model="user.Salt" placeholder="Password"
-                   validate-on="blur" required required-message="'Password is required'">
+            <input type="password" id="inputPassword" name="inputPassword" class="form-control" ng-model="user.Salt" placeholder="Password" required >
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <div class="pull-right">

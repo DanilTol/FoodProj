@@ -5,8 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Threading;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Web.Security;
 using FoodService.Business.ServiceInterfaces;
 using JWT;
 using Microsoft.Practices.ServiceLocation;
@@ -15,11 +17,11 @@ namespace FoodService.WebApi2.Attribute
 {
     public class MyAuthAttribute : AuthorizeAttribute
     {
-        string role;
+        readonly string _role;
 
         public MyAuthAttribute(string role = "user")
         {
-            this.role = role;
+            this._role = role;
         }
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
@@ -50,7 +52,7 @@ namespace FoodService.WebApi2.Attribute
 
                 var user = _userService.GetUserInfo(email);
 
-                if (user == null || (user.Role != role && user.Role != "admin")) return auth;
+                if (user == null || (user.Role != _role && user.Role != "admin")) return auth;
 
                 GenericIdentity MyIdentity = new GenericIdentity(user.EmailAddress);
 
@@ -59,7 +61,14 @@ namespace FoodService.WebApi2.Attribute
                 GenericPrincipal MyPrincipal =
                     new GenericPrincipal(MyIdentity, MyStringArray);
 
+                //MembershipCreateStatus status;
+                //var c = Membership.CreateUser(user.Name, user.Salt, user.EmailAddress,null,null,true,null, out status);
+                //var n =Membership.GetAllUsers();
+                //HttpContext.Current.User = MyPrincipal;
+
                 Thread.CurrentPrincipal = MyPrincipal;
+
+                
 
                 auth = true;
 

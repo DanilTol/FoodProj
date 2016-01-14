@@ -19,15 +19,12 @@ namespace FoodService.DAL.RepositoryBag
             _context = entityContext;
         }
 
-        public IQueryable<DishToImage> QueryToTable
-        {
-            get { return _context.DishToImage; }
-        }
+        public IQueryable<DishToImage> QueryToTable => _context.DishToImage;
 
         public void Add(DishToImage entity)
         {
             _context.DishToImage.Add(entity);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void Delete(int id)

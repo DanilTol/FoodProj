@@ -1,6 +1,6 @@
 ﻿(function (app) {
     "use strict";
-    app.controller("dishesCtrl", ["$scope", "$location", "dishService", function($scope, $location, dishService) {
+    app.controller("dishesCtrl", ["$scope", "$location", "dishService", "notificationService", function ($scope, $location, dishService, notificationService) {
             $scope.filterDishes = "";
 
             $scope.search = function () {
@@ -15,7 +15,9 @@
                             $scope.page = data.Page;
                             $scope.pagesCount = data.TotalPages;
                             $scope.totalCount = data.TotalCount;
-                        });;
+                        },function(response) {
+                            notificationService.displayError(response.data);
+                        });
             }
 
             $scope.clearSearch = function() {

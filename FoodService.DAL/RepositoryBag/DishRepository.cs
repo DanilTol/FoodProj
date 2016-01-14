@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using FoodService.DAL.Entity;
 
@@ -20,18 +19,10 @@ namespace FoodService.DAL.RepositoryBag
         }
 
         public IQueryable<Dish> QueryToTable => _context.Dishes;
-
-        //private void Add(Dish entity, string imgpath)
-        //{
-        //    context.Dishes.Add(entity);
-        //    //context.DishToImage.Add(new DishToImage { IdDish = entity.ID, PathToImageOnServer = imgpath });
-        //    context.SaveChanges();
-        //}
-
+        
         public void Add(Dish entity)
         {
             _context.Dishes.Add(entity);
-            //_context.SaveChanges();
         }
 
         public void Delete(int id)

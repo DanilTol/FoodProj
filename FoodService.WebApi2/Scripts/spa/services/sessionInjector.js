@@ -1,6 +1,6 @@
 ﻿(function(app) {
     'use strict';
-    app.factory('sessionInjector', ['$location',function($location) {
+    app.factory('sessionInjector', ['$location', 'notificationService',function($location, notificationService) {
         var sessionInjector = {
             request: function(config) {
                 if (sessionStorage.foodServiceToken) {
@@ -11,6 +11,7 @@
             'responseError': function(rejection) {
                 if (rejection.status == 401) {
                     $location.path('/');
+                    notificationService.displayError('Authentication required.');
                 }
             }
         };

@@ -252,6 +252,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -292,7 +294,10 @@
     <Content Include="Scripts\spa\order\orderModule.js" />
     <Content Include="Scripts\spa\order\orderService.js" />
     <Content Include="Scripts\spa\services\fileUploadService.js" />
+    <Content Include="Scripts\spa\services\notificationService.js" />
     <Content Include="Scripts\spa\services\sessionInjector.js" />
+    <Content Include="Scripts\Vendors\toastr.js" />
+    <Content Include="Scripts\Vendors\toastr.min.js" />
     <Content Include="Scripts\Vendors\angular-animate.js" />
     <Content Include="Scripts\Vendors\angular-animate.min.js" />
     <Content Include="Scripts\Vendors\angular-aria.js" />
@@ -362,6 +367,8 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Scripts\spa\account\login.html" />
     <Content Include="Scripts\spa\services\common.core.js" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\Vendors\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />

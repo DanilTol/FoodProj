@@ -31,19 +31,22 @@ namespace FoodService.WebApi2
               "~/Scripts/Vendors/angular.js",
               "~/Scripts/Vendors/angular-route.js",
               "~/Scripts/Vendors/angular-cookies.js",
-              "~/Scripts/Vendors/angular-validator.js"
+              "~/Scripts/Vendors/angular-validator.js",
+              "~/Scripts/Vendors/toastr.js"
 
               ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css",
+                      "~/content/toastr.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
                 "~/Scripts/Vendors/jquery-1.10.2.min.js",
                 //main
                 "~/Scripts/spa/app.js",
+                
 
                 //module
                 "~/Scripts/spa/dish/dishModule.js",
@@ -53,10 +56,12 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/dishset/dishsetModule.js",
                 "~/Scripts/spa/order/orderModule.js",
 
+
                //Services(common)
                "~/Scripts/spa/services/sessionInjector.js",
                "~/Scripts/spa/services/fileUploadService.js",
-               
+               "~/Scripts/spa/services/notificationService.js",
+
                 //home
                 "~/Scripts/spa/home/rootCtrl.js",
                 "~/Scripts/spa/home/indexCtrl.js",

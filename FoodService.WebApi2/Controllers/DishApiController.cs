@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Security;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
 using FoodService.WebApi2.Attribute;
@@ -40,6 +42,9 @@ namespace FoodService.WebApi2.Controllers
         [Route("search")]
         public HttpResponseMessage Search(int page = 1, int pageSize = 2, string filter = null)
         {
+            var k =HttpContext.Current.User;
+            var z = Thread.CurrentPrincipal;
+            var c = Membership.GetAllUsers();
             var shortDish = _dishService.FilterDishes(page, pageSize, filter);
             var totalDishes = _dishService.TotalFilteredDish(filter);
 

@@ -35,13 +35,13 @@ namespace FoodService.DAL.RepositoryBag
 
         public void Add(DayDishSet entity)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void Delete(int id)
         {
-            var result = (from r in _context.DayDishSets where id == r.ID select r).FirstOrDefault();
-            _context.DayDishSets.Remove(result);
+            //var result = (from r in _context.DayDishSets where id == r.ID select r).FirstOrDefault();
+            //_context.DayDishSets.Remove(result);
         }
 
         public void Delete(DayDishSet entity)
@@ -55,30 +55,34 @@ namespace FoodService.DAL.RepositoryBag
 
         public DayDishSet FindById(int id)
         {
-            return (from r in _context.DayDishSets where r.ID == id select r).FirstOrDefault();
+            //return (from r in _context.DayDishSets where r.ID == id select r).FirstOrDefault();
+            return null;
         }
        
-        public void DeleteByDate(DateTime date)
-        {
-            var result = (from r in _context.DayDishSets where date == r.Date select r).FirstOrDefault();
-            while (result != null)
-            {
-                _context.DayDishSets.Remove(result);
-                _context.SaveChanges();
-                result = (from r in _context.DayDishSets where date == r.Date select r).FirstOrDefault();
-            }
-            //var dayMenu = _context.DayDishSets.Where(x => x.Date == date);
-            //foreach (var day in dayMenu)
-            //{
-            //    _context.DayDishSets.Remove(day);
-            //}
+        //public void DeleteByDate(DateTime date)
+        //{
+        //    ////it work
+        //    //var result = (from r in _context.DayDishSets where date == r.Date select r).FirstOrDefault();
+        //    //while (result != null)
+        //    //{
+        //    //    _context.DayDishSets.Remove(result);
+        //    //    _context.SaveChanges();
+        //    //    result = (from r in _context.DayDishSets where date == r.Date select r).FirstOrDefault();
+        //    //}
 
 
-            //var result = (from r in context.WeekDishSets where date == r.Date select r).FirstOrDefault();
-            //context.WeekDishSets.Remove(result);
-            //context.SaveChanges();
+        //    //var dayMenu = _context.DayDishSets.Where(x => x.Date == date);
+        //    //foreach (var day in dayMenu)
+        //    //{
+        //    //    _context.DayDishSets.Remove(day);
+        //    //}
 
-        }
+
+        //    //var result = (from r in context.WeekDishSets where date == r.Date select r).FirstOrDefault();
+        //    //context.WeekDishSets.Remove(result);
+        //    //context.SaveChanges();
+
+        //}
 
     }
 }

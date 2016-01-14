@@ -1,18 +1,25 @@
 ﻿(function (app) {
-    'use strict';
+    "use strict";
 
-    app.directive('topBar', [
-         'accountService', function ( accountService) {
+    app.directive("topBar", [
+         "accountService",  "$location", function (accountService,  $location) {
             return {
-                restrict: 'E',
+                restrict: "E",
                 replace: true,
-                templateUrl: '/Scripts/spa/navbar/topBar.html',
+                templateUrl: "/Scripts/spa/navbar/topBar.html",
                 link: function (scope) {
-                    scope.getUserName = accountService.getUserData;
+                    scope.getUserData = function() {
+                        var userProfile = accountService.getUserData();
+                        return userProfile.Name;
+                    }
                     scope.isUserLoggedIn = accountService.isUserLoggedIn;
+                    scope.logout = function () {
+                        accountService.logoutUser();
+                        $location.path("#/");
+                    }
                 }
             }
         }]
             );
 
-})(angular.module('common.ui'));
+})(angular.module("common.ui"));
