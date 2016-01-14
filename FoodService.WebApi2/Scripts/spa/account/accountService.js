@@ -1,8 +1,7 @@
 ﻿(function (app) {
     "use strict";
 
-    app.factory("accountService", [
-        "$http", "$q", function ($http, $q) {
+    app.factory("accountService", ["$http", "$q", function ($http, $q) {
             var userProfile;
 
             function setProfileInfo() {

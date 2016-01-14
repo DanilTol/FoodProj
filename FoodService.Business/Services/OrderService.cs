@@ -24,14 +24,13 @@ namespace FoodService.Business.Services
             var fromDb = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.EmailAddress == email)?.UserSetes;
             if (fromDb == null) return null;
             var dishes = fromDb.Select(set => set.Dish);
-            var allDishes = Mapper.Map<IEnumerable<Dish>, IEnumerable<DishModelShortInfo>>(dishes);
 
+            var allDishes = Mapper.Map<IEnumerable<Dish>, IList<DishModelShortInfo>>(dishes);
             foreach (var plate in allDishes)
             {
                 var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
                 plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
             }
-
             return allDishes;
         }
 

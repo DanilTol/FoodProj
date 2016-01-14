@@ -1,7 +1,7 @@
 ﻿(function (app) {
-    'use strict';
-    app.controller('dishDetailsCtrl', [
-        '$scope', '$routeParams', 'dishService', function($scope, $routeParams, dishService) {
+    "use strict";
+    app.controller("dishDetailsCtrl", [
+        "$scope", "$routeParams", "dishService", function($scope, $routeParams, dishService) {
             function loadDetails() {
                 dishService.loadDishDetails($routeParams.id).then(
                     //success
@@ -11,4 +11,4 @@
             }
             loadDetails();
         }]);
-})(angular.module('dishModule'));
+})(angular.module("dishModule"));

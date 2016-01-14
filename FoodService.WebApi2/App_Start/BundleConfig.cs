@@ -43,16 +43,18 @@ namespace FoodService.WebApi2
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
-                "~/Scripts/Vendors/jquery-1.10.2.min.js",
+                //"~/Scripts/Vendors/jquery-1.10.2.min.js",
                 //main
                 "~/Scripts/spa/app.js",
-                
+
 
                 //module
+                "~/Scripts/spa/navbar/navbarModule.js",
+                "~/Scripts/spa/home/homeModule.js",
                 "~/Scripts/spa/dish/dishModule.js",
                 "~/Scripts/spa/account/accountModule.js",
                 "~/Scripts/spa/services/common.core.js",
-                "~/Scripts/spa/navbar/common.ui.js",
+                
                 "~/Scripts/spa/dishset/dishsetModule.js",
                 "~/Scripts/spa/order/orderModule.js",
 
@@ -63,27 +65,24 @@ namespace FoodService.WebApi2
                "~/Scripts/spa/services/notificationService.js",
 
                 //home
-                "~/Scripts/spa/home/rootCtrl.js",
-                "~/Scripts/spa/home/indexCtrl.js",
+                "~/Scripts/spa/home/index/indexCtrl.js",
 
                 //account
                 "~/Scripts/spa/account/accountService.js",
-                "~/Scripts/spa/account/loginCtrl.js",
-                "~/Scripts/spa/account/registerCtrl.js",
+                "~/Scripts/spa/account/login/loginCtrl.js",
+                "~/Scripts/spa/account/register/registerCtrl.js",
 
                 //dish
                 "~/Scripts/spa/dish/dishService.js",
-                "~/Scripts/spa/dish/dishDetailsCtrl.js",
-                "~/Scripts/spa/dish/dishAddCtrl.js",
-                "~/Scripts/spa/dish/dishEditCtrl.js",
-                "~/Scripts/spa/dish/dishesCtrl.js",
+                "~/Scripts/spa/dish/details/dishDetailsCtrl.js",
+                "~/Scripts/spa/dish/add/dishAddCtrl.js",
+                "~/Scripts/spa/dish/edit/dishEditCtrl.js",
+                "~/Scripts/spa/dish/main/dishesCtrl.js",
 
                 //dishset
                 "~/Scripts/spa/dishset/dishsetService.js",
-                "~/Scripts/spa/dishset/dishsetCtrl.js",
-                "~/Scripts/spa/dishset/dndDishset.js",
-                "~/Scripts/spa/dishset/editVMonDnD.directive.js",
-                "~/Scripts/spa/dishset/FilterForChosenDishes.js",
+                "~/Scripts/spa/dishset/main/dishsetCtrl.js",
+                "~/Scripts/spa/dishset/main/FilterForChosenDishes.js",
                 "~/Scripts/spa/dishset/DnD.directive.js",
 
                 //order
@@ -91,12 +90,10 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/order/orderCtrl.js",
 
                 //Nav bars
-                "~/Scripts/spa/navbar/sideBar.directive.js",
-                "~/Scripts/spa/navbar/topBar.directive.js",
-                "~/Scripts/spa/navbar/bottomBar.directive.js",
-                "~/Scripts/spa/navbar/pagination.directive.js",
-                "~/Scripts/spa/account/userName.directive.js"
-
+                "~/Scripts/spa/navbar/side/sideBar.directive.js",
+                "~/Scripts/spa/navbar/top/topBar.directive.js",
+                "~/Scripts/spa/navbar/bottom/bottomBar.directive.js",
+                "~/Scripts/spa/navbar/pagination/pagination.directive.js"
                 
         ));
             

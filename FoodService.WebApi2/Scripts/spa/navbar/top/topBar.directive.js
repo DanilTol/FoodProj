@@ -6,7 +6,7 @@
             return {
                 restrict: "E",
                 replace: true,
-                templateUrl: "/Scripts/spa/navbar/topBar.html",
+                templateUrl: "/Scripts/spa/navbar/top/topBar.html",
                 link: function (scope) {
                     scope.getUserData = function() {
                         var userProfile = accountService.getUserData();
@@ -22,4 +22,4 @@
         }]
             );
 
-})(angular.module("common.ui"));
+})(angular.module("navbarModule"));

@@ -24,27 +24,15 @@ namespace FoodService.WebApi2
 
             InitMap initMap = new InitMap();
             initMap.InitAllMaps();
-
-
-
-            //GlobalConfiguration.Configuration.Services.Replace(
-            //                typeof(IHttpControllerActivator),
-            //                new PoorMansCompositionRoot());
-
-
+            
             //IoC
             GlobalConfiguration.Configuration.Services.Replace(
                 typeof(IHttpControllerActivator),
                 new WindsorCompositionRoot(this.container));
-
-
-
+            
             //Service locator for attributes
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
-
-
         }
-
 
         private readonly IWindsorContainer container;
 

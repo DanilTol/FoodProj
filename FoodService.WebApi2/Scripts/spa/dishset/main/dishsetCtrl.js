@@ -1,7 +1,7 @@
 ﻿(function (app) {
     "use strict";
     app.controller('dishsetCtrl', [
-        '$scope', '$location', '$filter', 'dishService', 'dishsetService', function ($scope, $location, $filter, dishService, dishsetService) {
+        '$scope', '$location', 'dishService', 'dishsetService', function ($scope, $location, dishService, dishsetService) {
 
             $scope.dishes = [];
             $scope.dateInput = new Date();
@@ -18,18 +18,6 @@
                     function (data) {
                     });
             }
-
-            //$scope.$watch("menuDiv", function () {
-            //    //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
-            //    console.log("menu div change");
-            //});
-
-
-            //$scope.$watch("dishes.set.length", function () {
-            //    //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
-            //    console.log("menu div change");
-            //}, true);
-
 
             function convertDate(date) {
                 date = new Date(date);
@@ -52,7 +40,7 @@
                
                 $scope.dishes.set = {};
 
-                dishsetService.getDayMenu($scope.dateInputMiliSec).then(
+                dishsetService.filterDayMenu($scope.dateInputMiliSec,"").then(
                     //success
                     function (data) {
                         $scope.dishes.set = data;
@@ -79,7 +67,6 @@
                              $scope.page = data.Page;
                              $scope.pagesCount = data.TotalPages;
                              $scope.totalCount = data.TotalCount;
-                             //$scope.dishes.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
                          });;
             }
 
@@ -111,7 +98,6 @@
                     $scope.dishes.set.push(someDish);
                 }
                 $scope.$apply();
-                //$scope.dishes.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
             }
             
             $scope.removeClickBtn = function (el) {

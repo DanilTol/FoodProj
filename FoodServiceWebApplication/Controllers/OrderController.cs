@@ -55,7 +55,7 @@ namespace FoodServiceWebApplication.Controllers
                         item.ImagePath = DefaultPathToImage;
                     }
                 }
-                IEnumerable<DishModelShortInfo> shroDishModelShortInfos = _daySetService.GetDayInfo(day.AddDays(i));
+                IEnumerable<DishModelShortInfo> shroDishModelShortInfos = _daySetService.Filter(day.AddDays(i),"");
                 foreach (var item in shroDishModelShortInfos)
                 {
                     if (string.IsNullOrEmpty(item.ImagePath))

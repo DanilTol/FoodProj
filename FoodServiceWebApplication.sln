@@ -11,28 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodService.Business", "Foo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodService.WebApi2", "FoodService.WebApi2\FoodService.WebApi2.csproj", "{573C616D-9DE7-4739-A86D-7EA0026EAACC}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FoodServiceWebSite", "..\..\..\..\WebSites\FoodServiceWebSite\", "{5B559D36-331B-4A83-A760-1CA11E389E2E}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_63909"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\WebSites\FoodServiceWebSite\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63909\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_63909"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\WebSites\FoodServiceWebSite\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63909\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "63909"
-		SlnRelativePath = "..\..\..\..\WebSites\FoodServiceWebSite\"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodService.SimpleApi", "simpleApi\FoodService.SimpleApi.csproj", "{F6FCB38B-9466-4F09-943C-D7FE09E50411}"
 EndProject
 Global
@@ -57,10 +35,6 @@ Global
 		{573C616D-9DE7-4739-A86D-7EA0026EAACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{573C616D-9DE7-4739-A86D-7EA0026EAACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{573C616D-9DE7-4739-A86D-7EA0026EAACC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B559D36-331B-4A83-A760-1CA11E389E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B559D36-331B-4A83-A760-1CA11E389E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B559D36-331B-4A83-A760-1CA11E389E2E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B559D36-331B-4A83-A760-1CA11E389E2E}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{F6FCB38B-9466-4F09-943C-D7FE09E50411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6FCB38B-9466-4F09-943C-D7FE09E50411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6FCB38B-9466-4F09-943C-D7FE09E50411}.Release|Any CPU.ActiveCfg = Release|Any CPU

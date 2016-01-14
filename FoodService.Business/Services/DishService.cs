@@ -20,23 +20,36 @@ namespace FoodService.Business.Services
 
         public IEnumerable<DishModelShortInfo> GetAllDishes()
         {
-            var allDishes = Mapper.Map<IQueryable<Dish>, IEnumerable<DishModelShortInfo>>(Database.Dish.QueryToTable);
+            //var allDishes = Mapper.Map<IQueryable<Dish>, IList<DishModelShortInfo>>(Database.Dish.QueryToTable);
+            //foreach (var plate in allDishes)
+            //{
+            //    var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
+            //    plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
+            //}
+            
+            //return allDishes;
+
+            return GetImgAndDishTogether(Database.Dish.QueryToTable.ToList());
+        }
+
+        internal IEnumerable<DishModelShortInfo> GetImgAndDishTogether(IList<Dish> dish)
+        {
+            var allDishes = Mapper.Map<IList<Dish>, IList<DishModelShortInfo>>(dish);
             foreach (var plate in allDishes)
             {
                 var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
                 plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
             }
-            
+
             return allDishes;
-        }
+        } 
 
         public IEnumerable<DishModelShortInfo> FilterDishes(int page, int pageSize, string filter = null)
         {
-            List<Dish> shortDish = new List<Dish>();
             IEnumerable<DishModelShortInfo> allDishes;
             if (!string.IsNullOrEmpty(filter))
             {
-                    allDishes = Mapper.Map<IQueryable<Dish>, IEnumerable<DishModelShortInfo>>(
+                    allDishes = Mapper.Map<IQueryable<Dish>, IList<DishModelShortInfo>>(
                     Database.Dish.QueryToTable.Where(m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
                         .OrderBy(m => m.ID)
                         .Skip(page*pageSize)
@@ -45,7 +58,7 @@ namespace FoodService.Business.Services
             }
             else
             {
-                allDishes = Mapper.Map<IQueryable<Dish>, IEnumerable<DishModelShortInfo>>(
+                allDishes = Mapper.Map<IQueryable<Dish>, IList<DishModelShortInfo>>(
                     Database.Dish.QueryToTable
                         .OrderBy(m => m.ID)
                         .Skip(page*pageSize)
@@ -63,7 +76,7 @@ namespace FoodService.Business.Services
 
         public int TotalFilteredDish(string filter = null)
         {
-            int totalDishes = 0;
+            int totalDishes;
             if (!string.IsNullOrEmpty(filter))
             {
                 totalDishes = Database.Dish.QueryToTable
@@ -82,10 +95,7 @@ namespace FoodService.Business.Services
         {
             var toDb = Mapper.Map<DishModelDetailsInfo, Dish>(dish);
             toDb.DishToImages = new List<DishToImage>();
-            //if images were not uploaded
-            //if (dish.ImagePath == null || dish.ImagePath.Length < 1 || string.IsNullOrEmpty(dish.ImagePath[0]))
-            //    dish.ImagePath = new[] { DefaultPathToImage };
-
+            
             //add images to dish
             foreach (var imgPath in dish.ImagePath)
             {
@@ -104,9 +114,9 @@ namespace FoodService.Business.Services
 
         public DishModelDetailsInfo GetDishById(int id)
         {
-            DishModelDetailsInfo details = Mapper.Map<Dish, DishModelDetailsInfo>(Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == id));
+            var details = Mapper.Map<Dish, DishModelDetailsInfo>(Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == id));
 
-            List<string> imgList = new List<string>();
+            var imgList = new List<string>();
             var dishToImageCollection = Database.DishToImage.QueryToTable.Where(x => x.Dish.ID == details.ID);
             foreach (var dishimage in dishToImageCollection)
             {

@@ -19,21 +19,10 @@ namespace FoodService.WebApi2.Controllers
         }
 
         [HttpGet]
-        [Route("getdishmenu")]
-        public HttpResponseMessage GetDishMenuOnDay(long miliSecFrom1970)
-        {
-            var date = Jan1St1970.AddMilliseconds(miliSecFrom1970);
-            var dayInfo = _daySetService.GetDayInfo(date);
-            return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
-        }
-
-        [HttpGet]
         [Route("filterdishmenu")]
         public HttpResponseMessage GetFilterDishMenuOnDay(long miliSecFrom1970, string filter = "")
         {
-            var date = Jan1St1970.AddMilliseconds(miliSecFrom1970);
-            var dayInfo = _daySetService.Filter(date, filter);
-            
+            var dayInfo = _daySetService.Filter(Jan1St1970.AddMilliseconds(miliSecFrom1970), filter);
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 

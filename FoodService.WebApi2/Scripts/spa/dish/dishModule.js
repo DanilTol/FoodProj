@@ -1,28 +1,23 @@
 ﻿(function() {
-    'use strict';
-    angular.module('dishModule', ['common.core'])
+    "use strict";
+    angular.module("dishModule", ["common.core"])
          .config(function($routeProvider) {
                 $routeProvider
                     .when("/dishes", {
-                        templateUrl: "scripts/spa/dish/dishes.html",
-                        controller: "dishesCtrl"
-                    })
-                    //new
-                    .when("/dishes", {
-                        templateUrl: "scripts/spa/dish/dishes.html",
+                        templateUrl: "scripts/spa/dish/main/dishes.html",
                         controller: "dishesCtrl",
                         reloadOnSearch: false
                     })
                     .when("/dishes/add", {
-                        templateUrl: "scripts/spa/dish/add.html",
+                        templateUrl: "scripts/spa/dish/add/add.html",
                         controller: "dishAddCtrl"
                     })
                     .when("/dishes/:id", {
-                        templateUrl: "scripts/spa/dish/details.html",
+                        templateUrl: "scripts/spa/dish/details/details.html",
                         controller: "dishDetailsCtrl"
                     })
                     .when("/dishes/edit/:id", {
-                        templateUrl: "scripts/spa/dish/edit.html",
+                        templateUrl: "scripts/spa/dish/edit/edit.html",
                         controller: "dishEditCtrl"
                     }).otherwise({ redirectTo: "/" });
         });

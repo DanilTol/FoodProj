@@ -1,6 +1,5 @@
 ﻿(function (app) {
     "use strict";
-
     app.directive("lvlDraggable", function () {
         return {
             restrict: "A",
@@ -63,4 +62,4 @@
         };
     });
 
-})(angular.module("common.ui"));
+})(angular.module("navbarModule"));

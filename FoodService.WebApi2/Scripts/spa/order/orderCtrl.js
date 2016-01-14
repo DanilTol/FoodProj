@@ -52,18 +52,19 @@
 
             orderService.getUserSet($scope.dateInputMiliSec).then(
                 //success
-                function (data) {
+                function(data) {
                     $scope.dishes.userSet = [];
-
-                    for (var i = 0; i < data.length; i++) {
-                        if (angular.isUndefined($scope.dishes.userSet[data[i].ID])) {
-                            $scope.dishes.userSet[data[i].ID] = {};
-                        }
-                        $scope.dishes.userSet[data[i].ID].Number = 1 + ($scope.dishes.userSet[data[i].ID].Number || 0);
-                        if ($scope.dishes.userSet[data[i].ID].Number == 1) {
-                            $scope.dishes.userSet[data[i].ID].ID = data[i].ID;
-                            $scope.dishes.userSet[data[i].ID].Name = data[i].Name;
-                            $scope.dishes.userSet[data[i].ID].ImagePath = data[i].ImagePath;
+                    if (data != null) {
+                        for (var i = 0; i < data.length; i++) {
+                            if (angular.isUndefined($scope.dishes.userSet[data[i].ID])) {
+                                $scope.dishes.userSet[data[i].ID] = {};
+                            }
+                            $scope.dishes.userSet[data[i].ID].Number = 1 + ($scope.dishes.userSet[data[i].ID].Number || 0);
+                            if ($scope.dishes.userSet[data[i].ID].Number == 1) {
+                                $scope.dishes.userSet[data[i].ID].ID = data[i].ID;
+                                $scope.dishes.userSet[data[i].ID].Name = data[i].Name;
+                                $scope.dishes.userSet[data[i].ID].ImagePath = data[i].ImagePath;
+                            }
                         }
                     }
                 });

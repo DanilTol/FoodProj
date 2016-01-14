@@ -13,7 +13,9 @@
                     <h3>Dish menu</h3>
                     <div class="dishDnDZone"
                          x-lvl-drop-target="true"
+                         contenteditable="true"
                          x-on-drop="editDishSet(someDish)"
+                         data-text-placeholder ="Drag"
                          id="dishMenu">
                         <div ng-repeat="dish in dishes.set">
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"

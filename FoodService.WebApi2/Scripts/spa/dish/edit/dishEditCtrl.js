@@ -1,8 +1,8 @@
 ﻿(function (app) {
-    'use strict';
+    "use strict";
 
-    app.controller('dishEditCtrl', [
-        '$scope', '$routeParams', 'dishService', function ($scope, $routeParams, dishService) {
+    app.controller("dishEditCtrl", [
+        "$scope", "$routeParams", "dishService", function ($scope, $routeParams, dishService) {
 
             $scope.UpdateDish = function () {
                 dishService.updateDish($scope.dish).then(
@@ -30,4 +30,4 @@
 
             loadDetails();
         }]);
-})(angular.module('dishModule'));
+})(angular.module("dishModule"));

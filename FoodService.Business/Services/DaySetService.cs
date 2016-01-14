@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mail;
+using AutoMapper;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
 using FoodService.DAL.Entity;
@@ -18,34 +19,12 @@ namespace FoodService.Business.Services
         {
             Database = uow;
         }
-
-        public IEnumerable<DishModelShortInfo> GetDayInfo(DateTime dateTime)
-        {
-            //var fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date);
-            var fromDb = Database.DayDish.QueryToTable.Where(x => x.Date == dateTime.Date);
-            List<DishModelShortInfo> result = new List<DishModelShortInfo>();
-            foreach (var s in fromDb)
-            {
-                string pathImage = Database.DishToImage.FindByDishId(s.Dish.ID);
-                result.Add(new DishModelShortInfo()
-                {
-                    ID = s.Dish.ID,
-                    Name = s.Dish.Name,
-                    Weight = s.Dish.Weight,
-                    Price = s.Dish.Price,
-                    ImagePath = pathImage ?? DefaultPathToImage
-                });
-            }
-
-            return result;
-        }
-
+        
         public IEnumerable<DishModelShortInfo> Filter(DateTime dateTime, string filter)
         {
             IQueryable<DayDishSet> fromDb;
-            if (String.IsNullOrEmpty(filter))
+            if (string.IsNullOrEmpty(filter))
             {
-                //fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date).OrderBy(m => m.ID);
                 fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date).OrderBy(m => m.ID);
             }
             else
@@ -53,25 +32,21 @@ namespace FoodService.Business.Services
                 fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date)
                     .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
                     .OrderBy(m => m.ID);
+            }
 
-                //fromDb = Database.DayDish.GetAllDishSetsOnDay(dateTime.Date)
-                //   .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
-                //   .OrderBy(m => m.ID);
-            }
-            var result = new List<DishModelShortInfo>();
-            foreach (var s in fromDb)
-            {
-                string pathImage = Database.DishToImage.FindByDishId(s.Dish.ID);
-                result.Add(new DishModelShortInfo()
-                {
-                    ID = s.Dish.ID,
-                    Name = s.Dish.Name,
-                    Weight = s.Dish.Weight,
-                    Price = s.Dish.Price,
-                    ImagePath = pathImage ?? DefaultPathToImage
-                });
-            }
-            return result;
+
+            DishService dishService = new DishService(Database);
+
+            return dishService.GetImgAndDishTogether(fromDb.Select(set => set.Dish).ToList());
+
+            //var dishFromDb = fromDb.Select(set => set.Dish).ToList();
+            //var allDishes = Mapper.Map<IList<Dish>, IList<DishModelShortInfo>>(fromDb.Select(set => set.Dish).ToList());
+            //foreach (var plate in allDishes)
+            //{
+            //    var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
+            //    plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
+            //}
+            //return allDishes;
         }
 
 
@@ -90,7 +65,6 @@ namespace FoodService.Business.Services
 
             foreach (var dish in menuDelete)
             {
-                //Database.DayDish.Delete(dish.ID);
                 Database.DayDish.Delete(dish);
             }
 
