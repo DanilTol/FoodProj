@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
+using FoodService.Business.Services.CommonFunc;
 using FoodService.DAL.Entity;
 using FoodService.DAL.Interfaces;
 
@@ -12,7 +13,7 @@ namespace FoodService.Business.Services
     public class OrderService : IOrderService
     {
         IUnitOfWork Database { get; set; }
-        private const string DefaultPathToImage = "../Dish/Common.gif";
+        //private const string DefaultPathToImage = "../Dish/Common.gif";
 
         public OrderService(IUnitOfWork uow)
         {
@@ -25,13 +26,15 @@ namespace FoodService.Business.Services
             if (fromDb == null) return null;
             var dishes = fromDb.Select(set => set.Dish);
 
-            var allDishes = Mapper.Map<IEnumerable<Dish>, IList<DishModelShortInfo>>(dishes);
-            foreach (var plate in allDishes)
-            {
-                var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
-                plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
-            }
-            return allDishes;
+            return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,dishes);
+
+            //var allDishes = Mapper.Map<IEnumerable<Dish>, IList<DishModelShortInfo>>(dishes);
+            //foreach (var plate in allDishes)
+            //{
+            //    var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
+            //    plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
+            //}
+            //return allDishes;
         }
 
         public void EditOrder(DateTime date, int[] arraInts, string email)

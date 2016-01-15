@@ -26,7 +26,7 @@ namespace FoodService.WebApi2.Controllers
         }
 
         // GET: api/DishApi/5
-        //[MyAuth]
+        [HttpGet]
         [Route("details/{id:int}")]
         public HttpResponseMessage Get(int id)
         {
@@ -37,7 +37,6 @@ namespace FoodService.WebApi2.Controllers
             });
         }
         
-        [MyAuth]
         [HttpGet]
         [Route("search")]
         public HttpResponseMessage Search(int page = 1, int pageSize = 2, string filter = null)
@@ -59,6 +58,7 @@ namespace FoodService.WebApi2.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, pagedSet);
         }
 
+        [MyAuth("admin")]
         [HttpPost]
         [Route("add")]
         public async Task<HttpResponseMessage> PostFormData()
@@ -100,6 +100,7 @@ namespace FoodService.WebApi2.Controllers
             }
         }
 
+        [MyAuth("admin")]
         [HttpPost]
         [Route("update")]
         public HttpResponseMessage Update(DishModelDetailsInfo dish)
@@ -128,6 +129,7 @@ namespace FoodService.WebApi2.Controllers
             });
         }
 
+        [MyAuth("admin")]
         [HttpPost]
         [Route("delete")]
         public HttpResponseMessage Delete(int dishId = 2)

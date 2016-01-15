@@ -50,20 +50,15 @@
     <Compile Include="DTO\LogInUser.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Mapping\InitMap.cs" />
-    <Compile Include="Membership\Interface\IEncryptionService.cs" />
-    <Compile Include="Membership\Interface\IMembershipService.cs" />
-    <Compile Include="Membership\MembershipContext.cs" />
-    <Compile Include="Membership\Service\MembershipService.cs" />
     <Compile Include="ServiceInterfaces\IDaySetService.cs" />
     <Compile Include="ServiceInterfaces\IOrderService.cs" />
     <Compile Include="ServiceInterfaces\IUserService.cs" />
+    <Compile Include="Services\CommonFunc\UniteDishAndImage.cs" />
     <Compile Include="Services\DishService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DTO\BigDishAndWeekDishSet.cs" />
     <Compile Include="DTO\DishModelDetailsInfo.cs" />
     <Compile Include="DTO\DishModelShortInfo.cs" />
-    <Compile Include="DTO\OrderAndAvaliableModel.cs" />
     <Compile Include="DTO\OrderPlates.cs" />
     <Compile Include="DTO\SetOnDay.cs" />
     <Compile Include="ServiceInterfaces\IDishService.cs" />
@@ -79,9 +74,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

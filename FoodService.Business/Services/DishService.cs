@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
+using FoodService.Business.Services.CommonFunc;
 using FoodService.DAL.Entity;
 using FoodService.DAL.Interfaces;
 
@@ -11,67 +12,44 @@ namespace FoodService.Business.Services
     public class DishService : IDishService
     {
         IUnitOfWork Database { get; }
-        private const string DefaultPathToImage = "../Dish/Common.gif";
+        //private const string DefaultPathToImage = "../Dish/Common.gif";
 
         public DishService(IUnitOfWork uow)
         {
             Database = uow;
         }
 
-        public IEnumerable<DishModelShortInfo> GetAllDishes()
-        {
-            //var allDishes = Mapper.Map<IQueryable<Dish>, IList<DishModelShortInfo>>(Database.Dish.QueryToTable);
-            //foreach (var plate in allDishes)
-            //{
-            //    var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
-            //    plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
-            //}
-            
-            //return allDishes;
+        //internal static IEnumerable<DishModelShortInfo> GetDishImagesFromDbAndUnite(IUnitOfWork Database, IEnumerable<Dish> dish)
+        //{
+        //    var allDishes = Mapper.Map<IEnumerable<Dish>, IList<DishModelShortInfo>>(dish);
+        //    foreach (var plate in allDishes)
+        //    {
+        //        var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
+        //        plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
+        //    }
 
-            return GetImgAndDishTogether(Database.Dish.QueryToTable.ToList());
-        }
-
-        internal IEnumerable<DishModelShortInfo> GetImgAndDishTogether(IList<Dish> dish)
-        {
-            var allDishes = Mapper.Map<IList<Dish>, IList<DishModelShortInfo>>(dish);
-            foreach (var plate in allDishes)
-            {
-                var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
-                plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
-            }
-
-            return allDishes;
-        } 
+        //    return allDishes;
+        //}
 
         public IEnumerable<DishModelShortInfo> FilterDishes(int page, int pageSize, string filter = null)
         {
-            IEnumerable<DishModelShortInfo> allDishes;
+            IQueryable<Dish> dishesFromDb;
             if (!string.IsNullOrEmpty(filter))
             {
-                    allDishes = Mapper.Map<IQueryable<Dish>, IList<DishModelShortInfo>>(
-                    Database.Dish.QueryToTable.Where(m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
+                    dishesFromDb = Database.Dish.QueryToTable.Where(m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
                         .OrderBy(m => m.ID)
                         .Skip(page*pageSize)
-                        .Take(pageSize));
+                        .Take(pageSize);
 
             }
             else
             {
-                allDishes = Mapper.Map<IQueryable<Dish>, IList<DishModelShortInfo>>(
-                    Database.Dish.QueryToTable
+                dishesFromDb = Database.Dish.QueryToTable
                         .OrderBy(m => m.ID)
                         .Skip(page*pageSize)
-                        .Take(pageSize));
+                        .Take(pageSize);
             }
-            foreach (var plate in allDishes)
-            {
-                var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
-                plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
-            }
-
-
-            return allDishes;
+           return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,dishesFromDb);
         }
 
         public int TotalFilteredDish(string filter = null)
@@ -80,8 +58,7 @@ namespace FoodService.Business.Services
             if (!string.IsNullOrEmpty(filter))
             {
                 totalDishes = Database.Dish.QueryToTable
-                    .Count(m => m.Name.ToLower()
-                    .Contains(filter.ToLower().Trim()));
+                    .Count(m => m.Name.ToLower().Contains(filter.ToLower().Trim()));
             }
             else
             {
@@ -122,7 +99,7 @@ namespace FoodService.Business.Services
             {
                 imgList.Add(dishimage.PathToImageOnServer);
             }
-            details.ImagePath = imgList.Count<1 ? new []{DefaultPathToImage} : imgList.ToArray() ;
+            details.ImagePath = imgList.Count<1 ? new []{UniteDishAndImage.DefaultPathToImage} : imgList.ToArray() ;
             
             return details;
         }

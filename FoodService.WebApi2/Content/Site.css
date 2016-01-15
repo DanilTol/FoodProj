@@ -90,8 +90,3 @@ textarea {
     max-height:100%;
     overflow:auto ;
 }
-
-
-[contentEditable=true]:empty:not(:focus):before{
-        content:attr(data-text)
-    }

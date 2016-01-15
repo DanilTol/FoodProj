@@ -2,6 +2,7 @@
     "use strict";
     app.controller("dishesCtrl", ["$scope", "$location", "dishService", "notificationService", function ($scope, $location, dishService, notificationService) {
             $scope.filterDishes = "";
+           
 
             $scope.search = function () {
                 $scope.page = $location.search().page || 0;
@@ -10,7 +11,8 @@
                 dishService.search($scope.page, $scope.pageSize, $scope.filterDishes)
                     .then(
                         //success
-                        function(data) {
+                        function (data) {
+                           // data = {};
                             $scope.Dishes = data;
                             $scope.page = data.Page;
                             $scope.pagesCount = data.TotalPages;
