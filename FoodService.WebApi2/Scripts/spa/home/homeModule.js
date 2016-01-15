@@ -4,8 +4,8 @@
          .config(function ($routeProvider) {
             $routeProvider
                 .when("/", {
-                    templateUrl: "scripts/spa/home/index/index.html",
-                    controller: "indexCtrl"
+                    templateUrl: "scripts/spa/home/index/index.html"
+                    //,controller: "indexCtrl"
                 });
          });
 })();

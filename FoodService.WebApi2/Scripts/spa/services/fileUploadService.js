@@ -1,5 +1,5 @@
 ﻿(function (app) {
-    'use strict';
+    "use strict";
 
     app.factory("fileUploadService", ["$q", "$http",
                function ($q, $http) {
@@ -53,4 +53,4 @@
                         }
                     };
                 }]);
-})(angular.module('common.core'));
+})(angular.module("common.core"));

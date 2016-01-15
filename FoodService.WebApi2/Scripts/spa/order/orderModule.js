@@ -4,7 +4,7 @@
          .config(function ($routeProvider) {
              $routeProvider
                   .when("/order", {
-                      templateUrl: "scripts/spa/order/order.html",
+                      templateUrl: "scripts/spa/order/main/order.html",
                       controller: "orderCtrl",
                       reloadOnSearch: false
                   })

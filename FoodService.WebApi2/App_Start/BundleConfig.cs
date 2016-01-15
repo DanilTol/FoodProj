@@ -63,6 +63,7 @@ namespace FoodService.WebApi2
                "~/Scripts/spa/services/sessionInjector.js",
                "~/Scripts/spa/services/fileUploadService.js",
                "~/Scripts/spa/services/notificationService.js",
+               "~/Scripts/spa/services/DnD.directive.js",
 
                 //home
                 "~/Scripts/spa/home/index/indexCtrl.js",
@@ -83,11 +84,11 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/dishset/dishsetService.js",
                 "~/Scripts/spa/dishset/main/dishsetCtrl.js",
                 "~/Scripts/spa/dishset/main/FilterForChosenDishes.js",
-                "~/Scripts/spa/dishset/DnD.directive.js",
+                
 
                 //order
                 "~/Scripts/spa/order/orderService.js",
-                "~/Scripts/spa/order/orderCtrl.js",
+                "~/Scripts/spa/order/main/orderCtrl.js",
 
                 //Nav bars
                 "~/Scripts/spa/navbar/side/sideBar.directive.js",

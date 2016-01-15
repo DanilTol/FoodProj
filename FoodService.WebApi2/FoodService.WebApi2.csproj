@@ -267,7 +267,7 @@
     <Content Include="Scripts\spa\dishset\main\dishsetCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
     <Content Include="Scripts\spa\dishset\dishsetService.js" />
-    <Content Include="Scripts\spa\dishset\DnD.directive.js" />
+    <Content Include="Scripts\spa\services\DnD.directive.js" />
     <Content Include="Scripts\spa\dishset\main\FilterForChosenDishes.js" />
     <Content Include="Scripts\spa\dish\add\add.html" />
     <Content Include="Scripts\spa\dish\add\dishAddCtrl.js" />
@@ -287,8 +287,8 @@
     <Content Include="Scripts\spa\navbar\side\sideBar.html" />
     <Content Include="Scripts\spa\home\index\indexCtrl.js" />
     <Content Include="Scripts\spa\navbar\top\topBar.directive.js" />
-    <Content Include="Scripts\spa\order\order.html" />
-    <Content Include="Scripts\spa\order\orderCtrl.js" />
+    <Content Include="Scripts\spa\order\main\order.html" />
+    <Content Include="Scripts\spa\order\main\orderCtrl.js" />
     <Content Include="Scripts\spa\order\orderModule.js" />
     <Content Include="Scripts\spa\order\orderService.js" />
     <Content Include="Scripts\spa\services\fileUploadService.js" />
