@@ -12,7 +12,6 @@ namespace FoodService.Business.Services
     public class DaySetService : IDaySetService
     {
         IUnitOfWork Database { get; set; }
-        //private const string DefaultPathToImage = "../Dish/Common.gif";
 
         public DaySetService(IUnitOfWork uow)
         {
@@ -28,21 +27,12 @@ namespace FoodService.Business.Services
             }
             else
             {
+                //if filter set
                 fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date)
                     .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
                     .OrderBy(m => m.ID);
             }
-
             return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,fromDb.Select(set => set.Dish).ToList());
-
-            //var dishFromDb = fromDb.Select(set => set.Dish).ToList();
-            //var allDishes = Mapper.Map<IList<Dish>, IList<DishModelShortInfo>>(fromDb.Select(set => set.Dish).ToList());
-            //foreach (var plate in allDishes)
-            //{
-            //    var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
-            //    plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
-            //}
-            //return allDishes;
         }
 
 
@@ -67,7 +57,8 @@ namespace FoodService.Business.Services
             //add new dishes
             foreach (var i in dishIdsList)
             {
-                Database.DayDish.Add(i, date);
+                var entity = new DayDishSet { Date = date, Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == i) };
+                Database.DayDish.Add(entity);
             }
             Database.Save();
         }

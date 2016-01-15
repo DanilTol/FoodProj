@@ -9,6 +9,5 @@ namespace FoodService.Business.ServiceInterfaces
         void EditUser(UserDTO userDto);
         bool Login(LogInUser inUser);
         UserDTO GetUserInfo(string email);
-        IEnumerable<UserDTO> GetAllUsers();
     }
 }

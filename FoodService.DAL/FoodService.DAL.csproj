@@ -99,6 +99,7 @@
     <Compile Include="RepositoryBag\UserRepository.cs" />
     <Compile Include="RepositoryBag\DayDishSetRepository.cs" />
     <Compile Include="RepositoryBag\UnityOfWork.cs" />
+    <Compile Include="RepositoryBag\UserSetRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

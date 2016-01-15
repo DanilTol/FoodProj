@@ -2,12 +2,12 @@
 using System.Data.Entity;
 using System.Linq;
 using FoodService.DAL.Entity;
+using FoodService.DAL.Interfaces;
 
 namespace FoodService.DAL.RepositoryBag
 {
     public class UserRepository : IRepository<User>
     {
-
         private readonly EntityContext _context;
 
         public UserRepository(EntityContext context)
@@ -15,35 +15,21 @@ namespace FoodService.DAL.RepositoryBag
             _context = context;
         }
 
-        public IQueryable<User> QueryToTable {
-            get { return _context.Users; }
-                }
+        public IQueryable<User> QueryToTable => _context.Users;
+
         public void Add(User entity)
         {
-            entity.Role = _context.RolesForUsers.FirstOrDefault(x => x.Name == "user");
             _context.Users.Add(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(User entity)
         {
-            var result = (from r in _context.Users where id == r.ID select r).FirstOrDefault();
-            _context.Users.Remove(result);
-
+            _context.Users.Remove(entity);
         }
 
         public void Update(User entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-        }
-
-        public User FindById(int id)
-        {
-            return _context.Users.FirstOrDefault(x => x.ID == id);
-        }
-
-        public IQueryable<User> Find(Func<User, bool> predicate)
-        {
-            throw new NotImplementedException();
         }
     }
 }

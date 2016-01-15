@@ -38,7 +38,7 @@ namespace FoodService.WebApi2.Controllers
         [Route("edituserset")]
         public HttpResponseMessage UpdateOrder(SetOnDay setOnDay)
         {
-            _orderService.EditOrder(Jan1St1970.AddMilliseconds(setOnDay.Date), setOnDay.DishId, email);
+            _orderService.DeleteOldAndAddNewOrder(Jan1St1970.AddMilliseconds(setOnDay.Date), setOnDay.DishId, email);
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }
 

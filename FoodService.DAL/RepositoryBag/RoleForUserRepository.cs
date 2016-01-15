@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Data.Entity;
 using System.Linq;
 using FoodService.DAL.Entity;
+using FoodService.DAL.Interfaces;
 
 namespace FoodService.DAL.RepositoryBag
 {
@@ -13,30 +14,21 @@ namespace FoodService.DAL.RepositoryBag
             _context = con;
         }
 
-        public IQueryable<RolesForUser> QueryToTable { get { return _context.RolesForUsers; } }
+        public IQueryable<RolesForUser> QueryToTable => _context.RolesForUsers;
+
         public void Add(RolesForUser entity)
         {
-            //empty
+            _context.RolesForUsers.Add(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(RolesForUser entity)
         {
-            // empty
+            _context.RolesForUsers.Remove(entity);
         }
 
         public void Update(RolesForUser entity)
         {
-            // empty
-        }
-
-        public RolesForUser FindById(int id)
-        {
-           return _context.RolesForUsers.FirstOrDefault(x => x.ID == id);
-        }
-
-        public IQueryable<RolesForUser> Find(Func<RolesForUser, bool> predicate)
-        {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
         }
     }
 }

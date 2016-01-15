@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
 using FoodService.Business.Services.CommonFunc;
-using FoodService.DAL.Entity;
 using FoodService.DAL.Interfaces;
 
 namespace FoodService.Business.Services
@@ -13,7 +11,6 @@ namespace FoodService.Business.Services
     public class OrderService : IOrderService
     {
         IUnitOfWork Database { get; set; }
-        //private const string DefaultPathToImage = "../Dish/Common.gif";
 
         public OrderService(IUnitOfWork uow)
         {
@@ -27,20 +24,41 @@ namespace FoodService.Business.Services
             var dishes = fromDb.Select(set => set.Dish);
 
             return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,dishes);
-
-            //var allDishes = Mapper.Map<IEnumerable<Dish>, IList<DishModelShortInfo>>(dishes);
-            //foreach (var plate in allDishes)
-            //{
-            //    var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
-            //    plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
-            //}
-            //return allDishes;
         }
 
-        public void EditOrder(DateTime date, int[] arraInts, string email)
+        public void DeleteOldAndAddNewOrder(DateTime date, int[] dishIds, int userId)
         {
-            DeleteOrder(date, email);
-            Database.Order.AddSeveralOrders(date.Date, arraInts, email);
+            var dishIdsList = dishIds.ToList();
+            // get day set by date
+            var oldUserSets = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.ID == userId)?.UserSetes;
+            if (oldUserSets == null) return;
+            var oldOrderDishes = oldUserSets.Select(set => set.Dish.ID).ToList();
+
+            var equalList = oldUserSets.SelectMany(oldUserSet => dishIdsList.Where(dishId => oldUserSet.Dish.ID == dishId)).ToList();
+
+            foreach (var eq in equalList)
+            {
+                dishIdsList.Remove(eq);
+
+                //oldOrder.RemoveAll(x => x.Dish.ID == eq);
+            }
+
+            
+            ////delete old dishes from menu 
+            //foreach (var oldUserSet in oldUserSets)
+            //{
+            //    Database..Delete(dish);
+            //}
+            ////add new dishes
+            //foreach (var i in dishIdsList)
+            //{
+            //    Database.DayDish.Add(i, date);
+            //}
+            //Database.Save();
+
+
+            //DeleteOrder(date, email);
+            //Database.Order.AddSeveralOrders(date.Date, dishIds, email);
 
             //var newOrder = new Order { Date = date, User = Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == email) };
             //foreach (var i in arraInts)
@@ -51,9 +69,9 @@ namespace FoodService.Business.Services
             Database.Save();
         }
 
-        public void DeleteOrder(DateTime date, string email)
+        public void DeleteOrder(DateTime date, int userId)
         {
-            Database.Order.DeleteByDate(date.Date,email);
+            Database.Order.Delete(Database.Order.QueryToTable.FirstOrDefault(x => x.User.ID == userId && x.Date == date.Date));
             Database.Save();
         }
 

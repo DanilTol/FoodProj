@@ -106,7 +106,7 @@ namespace FoodService.Business.Services
 
         public void EditDish(DishModelDetailsInfo dish)
         {
-            var toDb = Mapper.Map<DishModelDetailsInfo, Dish>(dish);
+            //var toDb = Mapper.Map<DishModelDetailsInfo, Dish>(dish);
 
             //TODO: Uploade/Delete images
             ////if images were not uploaded
@@ -124,7 +124,16 @@ namespace FoodService.Business.Services
             //    toDb.DishToImages.Add(imgRow);
             //}
 
-            Database.Dish.Update(toDb);
+            var dishDb = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == dish.ID);
+            if (dishDb == null) return;
+            dishDb.Name = dish.Name;
+            dishDb.Description = dish.Description;
+            dishDb.Energy = dish.Energy;
+            dishDb.Ingridients = dish.Ingridients;
+            dishDb.Price = dish.Price;
+            dishDb.Weight = dish.Weight;
+
+            Database.Dish.Update(dishDb);
             Database.Save();
         }
 
