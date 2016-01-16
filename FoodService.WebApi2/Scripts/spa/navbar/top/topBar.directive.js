@@ -10,7 +10,7 @@
                 link: function (scope) {
                     scope.getUserData = function() {
                         var userProfile = accountService.getUserData();
-                        return userProfile.Name;
+                        return userProfile;
                     }
                     scope.isUserLoggedIn = accountService.isUserLoggedIn;
                     scope.logout = function () {

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
@@ -26,9 +24,6 @@ namespace FoodService.WebApi2.Controllers
             // here should get user entity from attr MyAuth
             user = userService.GetUser(userId);
         }
-
-        //string email = "mike@gmail.com";
-        
 
         [HttpGet]
         [Route("getuserset")]

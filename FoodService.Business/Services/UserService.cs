@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using AutoMapper;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
@@ -40,9 +39,9 @@ namespace FoodService.Business.Services
 
         public UserDTO GetUserInfo(string email)
         {
-            var z = Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == email);
-            var userdto = Mapper.Map<User, UserDTO>(z);
-            if (z != null) userdto.Role = z.Role.Name;
+            var userFromDb = Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == email);
+            var userdto = Mapper.Map<User, UserDTO>(userFromDb);
+            if (userFromDb != null) userdto.Role = userFromDb.Role.Name;
             return userdto;
         }
 
