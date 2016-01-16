@@ -4,10 +4,10 @@ namespace FoodService.DAL.Interfaces
 {
     public interface IRepositorySecond
     {
-        IQueryable<TE> GetAll<TE>() where TE : class;
-        bool Add<TE>(TE entity) where TE : class;
-        bool Update<TE>(TE entity) where TE : class;
-        bool Delete<TE>(TE entity) where TE : class;
+        IQueryable<T> GetAll<T>() where T : class;
+        void Add<T>(T entity) where T : class;
+        void Update<T>(T entity) where T : class;
+        void Delete<T>(T entity) where T : class;
         bool Save();
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
 using FoodService.Business.Services.CommonFunc;
+using FoodService.DAL.Entity;
 using FoodService.DAL.Interfaces;
 
 namespace FoodService.Business.Services
@@ -17,64 +18,63 @@ namespace FoodService.Business.Services
             Database = uow;
         }
 
-        public IEnumerable<DishModelShortInfo> GetPlatesByDate(DateTime date, string email)
+        public IEnumerable<DishModelShortInfo> GetPlatesByDate(DateTime date, User user)
         {
-            var fromDb = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.EmailAddress == email)?.UserSetes;
+            var fromDb = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.ID == user.ID)?.UserSetes;
             if (fromDb == null) return null;
             var dishes = fromDb.Select(set => set.Dish);
 
             return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,dishes);
         }
 
-        public void DeleteOldAndAddNewOrder(DateTime date, int[] dishIds, int userId)
+        public void DeleteOldAndAddNewOrder(DateTime date, int[] dishIds, User user)
         {
             var dishIdsList = dishIds.ToList();
-            // get day set by date
-            var oldUserSets = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.ID == userId)?.UserSetes;
-            if (oldUserSets == null) return;
-            var oldOrderDishes = oldUserSets.Select(set => set.Dish.ID).ToList();
-
-            var equalList = oldUserSets.SelectMany(oldUserSet => dishIdsList.Where(dishId => oldUserSet.Dish.ID == dishId)).ToList();
-
-            foreach (var eq in equalList)
+            // get order
+            var order = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.ID == user.ID);
+            if (order == null)
             {
-                dishIdsList.Remove(eq);
-
-                //oldOrder.RemoveAll(x => x.Dish.ID == eq);
+                //if it`s a new order
+                //TODO: if use user from param it understand like dif context
+                var newOrder = new Order {Date = date.Date, User = Database.User.QueryToTable.FirstOrDefault(x => x.ID == user.ID)};
+                Database.Order.Add(newOrder);
+                foreach (var dishId in dishIds)
+                {
+                    Database.UserSet.Add(new UserSet{Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == dishId), Order = newOrder});
+                }
             }
+            else
+            {
+                //get order userset
+                var oldUserSets = order.UserSetes;
+                if (oldUserSets == null) return;
+                var oldOrderDishIds = oldUserSets.Select(set => set.Dish.ID).ToList();
 
-            
-            ////delete old dishes from menu 
-            //foreach (var oldUserSet in oldUserSets)
-            //{
-            //    Database..Delete(dish);
-            //}
-            ////add new dishes
-            //foreach (var i in dishIdsList)
-            //{
-            //    Database.DayDish.Add(i, date);
-            //}
-            //Database.Save();
+                foreach (var dishId in dishIds.Where(dishId => oldOrderDishIds.Contains(dishId)))
+                {
+                    oldOrderDishIds.Remove(dishId);
+                    dishIdsList.Remove(dishId);
+                }
 
+                foreach (var dishId in oldOrderDishIds)
+                {
+                    Database.UserSet.Delete(oldUserSets.FirstOrDefault(x => x.Dish.ID == dishId));
+                }
 
-            //DeleteOrder(date, email);
-            //Database.Order.AddSeveralOrders(date.Date, dishIds, email);
-
-            //var newOrder = new Order { Date = date, User = Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == email) };
-            //foreach (var i in arraInts)
-            //{
-            //    var dish = Database.Dish.QueryToTable.FirstOrDefault(z => z.ID == i);
-            //    Da.UserSets.Add(new UserSet() { Dish = dish, Order = newOrder });
-            //}
+                foreach (var dishId in dishIdsList)
+                {
+                    var k = new UserSet
+                    {
+                        Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == dishId),
+                        Order = order
+                    };
+                    oldUserSets.Add(k);
+                    order.UserSetes = oldUserSets;
+                }
+            }
             Database.Save();
         }
-
-        public void DeleteOrder(DateTime date, int userId)
-        {
-            Database.Order.Delete(Database.Order.QueryToTable.FirstOrDefault(x => x.User.ID == userId && x.Date == date.Date));
-            Database.Save();
-        }
-
+        
         public void Dispose()
         {
             Database.Dispose();

@@ -30,16 +30,5 @@ namespace FoodService.DAL.RepositoryBag
         {
             _context.Entry(entity).State = EntityState.Modified;
         }
-        
-        //public void AddSeveralOrders(DateTime date, int[] dishInts, string email)
-        //{
-        //    var insert = new Order { Date = date , User = _context.Users.FirstOrDefault(x => x.EmailAddress == email)};
-        //    Add(insert);
-        //    foreach (var i in dishInts)
-        //    {
-        //        var dish = _context.Dishes.FirstOrDefault(z => z.ID == i);
-        //        _context.UserSets.Add(new UserSet() { Dish = dish, Order = insert });
-        //    }
-        //}
     }
 }

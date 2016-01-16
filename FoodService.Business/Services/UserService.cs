@@ -45,5 +45,10 @@ namespace FoodService.Business.Services
             if (z != null) userdto.Role = z.Role.Name;
             return userdto;
         }
+
+        public User GetUser(int id)
+        {
+            return Database.User.QueryToTable.FirstOrDefault(x => x.ID == id);
+        }
     }
 }

@@ -5,10 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Threading;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-using System.Web.Security;
 using FoodService.Business.ServiceInterfaces;
 using JWT;
 using Microsoft.Practices.ServiceLocation;
@@ -26,21 +24,21 @@ namespace FoodService.WebApi2.Attribute
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-
             bool auth = false;
-            IEnumerable<string> headerValues;
+            //IEnumerable<string> headerValues;
+            string requestToken;
             try
             {
-                headerValues = actionContext.Request.Headers.GetValues("Token");
+                requestToken = actionContext.Request.Headers.GetValues("Token").FirstOrDefault();
             }
             catch (Exception)
             {
-                return false;
+                return auth;
             }
 
-            var _userService = ServiceLocator.Current.GetInstance<IUserService>();
+            var userService = ServiceLocator.Current.GetInstance<IUserService>();
             
-            var requestToken = headerValues.FirstOrDefault();
+            //var requestToken = headerValues.FirstOrDefault();
 
             var secretKey = "G";
             try
@@ -50,7 +48,7 @@ namespace FoodService.WebApi2.Attribute
                 //string email = jsonPayload["email"].ToString();
                 var email = requestToken;
 
-                var user = _userService.GetUserInfo(email);
+                var user = userService.GetUserInfo(email);
 
                 if (user == null || (user.Role != _role && user.Role != "admin")) return auth;
 

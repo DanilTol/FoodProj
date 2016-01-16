@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201601051253133_clearDaySet.Designer.cs">
       <DependentUpon>201601051253133_clearDaySet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601160804237_usersetDeleteIntFields.cs" />
+    <Compile Include="Migrations\201601160804237_usersetDeleteIntFields.Designer.cs">
+      <DependentUpon>201601160804237_usersetDeleteIntFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositoryBag\DishToImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601051253133_clearDaySet.resx">
       <DependentUpon>201601051253133_clearDaySet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601160804237_usersetDeleteIntFields.resx">
+      <DependentUpon>201601160804237_usersetDeleteIntFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

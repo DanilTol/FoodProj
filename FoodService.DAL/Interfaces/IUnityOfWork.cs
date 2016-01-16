@@ -1,5 +1,4 @@
 ﻿using System;
-using FoodService.DAL.Entity;
 using FoodService.DAL.RepositoryBag;
 
 namespace FoodService.DAL.Interfaces
@@ -12,6 +11,7 @@ namespace FoodService.DAL.Interfaces
         DayDishSetRepository DayDish { get; }
         UserRepository User { get; }
         RoleForUserRepository Role { get; }
+        UserSetRepository UserSet { get; }
         void Save();
 
     }
