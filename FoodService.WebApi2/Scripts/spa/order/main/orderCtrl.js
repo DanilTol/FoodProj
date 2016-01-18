@@ -55,6 +55,7 @@
                 function(data) {
                     $scope.dishes.userSet = [];
                     if (data != null) {
+                    
                         for (var i = 0; i < data.length; i++) {
                             if (angular.isUndefined($scope.dishes.userSet[data[i].ID])) {
                                 $scope.dishes.userSet[data[i].ID] = {};

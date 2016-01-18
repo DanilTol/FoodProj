@@ -1,8 +1,8 @@
 ﻿<div class="row">
     <div class="panel panel-primary">
-        <div class="panel-heading clearfix">
+        <!--<div class="panel-heading clearfix">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Menu on {{DateShow}}</h4>
-        </div>
+        </div>-->
         <div class="panel-body">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Choose day to show menu </h4>
             <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" />
@@ -10,13 +10,16 @@
             <div class="row">
                 <!--here show list of menu on day-->
                 <div class="col-md-5 pull-left" style="margin-left: 60px;">
-                    <h3>Dish menu</h3>
+                    <h3>Dish menu
+                        <button class="btn btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="editDayMenu();"></button>
+                    </h3>
                     <div class="dishDnDZone"
                          x-lvl-drop-target="true"
                          contenteditable="true"
                          x-on-drop="editDishSet(someDish)"
-                         data-text-placeholder ="Drag"
+                         prompt="true" data-text="Drag disg here"
                          id="dishMenu">
+                        <div ng-if="dishes.set.length<1" class="text-center" style="font-size: 2em; color: gray; vertical-align: middle;line-height: 180px;  text-align: center">Drag dish here</div>
                         <div ng-repeat="dish in dishes.set">
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
@@ -25,13 +28,6 @@
                                 </p>
                                 <button class="btn btn-danger cancelButton glyphicon glyphicon-remove" ng-click="removeClickBtn($event)"></button>
                             </div>
-
-                            <!--<div class="col-md-6" style="padding: 15px" id={{dish.ID}}>
-                                <a ng-href="#/dishes/{{dish.ID}}">
-                                    <img ng-src="/Images/Dish/{{dish.ImagePath}}" alt="{{dish.Name}}" width="160" height="160"/>
-                                    <p class="textOnImage">{{dish.Name}}</p>
-                                </a>
-                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -62,9 +58,7 @@
                 </div>
             </div>
             <br />
-            <div class="col-md-5 pull-right" style="margin-right: 60px;">
-                <button class="btn btn-lg btn-primary pull-right" ng-click="editDayMenu();">Edit menu <i class="glyphicon glyphicon-edit"></i></button>
-            </div>
+           
         </div>
     </div>
 </div>

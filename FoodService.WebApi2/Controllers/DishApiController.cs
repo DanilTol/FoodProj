@@ -119,7 +119,7 @@ namespace FoodService.WebApi2.Controllers
                 {
                     var dishDb = _dishService.GetDishById(dish.ID);
                     if (dishDb == null)
-                        response = this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid movie.");
+                        response = this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid dish.");
                     else
                     {
                         _dishService.EditDish(dish);

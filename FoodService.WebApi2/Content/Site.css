@@ -18,7 +18,7 @@ textarea {
 
 
 .userinfo {
-    font-size: large;
+    /*font-size: large;*/
     background-color: white;
 }
 
@@ -89,4 +89,10 @@ textarea {
     max-width:100%;
     max-height:100%;
     overflow:auto ;
+}
+[x-lvl-drop-target=true]:empty:not(:focus):before{
+    content:attr(data-text-placeholder)
+}
+.btn {
+    margin-left: 2px;
 }

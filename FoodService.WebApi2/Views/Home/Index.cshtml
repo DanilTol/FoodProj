@@ -12,18 +12,23 @@
     @Scripts.Render("~/bundles/Vendors/modernizr")
 </head>
 <body>
-    <top-bar></top-bar>
-    <div class="row-offcanvas row-offcanvas-left">
-        @*<side-bar></side-bar>*@
-        <div id="main">
-            <div class="col-md-12">
-                <div ng-view></div>
-            </div>
+    <top-bar id="header"></top-bar>
+<div class="row-offcanvas row-offcanvas-left">
+    @*<side-bar></side-bar>*@
+    <div id="main">
+        <div class="col-md-12">
+            <div ng-view></div>
         </div>
     </div>
-    @*<bottom-Bar></bottom-Bar>*@
+</div>
+    <footer>© 2011 JOHN DOE ALL RIGHTS RESERVED</footer>
+
+
+@*<bottom-Bar></bottom-Bar>*@
     @Scripts.Render("~/bundles/Vendors")
     @Scripts.Render("~/bundles/spa")
+
+
 </body>
 </html>
 
