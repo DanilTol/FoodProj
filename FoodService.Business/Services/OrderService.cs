@@ -20,7 +20,7 @@ namespace FoodService.Business.Services
 
         public IEnumerable<DishModelShortInfo> GetPlatesByDate(DateTime date, User user)
         {
-            var fromDb = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.ID == user.ID)?.UserSetes;
+            var fromDb = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.id == user.id)?.UserSetes;
             if (fromDb == null) return null;
             var dishes = fromDb.Select(set => set.Dish);
 
@@ -31,16 +31,16 @@ namespace FoodService.Business.Services
         {
             var dishIdsList = dishIds.ToList();
             // get order
-            var order = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.ID == user.ID);
+            var order = Database.Order.QueryToTable.FirstOrDefault(x => x.Date == date.Date && x.User.id == user.id);
             if (order == null)
             {
                 //if it`s a new order
                 //TODO: if use user from param it understand like dif context
-                var newOrder = new Order {Date = date.Date, User = Database.User.QueryToTable.FirstOrDefault(x => x.ID == user.ID)};
+                var newOrder = new Order {Date = date.Date, User = Database.User.QueryToTable.FirstOrDefault(x => x.id == user.id)};
                 Database.Order.Add(newOrder);
                 foreach (var dishId in dishIds)
                 {
-                    Database.UserSet.Add(new UserSet{Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == dishId), Order = newOrder});
+                    Database.UserSet.Add(new UserSet{Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.id == dishId), Order = newOrder});
                 }
             }
             else
@@ -48,7 +48,7 @@ namespace FoodService.Business.Services
                 //get order userset
                 var oldUserSets = order.UserSetes;
                 if (oldUserSets == null) return;
-                var oldOrderDishIds = oldUserSets.Select(set => set.Dish.ID).ToList();
+                var oldOrderDishIds = oldUserSets.Select(set => set.Dish.id).ToList();
 
                 foreach (var dishId in dishIds.Where(dishId => oldOrderDishIds.Contains(dishId)))
                 {
@@ -58,14 +58,14 @@ namespace FoodService.Business.Services
 
                 foreach (var dishId in oldOrderDishIds)
                 {
-                    Database.UserSet.Delete(oldUserSets.FirstOrDefault(x => x.Dish.ID == dishId));
+                    Database.UserSet.Delete(oldUserSets.FirstOrDefault(x => x.Dish.id == dishId));
                 }
 
                 foreach (var dishId in dishIdsList)
                 {
                     var k = new UserSet
                     {
-                        Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == dishId),
+                        Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.id == dishId),
                         Order = order
                     };
                     oldUserSets.Add(k);

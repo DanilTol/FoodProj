@@ -6,8 +6,7 @@ namespace FoodService.DAL.Entity
 {
     public class User : CommonClass
     {
-        [Key]
-        public int ID { get; set; }
+       
         public string Name { get; set; }
         [Index(IsUnique = true)]
         [StringLength(50)]

@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201601160934541_uniqueUserEmailSetLength.Designer.cs">
       <DependentUpon>201601160934541_uniqueUserEmailSetLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601181151087_use_common_id.cs" />
+    <Compile Include="Migrations\201601181151087_use_common_id.Designer.cs">
+      <DependentUpon>201601181151087_use_common_id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositoryBag\DishToImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
@@ -137,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601160934541_uniqueUserEmailSetLength.resx">
       <DependentUpon>201601160934541_uniqueUserEmailSetLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601181151087_use_common_id.resx">
+      <DependentUpon>201601181151087_use_common_id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

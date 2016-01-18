@@ -2,13 +2,16 @@
     "use strict";
 
     app.controller("dishEditCtrl", [
-        "$scope", "$routeParams", "dishService", function ($scope, $routeParams, dishService) {
+        "$scope", "$routeParams", "dishService", "notificationService", function ($scope, $routeParams, dishService, notificationService) {
 
             $scope.UpdateDish = function () {
                 dishService.updateDish($scope.dish).then(
                     //success
                     function (data) {
+                        notificationService.displaySuccess("Dish edited");
                         $scope.dish = data;
+                    }, function() {
+                        notificationService.displayError("Can`t edit dish. Try again later.");
                     });;
             }
 
@@ -24,7 +27,11 @@
                 dishService.deleteDish($scope.dish.ID).then(
                     //success
                     function (data) {
-                    });;
+                        notificationService.displaySuccess("Dish has been deleted.");
+                    },function() {
+                        notificationService.displayError("Can`t delete this dish.");
+                    }
+                    );;
             }
 
 

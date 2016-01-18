@@ -5,16 +5,16 @@
             <div class="input-group">
                 <input type="search" ng-model="filterDishes" class="form-control shortInputSearch" placeholder="Filter, search dishes..">
                 <div class="input-group-btn">
-                    <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
-                    <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
-                    <a ng-if="getUserData().Role == 'admin'" ng-href="#/dishes/add" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"> Add</i></a>
+                    <button class="btn btn-toolbar" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-danger" style="margin-left: 1px;" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    <a ng-if="getUserData().Role == 'admin'" style="margin-left: 15px;" ng-href="#/dishes/add" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"> Add</i></a>
                 </div>
             </div>
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-3 " ng-repeat="dish in Dishes.Items">
-                    <div class="img-circle img-responsive text-center" id="{{dish.ID}}" ng-click="detailsRedirect('/dishes/'+dish.ID)"
+                <div class="col-xs-12 col-sm-6 col-md-3 " ng-repeat="dish in Dishes">
+                    <div class="img-circle img-responsive text-center" id="{{dish.id}}" ng-click="detailsRedirect('/dishes/'+dish.id)"
                          style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
                         <p class="textOnImage">
                             {{dish.Name}}

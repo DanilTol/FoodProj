@@ -1,6 +1,6 @@
 ﻿(function (app) {
     "use strict";
-    app.controller("dishesCtrl", ["$scope", "$location", "dishService", "notificationService", function ($scope, $location, dishService, notificationService) {
+    app.controller("dishesCtrl", ["$scope", "$location", "dishService", "notificationService", "accountService", function ($scope, $location, dishService, notificationService, accountService) {
             $scope.filterDishes = "";
            
 
@@ -12,14 +12,19 @@
                     .then(
                         //success
                         function (data) {
-                           // data = {};
+                            data = {};
                             $scope.Dishes = data;
                             $scope.page = data.Page;
                             $scope.pagesCount = data.TotalPages;
                             $scope.totalCount = data.TotalCount;
-                        },function(response) {
-                            notificationService.displayError(response.data);
+                        },function() {
+                            notificationService.displayError("Can`t delete dishes/");
                         });
+            }
+
+            $scope.getUserData = function () {
+                var userProfile = accountService.getUserData();
+                return userProfile;
             }
 
             $scope.clearSearch = function() {

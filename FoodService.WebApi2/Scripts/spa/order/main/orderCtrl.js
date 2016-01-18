@@ -1,7 +1,7 @@
 ﻿(function (app) {
     "use strict";
     app.controller("orderCtrl",
-        ["$scope", "$location", "orderService", "dishsetService", function ($scope, $location, orderService, dishsetService) {
+        ["$scope", "$location", "orderService", "dishsetService", "notificationService", function ($scope, $location, orderService, dishsetService, notificationService) {
 
         $scope.dishes = [];
         $scope.dateInput = new Date();
@@ -20,7 +20,11 @@
             orderService.editUserSet($scope.dateInputMiliSec, dishId).then(
                 //success
                 function (data) {
-                });
+                    notificationService.displaySuccess("Order edited.");
+                },function() {
+                    notificationService.displayError("Can`t edit order. Try again later.");
+                }
+                );
         }
 
         function convertDate(date) {

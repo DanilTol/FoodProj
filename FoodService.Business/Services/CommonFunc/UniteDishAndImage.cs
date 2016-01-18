@@ -16,7 +16,7 @@ namespace FoodService.Business.Services.CommonFunc
             var allDishes = Mapper.Map<IEnumerable<Dish>, IEnumerable<DishModelShortInfo>>(dish);
             foreach (var plate in allDishes)
             {
-                var plateImg = unitOfWork.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
+                var plateImg = unitOfWork.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.id == plate.ID);
                 plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
             }
             return allDishes;

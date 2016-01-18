@@ -1,13 +1,16 @@
 ﻿(function (app) {
     "use strict";
     app.controller("dishAddCtrl", [
-        "$scope", "$location", "dishService", function ($scope, $location, dishService) {
+        "$scope", "$location", "dishService", "notificationService", function ($scope, $location, dishService, notificationService) {
             $scope.addDish = function () {
                 dishService.addDish($scope.dish).then(
                     //success
                     function (data) {
+                        notificationService.displaySuccess("Dish successfully added.");
                         $scope.dish = data;
                         $location.path("/dishes");
+                    }, function() {
+                        notificationService.displayError("Can`t add dish try again later.");
                     });;
             };
         }

@@ -105,30 +105,69 @@ namespace FoodService.WebApi2.Controllers
         [MyAuth("admin")]
         [HttpPost]
         [Route("update")]
-        public HttpResponseMessage Update(DishModelDetailsInfo dish)
+        public async Task<HttpResponseMessage> Update()
         {
-            return CreateHttpResponse(this.Request, () =>
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
             {
-                HttpResponseMessage response;
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
 
-                if (!ModelState.IsValid)
-                {
-                    response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-                else
-                {
-                    var dishDb = _dishService.GetDishById(dish.ID);
-                    if (dishDb == null)
-                        response = this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid dish.");
-                    else
-                    {
-                        _dishService.EditDish(dish);
-                        response = this.Request.CreateResponse<DishModelDetailsInfo>(HttpStatusCode.OK, dish);
-                    }
-                }
+            string root = HttpContext.Current.Server.MapPath("~/Images/Dish");
+            var provider = new CustomMultipartFormDataStreamProvider(root); //new MultipartFormDataStreamProvider(root);
 
-                return response;
-            });
+            try
+            {
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                var pathArray =
+                    provider.FileData.Select(file => file.LocalFileName.Substring(root.Length + 1)).ToArray();
+
+                var detailsDish = new DishModelDetailsInfo
+                {
+                    Description = provider.FormData.Get("Description"),
+                    Energy = Convert.ToInt32(provider.FormData.Get("Energy")),
+                    ImagePath = pathArray,
+                    Ingridients = provider.FormData.Get("Ingridients"),
+                    Name = provider.FormData.Get("Name"),
+                    Price = Convert.ToInt32(provider.FormData.Get("Price")),
+                    Weight = Convert.ToInt32(provider.FormData.Get("Weight"))
+                };
+
+                _dishService.EditDish(detailsDish);
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+
+
+
+            //return CreateHttpResponse(this.Request, () =>
+            //{
+            //    HttpResponseMessage response;
+
+            //    if (!ModelState.IsValid)
+            //    {
+            //        response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            //    }
+            //    else
+            //    {
+            //        var dishDb = _dishService.GetDishById(dish.ID);
+            //        if (dishDb == null)
+            //            response = this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid dish.");
+            //        else
+            //        {
+            //            _dishService.EditDish(dish);
+            //            response = this.Request.CreateResponse<DishModelDetailsInfo>(HttpStatusCode.OK, dish);
+            //        }
+            //    }
+
+            //    return response;
+            //});
         }
 
         [MyAuth("admin")]

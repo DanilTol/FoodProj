@@ -1,7 +1,10 @@
-﻿namespace FoodService.DAL.Entity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FoodService.DAL.Entity
 {
     public class CommonClass
     {
-        public int ID;
+        [Key]
+        public int id { get; set; }
     }
 }

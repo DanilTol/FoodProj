@@ -6,8 +6,7 @@ namespace FoodService.DAL.Entity
 {
     public class DayDishSet : CommonClass
     {
-        [Key]
-        public int ID { get; set; }
+       
         [Column(TypeName = "Date")]
         public DateTime Date { get; set; }
 

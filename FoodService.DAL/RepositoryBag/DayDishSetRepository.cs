@@ -14,16 +14,16 @@ namespace FoodService.DAL.RepositoryBag
             this._context = context;
         }
 
-        public IQueryable<DayDishSet> QueryToTable => _context.DayDishSets;
+        public IQueryable<DayDishSet> QueryToTable => _context.DayDishSet;
 
         public void Add(DayDishSet entity)
         {
-            _context.DayDishSets.Add(entity);
+            _context.DayDishSet.Add(entity);
         }
 
         public void Delete(DayDishSet entity)
         {
-            _context.DayDishSets.Remove(entity);
+            _context.DayDishSet.Remove(entity);
         }
 
         public void Update(DayDishSet entity)

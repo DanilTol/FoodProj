@@ -47,7 +47,7 @@ namespace FoodService.Business.Services
 
         public User GetUser(int id)
         {
-            return Database.User.QueryToTable.FirstOrDefault(x => x.ID == id);
+            return Database.User.QueryToTable.FirstOrDefault(x => x.id == id);
         }
     }
 }

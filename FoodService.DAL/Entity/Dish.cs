@@ -5,8 +5,7 @@ namespace FoodService.DAL.Entity
 {
     public class Dish : CommonClass
     {
-        [Key]
-        public int ID { get; set; }
+       
         public string Name { get; set; }
         public string Ingridients { get; set; }
         public int Energy { get; set; }

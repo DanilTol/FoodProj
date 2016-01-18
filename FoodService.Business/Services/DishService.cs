@@ -18,26 +18,14 @@ namespace FoodService.Business.Services
         {
             Database = uow;
         }
-
-        //internal static IEnumerable<DishModelShortInfo> GetDishImagesFromDbAndUnite(IUnitOfWork Database, IEnumerable<Dish> dish)
-        //{
-        //    var allDishes = Mapper.Map<IEnumerable<Dish>, IList<DishModelShortInfo>>(dish);
-        //    foreach (var plate in allDishes)
-        //    {
-        //        var plateImg = Database.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.ID == plate.ID);
-        //        plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
-        //    }
-
-        //    return allDishes;
-        //}
-
+        
         public IEnumerable<DishModelShortInfo> FilterDishes(int page, int pageSize, string filter = null)
         {
             IQueryable<Dish> dishesFromDb;
             if (!string.IsNullOrEmpty(filter))
             {
                     dishesFromDb = Database.Dish.QueryToTable.Where(m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
-                        .OrderBy(m => m.ID)
+                        .OrderBy(m => m.id)
                         .Skip(page*pageSize)
                         .Take(pageSize);
 
@@ -45,7 +33,7 @@ namespace FoodService.Business.Services
             else
             {
                 dishesFromDb = Database.Dish.QueryToTable
-                        .OrderBy(m => m.ID)
+                        .OrderBy(m => m.id)
                         .Skip(page*pageSize)
                         .Take(pageSize);
             }
@@ -91,10 +79,10 @@ namespace FoodService.Business.Services
 
         public DishModelDetailsInfo GetDishById(int id)
         {
-            var details = Mapper.Map<Dish, DishModelDetailsInfo>(Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == id));
+            var details = Mapper.Map<Dish, DishModelDetailsInfo>(Database.Dish.QueryToTable.FirstOrDefault(x => x.id == id));
 
             var imgList = new List<string>();
-            var dishToImageCollection = Database.DishToImage.QueryToTable.Where(x => x.Dish.ID == details.ID);
+            var dishToImageCollection = Database.DishToImage.QueryToTable.Where(x => x.Dish.id == details.ID);
             foreach (var dishimage in dishToImageCollection)
             {
                 imgList.Add(dishimage.PathToImageOnServer);
@@ -124,7 +112,7 @@ namespace FoodService.Business.Services
             //    toDb.DishToImages.Add(imgRow);
             //}
 
-            var dishDb = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == dish.ID);
+            var dishDb = Database.Dish.QueryToTable.FirstOrDefault(x => x.id == dish.ID);
             if (dishDb == null) return;
             dishDb.Name = dish.Name;
             dishDb.Description = dish.Description;
@@ -139,7 +127,7 @@ namespace FoodService.Business.Services
 
         public void DeleteDish(int id)
         {
-            var toDelete = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == id);
+            var toDelete = Database.Dish.QueryToTable.FirstOrDefault(x => x.id == id);
             Database.Dish.Delete(toDelete);
             Database.Save();
         }

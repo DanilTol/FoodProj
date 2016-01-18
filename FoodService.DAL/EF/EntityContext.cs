@@ -1,18 +1,16 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using FoodService.DAL.Entity;
 
 namespace FoodService.DAL
 {
     public class EntityContext: DbContext
     {
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Dish> Dishes { get; set; }
-        public DbSet<UserSet> UserSets { get; set; }
-        public DbSet<DayDishSet> DayDishSets { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Dish> Dish { get; set; }
+        public DbSet<UserSet> UserSet { get; set; }
+        public DbSet<DayDishSet> DayDishSet { get; set; }
         public DbSet<DishToImage> DishToImage { get; set; }
-        public DbSet<RolesForUser> RolesForUsers { get; set; }
-
-        public DbSet<User> Users { get; set; }
+        public DbSet<RolesForUser> Role { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

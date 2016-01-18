@@ -23,14 +23,14 @@ namespace FoodService.Business.Services
             IQueryable<DayDishSet> fromDb;
             if (string.IsNullOrEmpty(filter))
             {
-                fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date).OrderBy(m => m.ID);
+                fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date).OrderBy(m => m.id);
             }
             else
             {
                 //if filter set
                 fromDb = Database.DayDish.QueryToTable.Where(m => m.Date == dateTime.Date)
                     .Where(m => m.Dish.Name.ToLower().Contains(filter.ToLower().Trim()))
-                    .OrderBy(m => m.ID);
+                    .OrderBy(m => m.id);
             }
             return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,fromDb.Select(set => set.Dish).ToList());
         }
@@ -42,12 +42,12 @@ namespace FoodService.Business.Services
             // get day set by date
             var menuDelete = Database.DayDish.QueryToTable.Where(x => x.Date == date.Date).ToList();
             //get equal dishes in exist and new day set
-            var equalList = menuDelete.SelectMany(daymenu => dishIdsList.Where(dishId => daymenu.Dish.ID == dishId)).ToList();
+            var equalList = menuDelete.SelectMany(daymenu => dishIdsList.Where(dishId => daymenu.Dish.id == dishId)).ToList();
             // remove equals
             foreach (var eq in equalList)
             {
                 dishIdsList.Remove(eq);
-                menuDelete.RemoveAll(x => x.Dish.ID == eq);
+                menuDelete.RemoveAll(x => x.Dish.id == eq);
             }
             //delete old dishes from menu 
             foreach (var dish in menuDelete)
@@ -57,7 +57,7 @@ namespace FoodService.Business.Services
             //add new dishes
             foreach (var i in dishIdsList)
             {
-                var entity = new DayDishSet { Date = date, Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.ID == i) };
+                var entity = new DayDishSet { Date = date, Dish = Database.Dish.QueryToTable.FirstOrDefault(x => x.id == i) };
                 Database.DayDish.Add(entity);
             }
             Database.Save();

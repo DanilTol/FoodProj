@@ -14,16 +14,16 @@ namespace FoodService.DAL.RepositoryBag
             _context = con;
         }
 
-        public IQueryable<RolesForUser> QueryToTable => _context.RolesForUsers;
+        public IQueryable<RolesForUser> QueryToTable => _context.Role;
 
         public void Add(RolesForUser entity)
         {
-            _context.RolesForUsers.Add(entity);
+            _context.Role.Add(entity);
         }
 
         public void Delete(RolesForUser entity)
         {
-            _context.RolesForUsers.Remove(entity);
+            _context.Role.Remove(entity);
         }
 
         public void Update(RolesForUser entity)
