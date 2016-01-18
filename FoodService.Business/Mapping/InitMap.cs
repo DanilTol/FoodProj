@@ -12,7 +12,6 @@ namespace FoodService.Business.Mapping
             Mapper.CreateMap<Dish, DishModelDetailsInfo>();
 
             Mapper.CreateMap<DishModelDetailsInfo, Dish>();
-            Mapper.CreateMap<DishModelDetailsWithFile, Dish>();
 
             Mapper.CreateMap<UserDTO, LogInUser>();
             Mapper.CreateMap<UserDTO, User>();

@@ -2,7 +2,7 @@
 
 namespace FoodService.DAL.Entity
 {
-    public class CommonClass
+    public class BaseEntity
     {
         [Key]
         public int id { get; set; }

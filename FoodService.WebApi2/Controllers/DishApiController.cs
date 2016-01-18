@@ -126,6 +126,7 @@ namespace FoodService.WebApi2.Controllers
 
                 var detailsDish = new DishModelDetailsInfo
                 {
+                    ID = Convert.ToInt32(provider.FormData.Get("id")),
                     Description = provider.FormData.Get("Description"),
                     Energy = Convert.ToInt32(provider.FormData.Get("Energy")),
                     ImagePath = pathArray,
@@ -134,6 +135,12 @@ namespace FoodService.WebApi2.Controllers
                     Price = Convert.ToInt32(provider.FormData.Get("Price")),
                     Weight = Convert.ToInt32(provider.FormData.Get("Weight"))
                 };
+
+                //if (provider.FormFile)
+                //{
+                //    detailsDish.ImagePath = provider.FormData.Get("ImagePath");
+                //}
+
 
                 _dishService.EditDish(detailsDish);
 

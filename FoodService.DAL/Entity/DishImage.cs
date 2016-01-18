@@ -2,10 +2,10 @@
 
 namespace FoodService.DAL.Entity
 {
-    public class DishToImage :CommonClass
+    public class DishImage :BaseEntity
     {
        
-        public string PathToImageOnServer { get; set; }
+        public string Path { get; set; }
 
         public virtual Dish Dish { get; set; }
     }

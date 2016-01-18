@@ -18,7 +18,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-if="isUserLoggedIn()"  class="userinfo"><a href="#/">{{getUserData().Name}}<i class="fa fa-user fa-fw"></i></a></li>
-                    <li ng-if="isUserLoggedIn()" class="userinfo"> <input class="btn-danger" style="height: 50px; margin-right: 15px" type="button" ng-click="logout()" value="Log Out"/> </li>
+                    <li ng-if="isUserLoggedIn()" class="userinfo"> 
+                    <button style="height: 50px; padding: 0; border: none; background: none; margin-right: 15px" ng-click="logout()">Log Out <i class="glyphicon glyphicon-log-out"> </i> </button></li>
                     <li ng-if="!isUserLoggedIn()" class="userinfo"><a href="#/login" style="height: 50px; margin-right: 15px" >Login</a></li>
                 </ul>
 

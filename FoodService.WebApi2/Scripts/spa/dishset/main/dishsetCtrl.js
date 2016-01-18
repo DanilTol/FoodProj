@@ -43,6 +43,7 @@
                 dishsetService.filterDayMenu($scope.dateInputMiliSec,"").then(
                     //success
                     function (data) {
+                        data = {};
                         $scope.dishes.set = data;
                         //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
                     });
@@ -63,6 +64,7 @@
                      .then(
                          //success
                          function (data) {
+                             data = {};
                              $scope.dishes.allDishes = data.Items;
                              $scope.page = data.Page;
                              $scope.pagesCount = data.TotalPages;
@@ -105,12 +107,6 @@
                 var child = el.target.parentNode.parentNode;
                 var id = el.target.parentNode.attributes["id"].value;
                 parent.removeChild(child);
-                //for (var i = 0; i < $scope.dishes.set.length; i++) {
-                //    if ($scope.dishes.set[i].ID == id) {
-                //        $scope.dishes.set.splice(i, 1);
-                //        break;
-                //    }
-                //}
                 $scope.dishes.set = $.grep($scope.dishes.set, function (e) { return e.ID != id; });
 
             }

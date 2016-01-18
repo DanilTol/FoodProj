@@ -12,7 +12,7 @@
                     .then(
                         //success
                         function (data) {
-                            data = {};
+                            //data = {};
                             $scope.Dishes = data;
                             $scope.page = data.Page;
                             $scope.pagesCount = data.TotalPages;

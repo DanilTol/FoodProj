@@ -94,24 +94,7 @@ namespace FoodService.Business.Services
 
         public void EditDish(DishModelDetailsInfo dish)
         {
-            //var toDb = Mapper.Map<DishModelDetailsInfo, Dish>(dish);
-
-            //TODO: Uploade/Delete images
-            ////if images were not uploaded
-            //if (dish.ImagePath == null || dish.ImagePath.Length < 1 || string.IsNullOrEmpty(dish.ImagePath[0]))
-            //    dish.ImagePath = new[] { DefaultPathToImage };
-
-            ////add images to dish
-            //foreach (var imgPath in dish.ImagePath)
-            //{
-            //    var imgRow = new DishToImage
-            //    {
-            //        Dish = toDb,
-            //        PathToImageOnServer = imgPath
-            //    };
-            //    toDb.DishToImages.Add(imgRow);
-            //}
-
+           
             var dishDb = Database.Dish.QueryToTable.FirstOrDefault(x => x.id == dish.ID);
             if (dishDb == null) return;
             dishDb.Name = dish.Name;
@@ -120,6 +103,22 @@ namespace FoodService.Business.Services
             dishDb.Ingridients = dish.Ingridients;
             dishDb.Price = dish.Price;
             dishDb.Weight = dish.Weight;
+
+            var oldImages = Database.DishToImage.QueryToTable.Where(x => x.Dish.id == dishDb.id);
+            foreach (var oldImage in oldImages)
+            {
+                Database.DishToImage.Delete(oldImage);
+            }
+
+            foreach (var imgPath in dish.ImagePath)
+            {
+                var imgRow = new DishToImage
+                {
+                    Dish = dishDb,
+                    PathToImageOnServer = imgPath,
+                };
+                dishDb.DishToImages.Add(imgRow);
+            }
 
             Database.Dish.Update(dishDb);
             Database.Save();

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodService.DAL.Entity
 {
-    public class User : CommonClass
+    public class User : BaseEntity
     {
        
         public string Name { get; set; }
@@ -14,7 +14,7 @@ namespace FoodService.DAL.Entity
         public string Salt { get; set; }
         public bool IsLocked { get; set; }
 
-        public virtual RolesForUser Role { get; set; }
+        public virtual Role Role { get; set; }
         public virtual ICollection<Order> Orders { get; set; } 
     }
 }

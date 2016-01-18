@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodService.DAL.Entity
 {
-    public class DayDishSet : CommonClass
+    public class DayDishSet : BaseEntity
     {
-       
         [Column(TypeName = "Date")]
         public DateTime Date { get; set; }
 

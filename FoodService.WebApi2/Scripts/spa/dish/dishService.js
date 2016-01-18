@@ -11,7 +11,7 @@
 
                 var deferred = $q.defer();
                 $http.get("api/dishes/search?page=" + page + "&pageSize=" + pageSize + "&filter=" + filterDishes).
-                    success(function(data) {
+                    success(function (data) {
                         deferred.resolve(data);
                     }).
                     error(function(data, status) {
@@ -35,14 +35,13 @@
 
             function updateDish(dish) {
                 var deferred = $q.defer();
-                $http.post("/api/dishes/update", dish).
-                    success(function(data) {
-                        deferred.resolve(data);
-                    }).
-                    error(function(data, status) {
+                fileUploadService.saveModel(dish, "/api/dishes/update").then
+                (function (data) {
+                    deferred.resolve(data);
+                },
+                    function (status) {
                         deferred.reject(status);
                     });
-
                 return deferred.promise;
             }
 
