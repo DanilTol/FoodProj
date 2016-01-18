@@ -12,6 +12,7 @@ using FoodService.Business.ServiceInterfaces;
 using FoodService.WebApi2.Attribute;
 using FoodService.WebApi2.Infrastructure.Core;
 using FoodService.WebApi2.Models;
+using FoodService.WebApi2.Infrastructure;
 
 namespace FoodService.WebApi2.Controllers
 {
@@ -36,12 +37,12 @@ namespace FoodService.WebApi2.Controllers
                 return this.Request.CreateResponse(HttpStatusCode.OK, detailsInfo);
             });
         }
-        
+
         [HttpGet]
         [Route("search")]
         public HttpResponseMessage Search(int page = 1, int pageSize = 2, string filter = null)
         {
-            var k =HttpContext.Current.User;
+            var k = HttpContext.Current.User;
             var z = Thread.CurrentPrincipal;
             var c = Membership.GetAllUsers();
             var shortDish = _dishService.FilterDishes(page, pageSize, filter);
@@ -51,7 +52,7 @@ namespace FoodService.WebApi2.Controllers
             {
                 Page = page,
                 TotalCount = totalDishes,
-                TotalPages = (int)Math.Ceiling((decimal)totalDishes / pageSize),
+                TotalPages = (int) Math.Ceiling((decimal) totalDishes/pageSize),
                 Items = shortDish
             };
 
@@ -68,17 +69,18 @@ namespace FoodService.WebApi2.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-            
+
             string root = HttpContext.Current.Server.MapPath("~/Images/Dish");
-            var provider = new MultipartFormDataStreamProvider(root);
+            var provider = new CustomMultipartFormDataStreamProvider(root); //new MultipartFormDataStreamProvider(root);
 
             try
             {
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
-                
-                var pathArray = provider.FileData.Select(file => file.LocalFileName.Substring(root.Length+1)).ToArray();
-                
+
+                var pathArray =
+                    provider.FileData.Select(file => file.LocalFileName.Substring(root.Length + 1)).ToArray();
+
                 var detailsDish = new DishModelDetailsInfo
                 {
                     Description = provider.FormData.Get("Description"),
@@ -99,7 +101,7 @@ namespace FoodService.WebApi2.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-
+        
         [MyAuth("admin")]
         [HttpPost]
         [Route("update")]
