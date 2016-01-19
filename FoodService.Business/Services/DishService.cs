@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using FoodService.Business.DTO;
@@ -12,7 +13,6 @@ namespace FoodService.Business.Services
     public class DishService : IDishService
     {
         IUnitOfWork Database { get; }
-        //private const string DefaultPathToImage = "../Dish/Common.gif";
 
         public DishService(IUnitOfWork uow)
         {
@@ -24,20 +24,33 @@ namespace FoodService.Business.Services
             IQueryable<Dish> dishesFromDb;
             if (!string.IsNullOrEmpty(filter))
             {
-                    dishesFromDb = Database.Dish.QueryToTable.Where(m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
+                if (filter == "-random")
+                {
+                    var randNum = new Random();
+                    var skip = randNum.Next(1, TotalFilteredDish("") - pageSize);
+                    dishesFromDb = Database.Dish.QueryToTable
+                        .OrderBy(m => m.id)
+                        .Skip(skip)
+                        .Take(pageSize);
+                }
+                else
+                {
+                    dishesFromDb = Database.Dish.QueryToTable.Where(
+                        m => m.Name.ToLower().Contains(filter.ToLower().Trim()))
                         .OrderBy(m => m.id)
                         .Skip(page*pageSize)
                         .Take(pageSize);
-
+                }
             }
             else
             {
-                dishesFromDb = Database.Dish.QueryToTable
+                    dishesFromDb = Database.Dish.QueryToTable
                         .OrderBy(m => m.id)
                         .Skip(page*pageSize)
                         .Take(pageSize);
+                
             }
-           return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,dishesFromDb);
+            return UniteDishAndImage.GetDishImagesFromDbAndUnite(Database,dishesFromDb);
         }
 
         public int TotalFilteredDish(string filter = null)
@@ -59,17 +72,17 @@ namespace FoodService.Business.Services
         public void CreateDish(DishModelDetailsInfo dish)
         {
             var toDb = Mapper.Map<DishModelDetailsInfo, Dish>(dish);
-            toDb.DishToImages = new List<DishToImage>();
+            toDb.Images = new List<DishImage>();
             
             //add images to dish
             foreach (var imgPath in dish.ImagePath)
             {
-                var imgRow = new DishToImage
+                var imgRow = new DishImage
                 {
                     Dish = toDb,
-                    PathToImageOnServer = imgPath,
+                    Path = imgPath,
                 };
-                toDb.DishToImages.Add(imgRow);
+                toDb.Images.Add(imgRow);
             }
 
             //add dish to database
@@ -82,10 +95,10 @@ namespace FoodService.Business.Services
             var details = Mapper.Map<Dish, DishModelDetailsInfo>(Database.Dish.QueryToTable.FirstOrDefault(x => x.id == id));
 
             var imgList = new List<string>();
-            var dishToImageCollection = Database.DishToImage.QueryToTable.Where(x => x.Dish.id == details.ID);
+            var dishToImageCollection = Database.DishImage.QueryToTable.Where(x => x.Dish.id == details.ID);
             foreach (var dishimage in dishToImageCollection)
             {
-                imgList.Add(dishimage.PathToImageOnServer);
+                imgList.Add(dishimage.Path);
             }
             details.ImagePath = imgList.Count<1 ? new []{UniteDishAndImage.DefaultPathToImage} : imgList.ToArray() ;
             
@@ -104,20 +117,20 @@ namespace FoodService.Business.Services
             dishDb.Price = dish.Price;
             dishDb.Weight = dish.Weight;
 
-            var oldImages = Database.DishToImage.QueryToTable.Where(x => x.Dish.id == dishDb.id);
+            var oldImages = Database.DishImage.QueryToTable.Where(x => x.Dish.id == dishDb.id);
             foreach (var oldImage in oldImages)
             {
-                Database.DishToImage.Delete(oldImage);
+                Database.DishImage.Delete(oldImage);
             }
 
             foreach (var imgPath in dish.ImagePath)
             {
-                var imgRow = new DishToImage
+                var imgRow = new DishImage
                 {
                     Dish = dishDb,
-                    PathToImageOnServer = imgPath,
+                    Path = imgPath,
                 };
-                dishDb.DishToImages.Add(imgRow);
+                dishDb.Images.Add(imgRow);
             }
 
             Database.Dish.Update(dishDb);

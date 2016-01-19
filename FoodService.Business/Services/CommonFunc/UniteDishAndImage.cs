@@ -7,7 +7,7 @@ using FoodService.DAL.Interfaces;
 
 namespace FoodService.Business.Services.CommonFunc
 {
-    public class UniteDishAndImage
+    public static class UniteDishAndImage
     {
         public static string DefaultPathToImage = "../Dish/Common.gif";
 
@@ -16,8 +16,8 @@ namespace FoodService.Business.Services.CommonFunc
             var allDishes = Mapper.Map<IEnumerable<Dish>, IEnumerable<DishModelShortInfo>>(dish);
             foreach (var plate in allDishes)
             {
-                var plateImg = unitOfWork.DishToImage.QueryToTable.FirstOrDefault(x => x.Dish.id == plate.ID);
-                plate.ImagePath = plateImg != null ? plateImg.PathToImageOnServer : DefaultPathToImage;
+                var plateImg = unitOfWork.DishImage.QueryToTable.FirstOrDefault(x => x.Dish.id == plate.ID);
+                plate.ImagePath = plateImg != null ? plateImg.Path : DefaultPathToImage;
             }
             return allDishes;
         }

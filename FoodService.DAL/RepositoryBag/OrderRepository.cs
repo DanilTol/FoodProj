@@ -23,7 +23,8 @@ namespace FoodService.DAL.RepositoryBag
 
         public void Delete(Order entity)
         {
-            _context.Order.Remove(entity);
+            //_context.Order.Remove(entity);
+            _context.Entry(entity).State = EntityState.Deleted;
         }
 
         public void Update(Order entity)
