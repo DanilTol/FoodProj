@@ -44,11 +44,11 @@ namespace FoodService.WebApi2.Attribute
             try
             {
 
-                //var jsonPayload = JsonWebToken.DecodeToObject(requestToken, secretKey) as IDictionary<string, object>;
-                //string email = jsonPayload["email"].ToString();
-                var email = requestToken;
+                var jsonPayload = JsonWebToken.DecodeToObject(requestToken, secretKey) as IDictionary<string, object>;
+                var userId = Int32.Parse(jsonPayload["id"].ToString());
+                //var email = requestToken;
 
-                var user = userService.GetUserInfo(email);
+                var user = userService.GetUser(userId);
 
                 if (user == null || (user.Role != _role && user.Role != "admin")) return auth;
 

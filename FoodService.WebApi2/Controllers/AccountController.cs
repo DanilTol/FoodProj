@@ -6,7 +6,9 @@ using System.Net.Http;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
+using FoodService.DAL.Entity;
 using FoodService.WebApi2.Attribute;
+using JWT;
 
 namespace FoodService.WebApi2.Controllers
 {
@@ -14,7 +16,7 @@ namespace FoodService.WebApi2.Controllers
     public class AccountController : ApiController
     {
         private readonly IUserService _userService;
-        private const string SecretKey = "G";
+        private const string secretKey = "G";
 
         public AccountController(IUserService user)
         {
@@ -26,21 +28,21 @@ namespace FoodService.WebApi2.Controllers
         public HttpResponseMessage Login( LogInUser user)
         {
             HttpResponseMessage response;
-            var boolLogin = _userService.Login(new LogInUser()
+            var existUser = _userService.Login(new LogInUser()
             { Email = user.Email, Salt = user.Salt.GetHashCode().ToString() });
-            if (boolLogin)
+            if (existUser != null)
             {
-
                 var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                var now = Math.Round((DateTime.UtcNow - unixEpoch).TotalSeconds);
+                var exp = Math.Round((DateTime.UtcNow.AddDays(1) - unixEpoch).TotalSeconds);
 
                 var payload = new Dictionary<string, object>()
                 {
-                    {"email", user.Email},
-                    {"exp", now}
+                    {"id", existUser.id},
+                    {"pass", existUser.Salt },
+                    {"exp", exp}
                 };
-                string token = JWT.JsonWebToken.Encode(payload, SecretKey, JWT.JwtHashAlgorithm.HS256);
-                token = user.Email;
+                string token = JWT.JsonWebToken.Encode(payload, secretKey, JWT.JwtHashAlgorithm.HS256);
+                //token = user.Email;
                 response = this.Request.CreateResponse<string>(HttpStatusCode.OK, token);
             }
             else
@@ -72,14 +74,14 @@ namespace FoodService.WebApi2.Controllers
         [Route("profileInfo")]
         public HttpResponseMessage LoginUserName()
         {
-            IEnumerable<string> headerValues = this.Request.Headers.GetValues("Token");
-            var requestToken = headerValues.FirstOrDefault();
+            var requestToken = this.Request.Headers.GetValues("Token").FirstOrDefault();
 
-            //TODO:decode token
+            var jsonPayload = JsonWebToken.DecodeToObject(requestToken, secretKey) as IDictionary<string, object>;
+            var userId = Int32.Parse(jsonPayload["id"].ToString());
 
-            var userName = _userService.GetUserInfo(requestToken);
+            var userInfo = _userService.GetUser(userId);
 
-            return this.Request.CreateResponse(HttpStatusCode.OK, userName);
+            return this.Request.CreateResponse(HttpStatusCode.OK, userInfo);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace FoodService.Business.ServiceInterfaces
     {
         void CreateUser(UserDTO userDto);
         void EditUser(UserDTO userDto);
-        bool Login(LogInUser inUser);
-        UserDTO GetUserInfo(string email);
-        User GetUser(int id);
+        User Login(LogInUser inUser);
+        UserDTO GetUser(int id);
+        User GetUserEntity(int id);
     }
 }

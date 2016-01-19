@@ -29,20 +29,6 @@ namespace FoodService.DAL.RepositoryBag
         public void Update(Dish dish)
         {
             _context.Entry(dish).State = EntityState.Modified;
-
-            //var result = (from r in _context.Dishes where dish.ID == r.ID select r).FirstOrDefault();
-            //if (result != null)
-            //{
-            //    result.Name = dish.Name;
-            //    result.Description = dish.Description;
-            //    result.Energy = dish.Energy;
-            //    result.Ingridients = dish.Ingridients;
-            //    result.Price = dish.Price;
-            //    result.Weight = dish.Weight;
-            //    _context.Entry(result).State = EntityState.Modified;
-            //}
         }
-
-       
     }
 }

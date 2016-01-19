@@ -32,20 +32,20 @@ namespace FoodService.Business.Services
             Database.Save();
         }
 
-        public bool Login(LogInUser inUser)
+        public User Login(LogInUser inUser)
         {
-            return Database.User.QueryToTable.Any(x => x.EmailAddress == inUser.Email && x.Salt == inUser.Salt);
+            return Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == inUser.Email && x.Salt == inUser.Salt);
         }
 
-        public UserDTO GetUserInfo(string email)
+        public UserDTO GetUser(int id)
         {
-            var userFromDb = Database.User.QueryToTable.FirstOrDefault(x => x.EmailAddress == email);
+            var userFromDb = Database.User.QueryToTable.FirstOrDefault(x => x.id == id);
             var userdto = Mapper.Map<User, UserDTO>(userFromDb);
             if (userFromDb != null) userdto.Role = userFromDb.Role.Name;
             return userdto;
         }
 
-        public User GetUser(int id)
+        public User GetUserEntity(int id)
         {
             return Database.User.QueryToTable.FirstOrDefault(x => x.id == id);
         }

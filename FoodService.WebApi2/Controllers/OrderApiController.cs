@@ -22,7 +22,7 @@ namespace FoodService.WebApi2.Controllers
         {
             _orderService = service;
             // here should get user entity from attr MyAuth
-            user = userService.GetUser(userId);
+            user = userService.GetUserEntity(userId);
         }
 
         [HttpGet]
