@@ -7,10 +7,9 @@ namespace FoodService.DAL
     {
         public DbSet<Order> Order { get; set; }
         public DbSet<Dish> Dish { get; set; }
-        public DbSet<UserSet> UserSet { get; set; }
         public DbSet<DayDishSet> DayDishSet { get; set; }
-        public DbSet<DishToImage> DishToImage { get; set; }
-        public DbSet<RolesForUser> Role { get; set; }
+        public DbSet<DishImage> DishImage { get; set; }
+        public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
     }
 }

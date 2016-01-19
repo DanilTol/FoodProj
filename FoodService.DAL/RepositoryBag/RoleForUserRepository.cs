@@ -5,7 +5,7 @@ using FoodService.DAL.Interfaces;
 
 namespace FoodService.DAL.RepositoryBag
 {
-    public class RoleForUserRepository : IRepository<RolesForUser>
+    public class RoleForUserRepository : IRepository<Role>
     {
         private readonly EntityContext _context;
 
@@ -14,19 +14,19 @@ namespace FoodService.DAL.RepositoryBag
             _context = con;
         }
 
-        public IQueryable<RolesForUser> QueryToTable => _context.Role;
+        public IQueryable<Role> QueryToTable => _context.Role;
 
-        public void Add(RolesForUser entity)
+        public void Add(Role entity)
         {
             _context.Role.Add(entity);
         }
 
-        public void Delete(RolesForUser entity)
+        public void Delete(Role entity)
         {
             _context.Role.Remove(entity);
         }
 
-        public void Update(RolesForUser entity)
+        public void Update(Role entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
         }

@@ -3,7 +3,7 @@ using FoodService.DAL.Entity;
 
 namespace FoodService.DAL.Interfaces
 {
-    public interface IRepository<T> where T: CommonClass
+    public interface IRepository<T> where T: BaseEntity
     {
         IQueryable<T> QueryToTable { get; }
         void Add(T entity);

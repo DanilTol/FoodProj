@@ -92,8 +92,12 @@
     <Compile Include="Migrations\201601181151087_use_common_id.Designer.cs">
       <DependentUpon>201601181151087_use_common_id.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601181548443_refactAllStruct.cs" />
+    <Compile Include="Migrations\201601181548443_refactAllStruct.Designer.cs">
+      <DependentUpon>201601181548443_refactAllStruct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="RepositoryBag\DishToImageRepository.cs" />
+    <Compile Include="RepositoryBag\DishImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
     <Compile Include="EF\EntityContext.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
@@ -110,7 +114,6 @@
     <Compile Include="RepositoryBag\UserRepository.cs" />
     <Compile Include="RepositoryBag\DayDishSetRepository.cs" />
     <Compile Include="RepositoryBag\UnityOfWork.cs" />
-    <Compile Include="RepositoryBag\UserSetRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -143,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601181151087_use_common_id.resx">
       <DependentUpon>201601181151087_use_common_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601181548443_refactAllStruct.resx">
+      <DependentUpon>201601181548443_refactAllStruct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

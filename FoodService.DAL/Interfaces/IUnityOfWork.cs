@@ -7,11 +7,10 @@ namespace FoodService.DAL.Interfaces
     {
         DishRepository Dish { get; }
         OrderRepository Order { get; }
-        DishToImageRepository DishToImage { get; }
+        DishImageRepository DishImage { get; }
         DayDishSetRepository DayDish { get; }
         UserRepository User { get; }
         RoleForUserRepository Role { get; }
-        UserSetRepository UserSet { get; }
         void Save();
 
     }

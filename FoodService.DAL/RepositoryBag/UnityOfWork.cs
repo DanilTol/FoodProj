@@ -10,10 +10,9 @@ namespace FoodService.DAL
         private DishRepository _dishRepository;
         private OrderRepository _orderRepository;
         private DayDishSetRepository _dayDishSetRepository;
-        private DishToImageRepository _dishToImageRepository;
+        private DishImageRepository _dishImageRepository;
         private UserRepository _userRepository;
         private RoleForUserRepository _roleForUser;
-        private UserSetRepository _userSetRepository;
 
         private bool _disposed = false;
 
@@ -27,11 +26,8 @@ namespace FoodService.DAL
 
         public OrderRepository Order => _orderRepository ?? (_orderRepository = new OrderRepository(_context));
 
-        public DishToImageRepository DishToImage
-            => _dishToImageRepository ?? (_dishToImageRepository = new DishToImageRepository(_context));
-
-        public  UserSetRepository UserSet => _userSetRepository ?? (_userSetRepository = new UserSetRepository(_context));
-
+        public DishImageRepository DishImage
+            => _dishImageRepository ?? (_dishImageRepository = new DishImageRepository(_context));
 
 
         public void Save()
