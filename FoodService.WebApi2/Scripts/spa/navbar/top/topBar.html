@@ -12,12 +12,12 @@
             <ul class="nav navbar-nav">
                 <li><a href="#/">Home</a></li>
                 <li><a href="#/dishes">Dishes</a></li>
-                <li ng-if="getUserData().Role == 'admin'"><a href="#/dishset">Menu</a></li>
+                <li ng-if="userProfile().Role == 'admin'"><a href="#/dishset">Menu</a></li>
                 <li ng-if="isUserLoggedIn()"><a href="#/order">Orders</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-if="isUserLoggedIn()"  class="userinfo"><a href="#/">{{getUserData().Name}}<i class="fa fa-user fa-fw"></i></a></li>
+                    <li ng-if="isUserLoggedIn()"  class="userinfo"><a href="#/">{{userProfile().Name}}<i class="fa fa-user fa-fw"></i></a></li>
                     <li ng-if="isUserLoggedIn()" class="userinfo"> 
                     <button style="height: 50px; padding: 0; border: none; background: none; margin-right: 15px" ng-click="logout()">Log Out <i class="glyphicon glyphicon-log-out"> </i> </button></li>
                     <li ng-if="!isUserLoggedIn()" class="userinfo"><a href="#/login" style="height: 50px; margin-right: 15px" >Login</a></li>

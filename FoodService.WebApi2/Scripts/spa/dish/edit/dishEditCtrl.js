@@ -2,14 +2,14 @@
     "use strict";
 
     app.controller("dishEditCtrl", [
-        "$scope", "$routeParams", "dishService", "notificationService", function ($scope, $routeParams, dishService, notificationService) {
+        "$scope", "$routeParams", "$location", "dishService", "notificationService", function ($scope, $routeParams, $location, dishService, notificationService) {
 
             $scope.UpdateDish = function () {
                 dishService.updateDish($scope.dish).then(
                     //success
-                    function (data) {
+                    function () {
                         notificationService.displaySuccess("Dish edited");
-                        $scope.dish = data;
+                        $location.path("/dishes/"+$scope.dish.ID);
                     }, function() {
                         notificationService.displayError("Can`t edit dish. Try again later.");
                     });;

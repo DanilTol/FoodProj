@@ -8,10 +8,7 @@
                 replace: true,
                 templateUrl: "/Scripts/spa/navbar/top/topBar.html",
                 link: function (scope) {
-                    scope.getUserData = function() {
-                        var userProfile = accountService.getUserData();
-                        return userProfile;
-                    }
+                    scope.userProfile = accountService.getUserData;
                     scope.isUserLoggedIn = accountService.isUserLoggedIn;
                     scope.logout = function () {
                         accountService.logoutUser();

@@ -1,7 +1,7 @@
 ﻿(function (app) {
-    'use strict';
+    "use strict";
 
-    app.filter('unchosenDishes', function() {
+    app.filter("unchosenDishes", function() {
         return function(allDishes, menuSet) {
             var out = [];
             if (typeof allDishes != "undefined") {
@@ -23,4 +23,4 @@
     });
 
 
-})(angular.module('dishsetModule'));
+})(angular.module("dishsetModule"));

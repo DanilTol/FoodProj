@@ -1,7 +1,7 @@
 ﻿(function (app) {
     "use strict";
-    app.controller('dishsetCtrl', [
-        '$scope', '$location', 'dishService', 'dishsetService', function ($scope, $location, dishService, dishsetService) {
+    app.controller("dishsetCtrl", [
+        "$scope", "$location", "dishService", "dishsetService", function ($scope, $location, dishService, dishsetService) {
 
             $scope.dishes = [];
             $scope.dateInput = new Date();
@@ -43,7 +43,7 @@
                 dishsetService.filterDayMenu($scope.dateInputMiliSec,"").then(
                     //success
                     function (data) {
-                        data = {};
+                        //data = {};
                         $scope.dishes.set = data;
                         //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
                     });
@@ -64,7 +64,7 @@
                      .then(
                          //success
                          function (data) {
-                             data = {};
+                             //data = {};
                              $scope.dishes.allDishes = data.Items;
                              $scope.page = data.Page;
                              $scope.pagesCount = data.TotalPages;
@@ -103,7 +103,7 @@
             }
             
             $scope.removeClickBtn = function (el) {
-                var parent = document.getElementById('dishMenu');
+                var parent = document.getElementById("dishMenu");
                 var child = el.target.parentNode.parentNode;
                 var id = el.target.parentNode.attributes["id"].value;
                 parent.removeChild(child);
@@ -114,5 +114,5 @@
 
             search();
         }]);
-})(angular.module('dishsetModule'));
+})(angular.module("dishsetModule"));
 

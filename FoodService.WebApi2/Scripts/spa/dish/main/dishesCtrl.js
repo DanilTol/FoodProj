@@ -12,19 +12,13 @@
                     .then(
                         //success
                         function (data) {
-                            //data = {};
-                            $scope.Dishes = data;
+                            $scope.Dishes = data.Items;
                             $scope.page = data.Page;
                             $scope.pagesCount = data.TotalPages;
                             $scope.totalCount = data.TotalCount;
                         },function() {
-                            notificationService.displayError("Can`t delete dishes/");
+                            notificationService.displayError("Can`t open dishes.");
                         });
-            }
-
-            $scope.getUserData = function () {
-                var userProfile = accountService.getUserData();
-                return userProfile;
             }
 
             $scope.clearSearch = function() {
@@ -43,6 +37,7 @@
             }
 
             $scope.search();
+            $scope.userProfile = accountService.getUserData();
         }
     ]);
 })(angular.module("dishModule"));

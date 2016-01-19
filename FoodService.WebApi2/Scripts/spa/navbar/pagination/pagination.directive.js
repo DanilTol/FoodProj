@@ -12,39 +12,40 @@
             restrict: "E",
             replace: true,
             templateUrl: "/Scripts/spa/navbar/pagination/pagination.html",
-            controller: [
-                "$scope", function ($scope) {
+            link: function ($scope) {
                     function range() {
                         if (!$scope.pagesCount) {
                             return [];
                         }
                         var step = 2;
                         var doubleStep = step * 2;
-                        var start = Math.max(0, $scope.page - step);
+                        var start = Math.max(0, parseInt($scope.page) - step);
                         var end = start + 1 + doubleStep;
-                        if (end > $scope.pagesCount) {
-                            end = $scope.pagesCount;
+                        if (end > parseInt($scope.pagesCount)) {
+                            end = parseInt($scope.pagesCount);
                         }
                         var ret = [];
-                        for (var i = start; i !== end; ++i) {
+                        for (var i = start; i != end; ++i) {
                             ret.push(i);
                         }
                         return ret;
                     }
 
                     $scope.$watch(
-                        function (scope) { return scope.page },
-                        function () {
-                            $scope.range = range();
+                        function () { return $scope.page },
+                        function (v,o) {
+                            //$scope.range = range();
                         });
 
                     $scope.$watch(
-                        function (scope) { return scope.pagesCount },
-                        function () {
+                        function() {
+                            return $scope.pagesCount;
+                        },
+                        function (v,o) {
+                            debugger;
                             $scope.range = range();
                         });;
                 }
-            ]
         }
     });
 })(angular.module("navbarModule"));

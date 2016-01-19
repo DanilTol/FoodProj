@@ -1,8 +1,7 @@
-﻿<hr />
-<div class="jumbotron">
+﻿<div class="jumbotron" style="background-image: url(/Images/ProjectImages/table.jpg); background-size: cover; width:100%">
     <div class="container text-center">
-        <img class="media-object" style="margin: 0 auto" height="320" ng-src="/Images/Dish/{{dish.ImagePath[0]}}" alt="{{dish.Name}}" alt="{{dish.Name}}" class="pull-left" />
-        <div class="movieDescription"><i><i class="fa fa-quote-left"></i>{{dish.Description}}<i class="fa fa-quote-right"></i></i></div>
+        <img class="media-object img-rounded  img-responsive" style="margin: 0 auto; height: 320px;" ng-src="/Images/Dish/{{dish.ImagePath[0]}}" alt="{{dish.Name}}" alt="{{dish.Name}}" class="pull-left" />
+        <div style="color: black "><i><i class="fa fa-quote-left"></i>{{dish.Description}}<i class="fa fa-quote-right"></i></i></div>
         <br />
         <div class="btn-group">
             <a ng-href="#/dishes/edit/{{dish.ID}}" class="btn btn-sm btn-default">Edit dish<i class="fa fa-pencil-square-o pull-right"></i></a>
@@ -18,7 +17,7 @@
             <div class="panel-body">
                 <div class="media">
                     <a class="pull-right" ng-href="#/dishes/{{dish.ID}}" title="View {{dish.Name}} details">
-                        <img class="media-object img-circle" height="120" ng-src="/Images/Dish/{{dish.ImagePath[0]}}" alt="{{dish.Name}}" alt="{{dish.Name}}" />
+                        <img class="media-object img-circle" height="135" ng-src="/Images/Dish/{{dish.ImagePath[0]}}" alt="{{dish.Name}}" alt="{{dish.Name}}" />
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">{{dish.Name}}</h4>
@@ -26,7 +25,6 @@
                         Price: <label>{{dish.Price}}</label><br />
                         Ingridients: <label>{{dish.Ingridients}}</label><br />
                         <br />
-                        <label class="label label-info">{{dish.Name}}</label>
                     </div>
                 </div>
             </div>
@@ -46,21 +44,18 @@
             <div class="panel-heading clearfix">
                 <h5 class="pull-left">See also</h5>
             </div>
-            <div class="table-responsive" ng-if="!loadingRentals">
-
-            </div>
-            <div ng-if="loadingRentals">
-                <div class="col-xs-4"></div>
-                <div class="col-xs-4">
-                    <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Loading rental history...</label>
+            <div class="panel-body">
+                <div class="col-xs-6 col-sm-4 col-md-4 " ng-repeat="dish in seeAlso">
+                    <div class="img-circle img-responsive text-center" id="{{dish.ID}}" ng-click="detailsRedirect('/dishes/'+dish.ID)"
+                         style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
+                        <p class="textOnImage">
+                            {{dish.Name}}
+                        </p>
+                    </div>
                 </div>
-                <div class="col-xs-4"></div>
             </div>
-        </div>
-
-
-
-
-
+            
+            </div>
+        
     </div>
 </div>
