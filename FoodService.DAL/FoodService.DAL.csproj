@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201601181548443_refactAllStruct.Designer.cs">
       <DependentUpon>201601181548443_refactAllStruct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601191135509_addManyToMany_DishToOrder.cs" />
+    <Compile Include="Migrations\201601191135509_addManyToMany_DishToOrder.Designer.cs">
+      <DependentUpon>201601191135509_addManyToMany_DishToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositoryBag\DishImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
@@ -149,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601181548443_refactAllStruct.resx">
       <DependentUpon>201601181548443_refactAllStruct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601191135509_addManyToMany_DishToOrder.resx">
+      <DependentUpon>201601191135509_addManyToMany_DishToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
