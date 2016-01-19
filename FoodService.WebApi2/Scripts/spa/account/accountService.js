@@ -4,21 +4,8 @@
     app.factory("accountService", ["$http", "$q", function ($http, $q) {
             var userProfile;
 
-            function setProfileInfo() {
-                var deferred = $q.defer();
-                $http.get("/api/account/profileInfo").
-                    success(function (data1) {
-                        userProfile = data1;
-                        deferred.resolve(data1);
-                    }).
-                    error(function (data1, status) {
-                        deferred.resolve(status);
-                    });
-                return deferred.promise;
-            }
-
             function getUserData() {
-                if (angular.isUndefined(userProfile)) {
+                if (angular.isUndefined(userProfile) && isUserLoggedIn()) {
                     userProfile = {};
                     userProfile.Name = "";
                     $http.get("/api/account/profileInfo").

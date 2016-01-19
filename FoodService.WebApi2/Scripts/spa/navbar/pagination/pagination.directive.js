@@ -34,7 +34,7 @@
                     $scope.$watch(
                         function () { return $scope.page },
                         function (v,o) {
-                            //$scope.range = range();
+                            $scope.range = range();
                         });
 
                     $scope.$watch(
