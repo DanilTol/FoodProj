@@ -10,7 +10,26 @@
             $scope.dateInputMiliSec = $scope.dateInput.getTime();
             $scope.chefMail = "";//"example@mail.com";
             $scope.headerArray = ["Order id", "Date", "User", "Role", "Dishes"];
+            $scope.csvArr = [];
 
+            function prepareArrayToCsv() {
+                var csvArr = [];
+                for (var order in $scope.dishes.orderList) {
+                    var row = {};
+                    row.id = $scope.dishes.orderList[order].Id;
+                    row.date = $scope.dishes.orderList[order].Date;
+                    row.user = $scope.dishes.orderList[order].User.Name;
+                    row.role = $scope.dishes.orderList[order].User.Role;
+                    row.dishes = "";
+                    for (var dish in $scope.dishes.orderList[order].Dishes) {
+                        row.dishes += $scope.dishes.orderList[order].Dishes[dish].Name + " * " + $scope.dishes.orderList[order].Dishes[dish].Number + " ";
+                    }
+                    csvArr.push(row);
+                }
+                $scope.csvArr = csvArr;
+                //return csvArr;
+            }
+            
             function loadList() {
                 $location.search("date", $scope.dateInputMiliSec);
                 orderService.getOrderList($scope.dateInputMiliSec).then(
@@ -23,23 +42,23 @@
                                 orderItem.Id = data[order].Id;
                                 orderItem.Date = data[order].Date.substring(0, 10);
                                 orderItem.User = data[order].User;
-                                //                                orderItem.User.Role = "Good";
-                                orderItem.dishes = [];
+                                orderItem.Dishes = [];
                                 if (!angular.isUndefined(data[order].Dishes.length)) {
                                     for (var i = 0; i < data[order].Dishes.length; i++) {
-                                        if (angular.isUndefined(orderItem.dishes[data[order].Dishes[i]])) {
-                                            orderItem.dishes[data[order].Dishes[i].ID] = {};
+                                        if (angular.isUndefined(orderItem.Dishes[data[order].Dishes[i]])) {
+                                            orderItem.Dishes[data[order].Dishes[i].ID] = {};
                                         }
-                                        orderItem.dishes[data[order].Dishes[i].ID].Number = 1 + (orderItem.dishes[data[order].Dishes[i].ID].Number || 0);
-                                        if (orderItem.dishes[data[order].Dishes[i].ID].Number == 1) {
-                                            orderItem.dishes[data[order].Dishes[i].ID].ID = data[order].Dishes[i].ID;
-                                            orderItem.dishes[data[order].Dishes[i].ID].Name = data[order].Dishes[i].Name;
-                                            orderItem.dishes[data[order].Dishes[i].ID].ImagePath = data[order].Dishes[i].ImagePath;
+                                        orderItem.Dishes[data[order].Dishes[i].ID].Number = 1 + (orderItem.Dishes[data[order].Dishes[i].ID].Number || 0);
+                                        if (orderItem.Dishes[data[order].Dishes[i].ID].Number == 1) {
+                                            orderItem.Dishes[data[order].Dishes[i].ID].ID = data[order].Dishes[i].ID;
+                                            orderItem.Dishes[data[order].Dishes[i].ID].Name = data[order].Dishes[i].Name;
+                                            orderItem.Dishes[data[order].Dishes[i].ID].ImagePath = data[order].Dishes[i].ImagePath;
                                         }
                                     }
                                     $scope.dishes.orderList.push(orderItem);
                                 }
                             }
+                           prepareArrayToCsv();
                         }
                     });
             }
@@ -47,6 +66,7 @@
             $scope.deleteOrder = function (order) {
                 $scope.dishes.deletedOrders.push(order.Id);
                 $scope.dishes.orderList.splice(order, 1);
+                prepareArrayToCsv();
             }
 
             $scope.saveChanges = function () {
@@ -75,22 +95,7 @@
                     });
             }
 
-            $scope.prepareArrayToCSV = function() {
-                var csvArr = [];
-                for (var order in $scope.orderList) {
-                    var row = {};
-                    row.id = order.id;
-                    row.date = order.date;//9
-                    row.user = order.User.Name;
-                    row.role = order.User.Role;
-                    row.dishes = "";
-                    for (var dish in order.Dishes) {
-                        row.dishes += dish.Name + " * " + dish.Number + " ";
-                    }
-                    csvArr.push(row);
-                }
-                return csvArr;
-            }
+            
 
         }]);
 })(angular.module("orderModule"));
