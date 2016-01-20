@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
 using FoodService.Business.Services.CommonFunc;
@@ -54,7 +55,31 @@ namespace FoodService.Business.Services
             }
             Database.Save();
         }
-        
+
+        public IEnumerable<OrderInfo> GetOrderListOnWeek(DateTime date)
+        {
+            var friday = date.AddDays(4);
+            var ordersDb = Database.Order.QueryToTable.Where(x => x.Date >= date && x.Date <= friday);
+            var orderInfos = new List<OrderInfo>();
+            foreach (var order in ordersDb)
+            {
+                var userDto = Mapper.Map<User, UserDTO>(order.User);
+                userDto.Role = order.User.Role.Name;
+                var dishShort = Mapper.Map<ICollection<Dish>, IEnumerable<DishModelShortInfo>>(order.Dishes);
+            orderInfos.Add(new OrderInfo() {Date = order.Date, Id = order.id, User = userDto, Dishes = dishShort});
+            }
+            return orderInfos;
+        }
+
+        public void DeleteRangeOrders(int[] orderIds)
+        {
+            foreach (var orderId in orderIds)
+            {
+                Database.Order.Delete(Database.Order.QueryToTable.FirstOrDefault(x => x.id == orderId));
+            }
+            Database.Save();
+        } 
+
         public void Dispose()
         {
             Database.Dispose();
