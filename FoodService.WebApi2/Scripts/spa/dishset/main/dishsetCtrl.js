@@ -83,6 +83,10 @@
                 search();
             }
 
+            $scope.clearMenu = function() {
+                $scope.dishes.set = [];
+            }
+
             $scope.filterClick = function() {
                 $scope.page = 0;
                 search();

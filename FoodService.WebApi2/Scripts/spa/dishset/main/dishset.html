@@ -7,15 +7,23 @@
             <div class="row">
                 <!--here show list of menu on day-->
                 <div class="col-md-5 pull-left" style="margin-left: 60px;">
-                    <h3>Dish menu
-                        <button class="btn btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="editDayMenu();"></button>
-                    </h3>
+                    <div>
+                        <h3>
+                            Dish menu
+                            <span class="pull-right">
+                                <button class="btn btn btn-primary glyphicon glyphicon-floppy-disk" ng-click="editDayMenu();"></button>
+                                <button class="btn btn btn-danger glyphicon glyphicon-remove" ng-click="clearMenu();"></button>
+                            </span>
+
+                        </h3>
+                    </div>
+                   
                     <div class="dishDnDZone"
                          x-lvl-drop-target="true"
                          x-on-drop="editDishSet(someDish)"
                          prompt="true" data-text="Drag disg here"
                          id="dishMenu">
-                        <div ng-if="dishes.set.length<1" class="text-center" style="font-size: 2em; color: gray; vertical-align: middle;line-height: 180px;  text-align: center">Drag dish here</div>
+                        <div ng-if="dishes.set.length<1" class="text-center" style="font-size: 2em; color: gray; vertical-align: middle; line-height: 180px; text-align: center">Drag dish here</div>
                         <div ng-repeat="dish in dishes.set">
                             <div class="col-md-6 img-circle" id="{{dish.ID}}"
                                  style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
