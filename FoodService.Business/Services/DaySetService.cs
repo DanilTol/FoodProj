@@ -36,7 +36,7 @@ namespace FoodService.Business.Services
         }
 
 
-        public void DeleteAndEditDayDishSet(DateTime date, int[] dishIds)
+        public void UpdateDayDishSet(DateTime date, int[] dishIds)
         {
             var dishIdsList = dishIds.ToList();
             // get day set by date
