@@ -261,6 +261,8 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\spa\account\accountModule.js" />
     <Content Include="Scripts\spa\account\accountService.js" />
+    <Content Include="Scripts\spa\account\profile\profileCtrl.js" />
+    <Content Include="Scripts\spa\account\profile\profile.html" />
     <Content Include="Scripts\spa\account\register\register.html" />
     <Content Include="Scripts\spa\account\login\loginCtrl.js" />
     <Content Include="Scripts\spa\account\register\registerCtrl.js" />
@@ -402,7 +404,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\spa\customers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

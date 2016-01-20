@@ -83,5 +83,17 @@ namespace FoodService.WebApi2.Controllers
 
             return this.Request.CreateResponse(HttpStatusCode.OK, userInfo);
         }
+
+        [HttpPost]
+        [MyAuth]
+        [Route("edit")]
+        public HttpResponseMessage EditProfile(UserDTO newProfileInfo)
+        {
+            _userService.EditUser(newProfileInfo);
+            return Request.CreateResponse(HttpStatusCode.Accepted);
+        }
+
+
+
     }
 }

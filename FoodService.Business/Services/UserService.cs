@@ -24,12 +24,19 @@ namespace FoodService.Business.Services
             Database.Save();
         }
 
-        public void EditUser(UserDTO userDto)
+        public bool EditUser(UserDTO userDto)
         {
+            var userDb = Database.User.QueryToTable.FirstOrDefault(x => x.id == userDto.Id);
+            if (userDto.Salt.GetHashCode().ToString() != userDb.Salt)
+            {
+                return false;
+            }
             var user = Mapper.Map<UserDTO, User>(userDto);
             user.Role = Database.Role.QueryToTable.FirstOrDefault(x => x.Name == userDto.Role);
             Database.User.Update(user);
             Database.Save();
+
+            return true;
         }
 
         public User Login(LogInUser inUser)
@@ -49,5 +56,6 @@ namespace FoodService.Business.Services
         {
             return Database.User.QueryToTable.FirstOrDefault(x => x.id == id);
         }
-    }
+
+       }
 }
