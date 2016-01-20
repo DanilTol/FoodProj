@@ -178,7 +178,7 @@ namespace FoodService.WebApi2.Controllers
         }
 
         [MyAuth("admin")]
-        [HttpPost]
+        [HttpDelete]
         [Route("delete")]
         public HttpResponseMessage Delete(int dishId = 2)
         {

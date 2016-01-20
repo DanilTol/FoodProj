@@ -30,7 +30,7 @@ namespace FoodService.WebApi2.Controllers
         [Route("editdishmenu")]
         public HttpResponseMessage UpdatingMenuOnDay(SetOnDay setOnDay)
         {
-            _daySetService.DeleteAndEditDayDishSet(Jan1St1970.AddMilliseconds(setOnDay.Date),setOnDay.DishId);
+            _daySetService.UpdateDayDishSet(Jan1St1970.AddMilliseconds(setOnDay.Date),setOnDay.DishId);
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }
 

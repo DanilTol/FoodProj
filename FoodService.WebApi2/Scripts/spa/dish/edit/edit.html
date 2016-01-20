@@ -2,9 +2,9 @@
     <div class="row" style="margin-left: 3px;">
         <!-- left column -->
         <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-            <div class="text-center" style="margin-top: 10px; margin-right: 5px">
+            <div class="text-center" style="margin-top: 10px; margin-right: 5px; margin-bottom: 5px;">
                 <img ng-src="/Images/Dish/{{dish.ImagePath[0]}}" class="img-responsive img-rounded" alt="avatar">
-                <h6>Change photo...</h6>
+                <h6 style="color: white">Change photo...</h6>
                 <input type="file" name="attachment" class="form-control"
                        data-ak-file-model="dish.Attachment" multiple />
             </div>
@@ -61,6 +61,7 @@
                     <a class="btn btn-default" ng-href="#/dishes/{{dish.ID}}">Cancel</a>
                     |
                     <button class="btn btn-danger" ng-click="deleteDish();">Delete <i class="fa fa-remove"></i></button>
+                    <br/> <br/>
                 </div>
                     </div>
             </form>

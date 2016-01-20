@@ -60,7 +60,7 @@
 
             function deleteDish(dishId) {
                 var deferred = $q.defer();
-                $http.post("/api/dishes/delete", parseInt(dishId)).
+                $http.delete("/api/dishes/delete?dishId="+dishId).
                     success(function(data) {
                         deferred.resolve(data);
                     }).
