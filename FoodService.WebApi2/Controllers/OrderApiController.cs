@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -42,6 +43,22 @@ namespace FoodService.WebApi2.Controllers
         {
             _orderService.DeleteOldAndAddNewOrder(Jan1St1970.AddMilliseconds(setOnDay.Date), setOnDay.DishId, user);
             return this.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        [Route("orderlist")]
+        public HttpResponseMessage GetListOfOrders(long miliSecFrom1970)
+        {
+            var ordersList = _orderService.GetOrderListOnWeek(Jan1St1970.AddMilliseconds(miliSecFrom1970).Date);
+            return Request.CreateResponse(HttpStatusCode.OK, ordersList);
+        }
+
+        [HttpPost]
+        [Route("ordersdelete")]
+        public HttpResponseMessage DeleteRangeOrders(int[] orderInfos)
+        {
+            _orderService.DeleteRangeOrders(orderInfos);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
     }

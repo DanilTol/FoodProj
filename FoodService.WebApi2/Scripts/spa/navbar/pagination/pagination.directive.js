@@ -42,7 +42,6 @@
                             return $scope.pagesCount;
                         },
                         function (v,o) {
-                            debugger;
                             $scope.range = range();
                         });;
                 }

@@ -7,7 +7,7 @@
                 <div class="input-group-btn">
                     <button class="btn btn-toolbar" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
                     <button class="btn btn-danger" style="margin-left: 1px;" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
-                    <a ng-if="userProfile.Role == 'admin'" style="margin-left: 15px;" ng-href="#/dishes/add" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"> Add</i></a>
+                    <a ng-if="userProfile.Role == 'admin'" style="margin-left: 3px; border-radius: 0em;" ng-href="#/dishes/add" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"> Add</i></a>
                 </div>
             </div>
         </div>
@@ -26,6 +26,7 @@
 
         </div>
         <div class="panel-footer">
+            
             <div class="text-center">
                 <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute"></pagination>
             </div>

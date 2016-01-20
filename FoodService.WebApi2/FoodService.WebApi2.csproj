@@ -270,6 +270,8 @@
     <Content Include="Scripts\spa\dishset\main\dishsetCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
     <Content Include="Scripts\spa\dishset\dishsetService.js" />
+    <Content Include="Scripts\spa\order\orderList\orderList.html" />
+    <Content Include="Scripts\spa\order\orderList\orderListCtrl.js" />
     <Content Include="Scripts\spa\services\DnD.directive.js" />
     <Content Include="Scripts\spa\dishset\main\FilterForChosenDishes.js" />
     <Content Include="Scripts\spa\dish\add\add.html" />
@@ -297,6 +299,7 @@
     <Content Include="Scripts\spa\services\fileUploadService.js" />
     <Content Include="Scripts\spa\services\notificationService.js" />
     <Content Include="Scripts\spa\services\sessionInjector.js" />
+    <Content Include="Scripts\Vendors\ng-csv.min.js" />
     <Content Include="Scripts\Vendors\toastr.js" />
     <Content Include="Scripts\Vendors\toastr.min.js" />
     <Content Include="Scripts\Vendors\angular-animate.js" />

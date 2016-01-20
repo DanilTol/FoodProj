@@ -8,6 +8,11 @@
                       controller: "orderCtrl",
                       reloadOnSearch: false
                   })
+                  .when("/orderlist", {
+                      templateUrl: "scripts/spa/order/orderList/orderList.html",
+                      controller: "orderListCtrl"
+                      ,reloadOnSearch: false
+                  })
                  .otherwise({ redirectTo: "/" });
          });
 })();

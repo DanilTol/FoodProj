@@ -9,6 +9,8 @@ namespace FoodService.Business.ServiceInterfaces
     {
         IEnumerable<DishModelShortInfo> GetPlatesByDate(DateTime date, User user);
         void DeleteOldAndAddNewOrder(DateTime date, int[] arraInts, User user);
+        IEnumerable<OrderInfo> GetOrderListOnWeek(DateTime date);
+        void DeleteRangeOrders(int[] orderIds);
         void Dispose();
     }
 }

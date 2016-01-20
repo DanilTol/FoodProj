@@ -30,6 +30,39 @@
                             deferred.reject(status);
                         });
                     return deferred.promise;
+                },
+                getOrderList: function (date) {
+                    var deferred = $q.defer();
+                    $http.get("api/order/orderlist?miliSecFrom1970=" + date).
+                        success(function (data) {
+                            deferred.resolve(data);
+                        }).
+                        error(function (status) {
+                            deferred.reject(status);
+                        });
+                    return deferred.promise;
+                },
+                deleteOrders: function(orders) {
+                    var deferred = $q.defer();
+                    $http.post("api/order/ordersdelete", orders).
+                        success(function (data) {
+                            deferred.resolve(data);
+                        }).
+                        error(function (status) {
+                            deferred.reject(status);
+                        });
+                    return deferred.promise;
+                },
+                sendMailToChef: function(mail) {
+                    var deferred = $q.defer();
+                    $http.post("api/order/sendmail", mail).
+                        success(function (data) {
+                            deferred.resolve(data);
+                        }).
+                        error(function (status) {
+                            deferred.reject(status);
+                        });
+                    return deferred.promise;
                 }
             }
         }

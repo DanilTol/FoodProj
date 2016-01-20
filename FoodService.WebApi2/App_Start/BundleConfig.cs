@@ -32,14 +32,17 @@ namespace FoodService.WebApi2
               "~/Scripts/Vendors/angular-route.js",
               "~/Scripts/Vendors/angular-cookies.js",
               "~/Scripts/Vendors/angular-validator.js",
-              "~/Scripts/Vendors/toastr.js"
+              "~/Scripts/Vendors/toastr.js",
+              "~/Scripts/Vendors/ng-csv.min.js",
+              "~/Scripts/Vendors/angular-sanitize.js"
+
 
               ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css",
-                      "~/content/toastr.css",
+                      "~/Content/toastr.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
@@ -90,6 +93,7 @@ namespace FoodService.WebApi2
                 //order
                 "~/Scripts/spa/order/orderService.js",
                 "~/Scripts/spa/order/main/orderCtrl.js",
+                "~/Scripts/spa/order/orderList/orderListCtrl.js",
 
                 //Nav bars
                 "~/Scripts/spa/navbar/side/sideBar.directive.js",

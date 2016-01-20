@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\LogInUser.cs" />
+    <Compile Include="DTO\OrderInfo.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Mapping\InitMap.cs" />
     <Compile Include="ServiceInterfaces\IDaySetService.cs" />
