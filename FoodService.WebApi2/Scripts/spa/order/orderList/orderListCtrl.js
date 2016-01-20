@@ -8,7 +8,7 @@
             $scope.dishes.deletedOrders = [];
             $scope.dateInput = new Date();
             $scope.dateInputMiliSec = $scope.dateInput.getTime();
-            $scope.chefMail = "";//"example@mail.com";
+            $scope.chefMail = "example@mail.com";
             $scope.headerArray = ["Order id", "Date", "User", "Role", "Dishes"];
             $scope.csvArr = [];
 
@@ -87,7 +87,7 @@
             });
 
             $scope.sendToChef = function() {
-                orderService.sendMailToChef($scope.chefMail).then(
+                orderService.sendMailToChef($scope.dateInputMiliSec,$scope.chefMail).then(
                     function (data) {
                         notificationService.displaySuccess("Mail send.");
                     }, function (status) {

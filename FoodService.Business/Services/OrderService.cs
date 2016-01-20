@@ -7,6 +7,7 @@ using FoodService.Business.ServiceInterfaces;
 using FoodService.Business.Services.CommonFunc;
 using FoodService.DAL.Entity;
 using FoodService.DAL.Interfaces;
+using FoodService.Business.Services;
 
 namespace FoodService.Business.Services
 {
@@ -78,7 +79,14 @@ namespace FoodService.Business.Services
                 Database.Order.Delete(Database.Order.QueryToTable.FirstOrDefault(x => x.id == orderId));
             }
             Database.Save();
-        } 
+        }
+
+        public void SentMailToChef(DateTime date, string chefMail)
+        {
+            //var orderInfos = GetOrderListOnWeek(date);
+            string messageBody = "Chef it`s email for you";
+            MailService.SentEmail(chefMail, "Orders on " + date.Date, messageBody);
+        }
 
         public void Dispose()
         {

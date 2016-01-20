@@ -53,9 +53,9 @@
                         });
                     return deferred.promise;
                 },
-                sendMailToChef: function(mail) {
+                sendMailToChef: function (dateInputMiliSec, mail) {
                     var deferred = $q.defer();
-                    $http.post("api/order/sendmail", mail).
+                    $http.get("api/order/sentmail?miliSecFrom1970=" + dateInputMiliSec + "&chefMail=" + mail).
                         success(function (data) {
                             deferred.resolve(data);
                         }).

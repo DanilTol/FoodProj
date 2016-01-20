@@ -49,6 +49,7 @@
     <Compile Include="DTO\LogInUser.cs" />
     <Compile Include="DTO\OrderInfo.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Services\MailService.cs" />
     <Compile Include="Mapping\InitMap.cs" />
     <Compile Include="ServiceInterfaces\IDaySetService.cs" />
     <Compile Include="ServiceInterfaces\IOrderService.cs" />
@@ -73,7 +74,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
