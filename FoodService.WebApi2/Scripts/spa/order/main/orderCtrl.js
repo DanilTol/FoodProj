@@ -12,12 +12,15 @@
 
         $scope.editUserSet = function () {
             var dishId = [];
+            var dishNum = [];
             for (var x in $scope.dishes.userSet) {
-                for (var j = 0; j < $scope.dishes.userSet[x].Number; j++) {
-                    dishId.push($scope.dishes.userSet[x].ID);
-                }
+               // for (var j = 0; j < $scope.dishes.userSet[x].Number; j++) 
+               {
+                   dishId.push($scope.dishes.userSet[x].ID);
+                   dishNum.push($scope.dishes.userSet[x].Count);
+               }
             }
-            orderService.editUserSet($scope.dateInputMiliSec, dishId).then(
+            orderService.editUserSet($scope.dateInputMiliSec, dishId, dishNum).then(
                 //success
                 function (data) {
                     notificationService.displaySuccess("Order edited.");
@@ -59,18 +62,19 @@
                 function(data) {
                     $scope.dishes.userSet = [];
                     if (data != null) {
-                    
-                        for (var i = 0; i < data.length; i++) {
-                            if (angular.isUndefined($scope.dishes.userSet[data[i].ID])) {
-                                $scope.dishes.userSet[data[i].ID] = {};
-                            }
-                            $scope.dishes.userSet[data[i].ID].Number = 1 + ($scope.dishes.userSet[data[i].ID].Number || 0);
-                            if ($scope.dishes.userSet[data[i].ID].Number == 1) {
-                                $scope.dishes.userSet[data[i].ID].ID = data[i].ID;
-                                $scope.dishes.userSet[data[i].ID].Name = data[i].Name;
-                                $scope.dishes.userSet[data[i].ID].ImagePath = data[i].ImagePath;
-                            }
-                        }
+                        $scope.dishes.userSet = data;
+
+                        //for (var i = 0; i < data.length; i++) {
+                        //    if (angular.isUndefined($scope.dishes.userSet[data[i].ID])) {
+                        //        $scope.dishes.userSet[data[i].ID] = {};
+                        //    }
+                        //    $scope.dishes.userSet[data[i].ID].Number = 1 + ($scope.dishes.userSet[data[i].ID].Number || 0);
+                        //    if ($scope.dishes.userSet[data[i].ID].Number == 1) {
+                        //        $scope.dishes.userSet[data[i].ID].ID = data[i].ID;
+                        //        $scope.dishes.userSet[data[i].ID].Name = data[i].Name;
+                        //        $scope.dishes.userSet[data[i].ID].ImagePath = data[i].ImagePath;
+                        //    }
+                   // }
                     }
                 });
         }
@@ -97,17 +101,17 @@
                 
                 if ($scope.dishes.userSet[dish].ID === someDish.ID) {
                     
-                    if ($scope.dishes.userSet[dish].Number > 0) {
+                    if ($scope.dishes.userSet[dish].Count > 0) {
                         flag = false;
                     }
-                    if (($scope.dishes.userSet[dish].Number || 0) < maxNumberOfDish)
-                    $scope.dishes.userSet[dish].Number = 1 + ($scope.dishes.userSet[dish].Number || 0);
+                    if (($scope.dishes.userSet[dish].Count || 0) < maxNumberOfDish)
+                        $scope.dishes.userSet[dish].Count = 1 + ($scope.dishes.userSet[dish].Count || 0);
                     break;
                 }
                 
             }
             if (flag) {
-                someDish.Number = 1;
+                someDish.Count = 1;
                 $scope.dishes.userSet.push(someDish);
             }
             
@@ -120,8 +124,8 @@
             for (var dish in $scope.dishes.userSet) {
                 var flag = false;
                 if ($scope.dishes.userSet[dish].ID == id) {
-                    --$scope.dishes.userSet[dish].Number;
-                    if ($scope.dishes.userSet[dish].Number < 1) {
+                    --$scope.dishes.userSet[dish].Count;
+                    if ($scope.dishes.userSet[dish].Count < 1) {
                         flag = true;
                     }
                 }

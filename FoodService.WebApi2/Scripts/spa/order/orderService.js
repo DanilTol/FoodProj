@@ -17,11 +17,12 @@
                         });
                     return deferred.promise;
                 },
-                editUserSet: function (date, dishes) {
+                editUserSet: function (date, dishes, number) {
                     var deferred = $q.defer();
                     var setOnDay = {};
                     setOnDay.DishId = dishes;
                     setOnDay.Date = date;
+                    setOnDay.DishNum = number;
                     $http.post("api/order/edituserset", setOnDay).
                         success(function (data) {
                             deferred.resolve(data);

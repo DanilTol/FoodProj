@@ -8,7 +8,7 @@ namespace FoodService.Business.ServiceInterfaces
     public interface IOrderService
     {
         IEnumerable<DishModelShortInfo> GetPlatesByDate(DateTime date, User user);
-        void DeleteOldAndAddNewOrder(DateTime date, int[] arraInts, User user);
+        void UpdateOrder(DateTime date, int[] arraInts,int[] dishNum, User user);
         IEnumerable<OrderInfo> GetOrderListOnWeek(DateTime date);
         void DeleteRangeOrders(int[] orderIds);
         void SentMailToChef(DateTime date, string chefMail);

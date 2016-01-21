@@ -6,6 +6,8 @@
         <div class="panel-body">
             <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Choose day to show menu </h4>
             <input type="date" id="dateInput" name="dateInput" ng-model="dateInput"/>
+
+        
             <hr/>
             <div class="row">
                 <!--here show list of user set-->
@@ -34,7 +36,7 @@
                                 </p>
                                 <button class="btn btn-danger glyphicon glyphicon-remove cancelButton" ng-click="removeClickBtn($event)"></button>
                                 <div style="width: 60px; background-color: lightgray; padding: 3px; border-radius: 0.7em;">
-                                    <input type="number" min="1" max="20" data-ng-model="dish.Number" style="width: 40px"/><i class="glyphicon glyphicon-pushpin"></i>
+                                    <input type="number" min="1" max="20" data-ng-model="dish.Count" style="width: 40px"/><i class="glyphicon glyphicon-pushpin"></i>
                                 </div>
                             </div>
                         </div>
