@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\OrderDish.cs" />
     <Compile Include="Entity\Role.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Interfaces\IUnityOfWork.cs" />
@@ -100,7 +101,12 @@
     <Compile Include="Migrations\201601191135509_addManyToMany_DishToOrder.Designer.cs">
       <DependentUpon>201601191135509_addManyToMany_DishToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601210931417_addTableOrderDishesWithFieldCount.cs" />
+    <Compile Include="Migrations\201601210931417_addTableOrderDishesWithFieldCount.Designer.cs">
+      <DependentUpon>201601210931417_addTableOrderDishesWithFieldCount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="RepositoryBag\OrderDishRepository.cs" />
     <Compile Include="RepositoryBag\DishImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
     <Compile Include="EF\EntityContext.cs" />
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601191135509_addManyToMany_DishToOrder.resx">
       <DependentUpon>201601191135509_addManyToMany_DishToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601210931417_addTableOrderDishesWithFieldCount.resx">
+      <DependentUpon>201601210931417_addTableOrderDishesWithFieldCount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

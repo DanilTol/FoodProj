@@ -11,7 +11,7 @@ namespace FoodService.DAL.Entity
         public int Price { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderDish> OrdersDishes { get; set; }
         public virtual ICollection<DishImage> Images { get; set; }
     }
 }

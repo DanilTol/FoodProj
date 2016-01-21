@@ -11,6 +11,7 @@ namespace FoodService.DAL.Interfaces
         DayDishSetRepository DayDish { get; }
         UserRepository User { get; }
         RoleForUserRepository Role { get; }
+        OrderDishRepository OrderDishes { get; }
         void Save();
 
     }

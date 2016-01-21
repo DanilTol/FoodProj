@@ -13,6 +13,7 @@ namespace FoodService.DAL
         private DishImageRepository _dishImageRepository;
         private UserRepository _userRepository;
         private RoleForUserRepository _roleForUser;
+        private OrderDishRepository _orderDishes;
 
         private bool _disposed = false;
 
@@ -25,6 +26,8 @@ namespace FoodService.DAL
         public DishRepository Dish => _dishRepository ?? (_dishRepository = new DishRepository(_context));
 
         public OrderRepository Order => _orderRepository ?? (_orderRepository = new OrderRepository(_context));
+
+        public OrderDishRepository OrderDishes => _orderDishes ?? (_orderDishes = new OrderDishRepository(_context));
 
         public DishImageRepository DishImage
             => _dishImageRepository ?? (_dishImageRepository = new DishImageRepository(_context));
