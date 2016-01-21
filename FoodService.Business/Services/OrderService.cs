@@ -83,8 +83,19 @@ namespace FoodService.Business.Services
 
         public void SentMailToChef(DateTime date, string chefMail)
         {
-            //var orderInfos = GetOrderListOnWeek(date);
-            string messageBody = "Chef it`s email for you";
+            chefMail = "d.a.tolmachov@gmail.com";
+            var orderInfos = GetOrderListOnWeek(date);
+            string messageBody = "<table class='table table-striped text-center'><tr><th class='text-center'>Order Id</th><th class='text-center'>Date</th><th class='text-center'>User</th><th class='text-center'>Role</th><th class='text-center'>Dishes</th></tr>";
+            foreach (var order in orderInfos)
+            {
+                messageBody += "<tr><td>" + order.Id + "</td><td>" + order.Date.Date + "</td><td>" + order.User.Name +
+                               "</td><td>" + order.User.Role + "</td><td>";
+                foreach (var dish in order.Dishes)
+                {
+                    messageBody += dish.Name + " * " + dish.Count + ";";
+                }
+            }       
+            messageBody += "</td></tr></table>";
             MailService.SentEmail(chefMail, "Orders on " + date.Date, messageBody);
         }
 

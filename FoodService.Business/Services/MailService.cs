@@ -7,7 +7,7 @@ namespace FoodService.Business.Services
     {
         internal static void SentEmail(string destination, string messageSubject, string messageBody)
         {
-            destination = "d.a.tolmachov@gmail.com";
+            //destination = "d.a.tolmachov@gmail.com";
             try
             {
                 MailMessage mail = new MailMessage();
@@ -17,7 +17,7 @@ namespace FoodService.Business.Services
                 mail.Subject = messageSubject;
 
                 mail.Body = messageBody;
-                //mail.IsBodyHtml = true;
+                mail.IsBodyHtml = true;
 
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();

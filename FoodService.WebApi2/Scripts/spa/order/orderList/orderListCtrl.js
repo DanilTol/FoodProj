@@ -8,7 +8,7 @@
             $scope.dishes.deletedOrders = [];
             $scope.dateInput = new Date();
             $scope.dateInputMiliSec = $scope.dateInput.getTime();
-            $scope.chefMail = "example@mail.com";
+            $scope.chefMail = "";
             $scope.headerArray = ["Order id", "Date", "User", "Role", "Dishes"];
             $scope.csvArr = [];
 
