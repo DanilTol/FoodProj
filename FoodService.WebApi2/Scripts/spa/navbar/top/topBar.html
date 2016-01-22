@@ -19,10 +19,12 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-if="isUserLoggedIn()"  class="userinfo"><a href="#/profile">{{userProfile().Name}}<i class="fa fa-user fa-fw"></i></a></li>
-                    <li ng-if="isUserLoggedIn()" class="userinfo"> 
-                    <button style="height: 50px; padding: 0; border: none; background: none; margin-right: 25px; margin-left: 20px;" ng-click="logout()">Log Out <i class="glyphicon glyphicon-log-out"> </i> </button></li>
-                    <li ng-if="!isUserLoggedIn()" class="userinfo"><a href="#/login" style="height: 50px; margin-right: 25px;  margin-left: 10px" >Login</a></li>
+                    <li ng-if="userProfile().Role == 'admin'"><a href="#/orderdif">
+                        <div style="background-color: cornflowerblue; padding: 1px 15px; color: beige" class="img-circle">{{unCheckedOrders}}</div></a></li>
+                    <li ng-if="isUserLoggedIn()" class="userinfo"><a href="#/profile">{{userProfile().Name}}<i class="fa fa-user fa-fw"></i><label class="label label-danger" >Admin</label></a></li>
+                    <li ng-if="isUserLoggedIn()" class="userinfo">
+                        <button style="height: 50px; padding: 0; border: none; background: none; margin-right: 25px; margin-left: 20px;" ng-click="logout()">Log Out <i class="glyphicon glyphicon-log-out"> </i> </button></li>
+                    <li ng-if="!isUserLoggedIn()" class="userinfo"><a href="#/login" style="height: 50px; margin-right: 25px; margin-left: 10px">Login</a></li>
                 </ul>
 
             </ul>

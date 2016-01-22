@@ -9,5 +9,6 @@ namespace FoodService.Business.DTO
         public UserDTO User { get; set; }
         public IEnumerable<DishModelShortInfo> Dishes{get;set;}
         public DateTime Date { get; set; }
+        public bool Checked { get; set; }
     }
 }

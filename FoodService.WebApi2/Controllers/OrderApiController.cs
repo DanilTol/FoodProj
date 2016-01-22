@@ -69,5 +69,19 @@ namespace FoodService.WebApi2.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
+        [HttpGet]
+        [Route("notificationcheckorders")]
+        public HttpResponseMessage NotificationCheckedOrders()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, _orderService.NumberOfUnchecked());
+        }
+
+        [HttpGet]
+        [Route("uncheckorders")]
+        public HttpResponseMessage NotCheckedOrders()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, _orderService.NotCheckedOrders());
+        }
+
     }
 }
