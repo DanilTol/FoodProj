@@ -12,6 +12,7 @@ namespace FoodService.DAL.Interfaces
         UserRepository User { get; }
         RoleForUserRepository Role { get; }
         OrderDishRepository OrderDishes { get; }
+        ReportRepository Report { get; }
         void Save();
 
     }

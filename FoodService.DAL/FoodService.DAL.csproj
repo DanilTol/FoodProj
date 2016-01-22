@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Entity\OrderDish.cs" />
     <Compile Include="Entity\Role.cs" />
+    <Compile Include="Entity\Report.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Interfaces\IUnityOfWork.cs" />
     <Compile Include="Migrations\201512161010063_AddUserTable.cs" />
@@ -105,7 +106,12 @@
     <Compile Include="Migrations\201601210931417_addTableOrderDishesWithFieldCount.Designer.cs">
       <DependentUpon>201601210931417_addTableOrderDishesWithFieldCount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601221014503_reportTable.cs" />
+    <Compile Include="Migrations\201601221014503_reportTable.Designer.cs">
+      <DependentUpon>201601221014503_reportTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="RepositoryBag\ReportRepository.cs" />
     <Compile Include="RepositoryBag\OrderDishRepository.cs" />
     <Compile Include="RepositoryBag\DishImageRepository.cs" />
     <Compile Include="RepositoryBag\DishRepository.cs" />
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601210931417_addTableOrderDishesWithFieldCount.resx">
       <DependentUpon>201601210931417_addTableOrderDishesWithFieldCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601221014503_reportTable.resx">
+      <DependentUpon>201601221014503_reportTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

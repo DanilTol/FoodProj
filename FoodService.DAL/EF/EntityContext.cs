@@ -12,5 +12,6 @@ namespace FoodService.DAL
         public DbSet<DishImage> DishImage { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Report> Report { get; set; }
     }
 }
