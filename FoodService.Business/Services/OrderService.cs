@@ -46,7 +46,7 @@ namespace FoodService.Business.Services
                     User = Database.User.QueryToTable.FirstOrDefault(x => x.id == user.id)
                 };
                 var orderDishList = new List<OrderDish>();
-                var dishIdAndCounts = dishIds.Zip(dishNum, (id, count) => new {dishId = id, dishCount = count});
+                var dishIdAndCounts = dishIds.Zip(dishNum, (id, count) => new { dishId = id, dishCount = count });
                 foreach (var idAndCount in dishIdAndCounts)
                 {
                     var temp = new OrderDish()
@@ -65,7 +65,7 @@ namespace FoodService.Business.Services
             {
                 if (dishIds.Length > 0)
                 {
-                    var dishIdAndCounts = dishIds.Zip(dishNum, (id, count) => new {dishId = id, dishCount = count});
+                    var dishIdAndCounts = dishIds.Zip(dishNum, (id, count) => new { dishId = id, dishCount = count });
                     var addOrderDishes =
                         dishIdAndCounts.Select(
                             dishinfo => new KeyValuePair<int, int>(dishinfo.dishId, dishinfo.dishCount)).ToList();
@@ -76,9 +76,9 @@ namespace FoodService.Business.Services
                     //fill equal list
                     var equalDishesInOrderDish =
                         (from newDish in addOrderDishes
-                            from oldDish in deleteOrderDishes
-                            where oldDish.id == newDish.Key
-                            select newDish).ToList();
+                         from oldDish in deleteOrderDishes
+                         where oldDish.id == newDish.Key
+                         select newDish).ToList();
 
                     // remove equals(dishes that will leave in DB) from adding and removing lista
                     foreach (var e in equalDishesInOrderDish)
@@ -145,7 +145,7 @@ namespace FoodService.Business.Services
                 {
                     dish.Count = order.OrderDishes.FirstOrDefault(x => x.Dish.id == dish.ID).Count;
                 }
-                orderInfos.Add(new OrderInfo {Date = order.Date, Id = order.id, User = userDto, Dishes = dishShort, Checked = order.Checked});
+                orderInfos.Add(new OrderInfo { Date = order.Date, Id = order.id, User = userDto, Dishes = dishShort, Checked = order.Checked });
             }
             return orderInfos;
         }
@@ -159,30 +159,6 @@ namespace FoodService.Business.Services
             Database.Save();
         }
 
-        public void SentMailToChef(DateTime date, string chefMail)
-        {
-            //chefMail = "d.a.tolmachov@gmail.com";
-            var orderInfos = GetOrderListOnWeek(date);
-            foreach (var order in orderInfos)
-            {
-                var orderDb = Database.Order.QueryToTable.FirstOrDefault(x => x.id == order.Id);
-                orderDb.Checked = true;
-                Database.Order.Update(orderDb);
-            }
-            string messageBody =
-                "<table style='border: 1px solid black'><tr><th>Order Id</th><th>Date</th><th>User</th><th>Role</th><th>Dishes</th></tr>";
-            foreach (var order in orderInfos)
-            {
-                messageBody += "<tr><td>" + order.Id + "</td><td>" + order.Date.Date + "</td><td>" + order.User.Name +
-                               "</td><td>" + order.User.Role + "</td><td>";
-                foreach (var dish in order.Dishes)
-                {
-                    messageBody += dish.Name + " * " + dish.Count + ";";
-                }
-            }
-            messageBody += "</td></tr></table>";
-            MailService.SentEmail(chefMail, "Orders on " + date.Date, messageBody);
-        }
 
         public int NumberOfUnchecked()
         {
@@ -203,12 +179,12 @@ namespace FoodService.Business.Services
                 {
                     dish.Count = order.OrderDishes.FirstOrDefault(x => x.Dish.id == dish.ID).Count;
                 }
-                orderInfos.Add(new OrderInfo { Date = order.Date, Id = order.id, User = userDto, Dishes = dishShort , Checked = order.Checked});
+                orderInfos.Add(new OrderInfo { Date = order.Date, Id = order.id, User = userDto, Dishes = dishShort, Checked = order.Checked });
             }
             return orderInfos;
         }
 
-    public void Dispose()
+        public void Dispose()
         {
             Database.Dispose();
         }

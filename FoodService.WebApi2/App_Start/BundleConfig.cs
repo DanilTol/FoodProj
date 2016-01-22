@@ -28,6 +28,7 @@ namespace FoodService.WebApi2
               "~/Scripts/Vendors/jquery-1.10.2.min.js",
               "~/Scripts/Vendors/bootstrap.js",
               "~/Scripts/Vendors/respond.src.js",
+              "~/Scripts/Vendors/diff_match_patch.js",
               "~/Scripts/Vendors/angular.js",
               "~/Scripts/Vendors/angular-route.js",
               "~/Scripts/Vendors/angular-cookies.js",
@@ -35,7 +36,7 @@ namespace FoodService.WebApi2
               "~/Scripts/Vendors/toastr.js",
               "~/Scripts/Vendors/ng-csv.min.js",
               "~/Scripts/Vendors/angular-sanitize.js"
-
+              
 
               ));
 
@@ -60,6 +61,7 @@ namespace FoodService.WebApi2
                 
                 "~/Scripts/spa/dishset/dishsetModule.js",
                 "~/Scripts/spa/order/orderModule.js",
+                "~/Scripts/spa/report/reportModule.js",
 
 
                //Services(common)
@@ -94,6 +96,11 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/order/orderService.js",
                 "~/Scripts/spa/order/main/orderCtrl.js",
                 "~/Scripts/spa/order/orderList/orderListCtrl.js",
+
+                //report
+                "~/Scripts/spa/report/reportService.js",
+                "~/Scripts/spa/report/main/reportCtrl.js",
+                "~/Scripts/spa/report/reportDif/reportDifCtrl.js",
 
                 //Nav bars
                 "~/Scripts/spa/navbar/side/sideBar.directive.js",
