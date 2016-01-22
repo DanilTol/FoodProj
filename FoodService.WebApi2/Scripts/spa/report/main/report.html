@@ -9,6 +9,7 @@
                     <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">List of orders on </h4>
                     <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" style="width: 130px;"/>
                     <button class="btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="saveChanges()"></button>
+                    <button class="btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="reportDif()"></button>
                     <hr/>
                     <table class="table table-striped text-center">
                         <tr>
@@ -37,8 +38,9 @@
                         <label for="email" class="sr-only">Enter chef email</label>
                         <input type="email" required class="form-control" id="email" ng-model="chefMail" style="width: 235px" placeholder="example@mail.com"/><br/>
                         <button class="btn btn-default ng-isolate-scope" ng-csv="csvArr" csv-header="headerArray" filename="OrderListOn{{dateInput}}.csv" field-separator=",">Export to CSV</button>
-                        <input type="button" class="btn btn-primary" ng-click="sendToChef()" value="Send to Chef" />
+                        <input type="button" class="btn btn-primary" ng-click="sendToChef()" value="Send to Chef"/>
                     </div>
+                    <input type="text" ng-model="htmlDif"/>
                 </div>
         </div>
     </div>

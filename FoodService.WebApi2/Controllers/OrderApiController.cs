@@ -61,13 +61,7 @@ namespace FoodService.WebApi2.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        [HttpGet]
-        [Route("sentmail")]
-        public HttpResponseMessage SentOrderToChef(long miliSecFrom1970, string chefMail)
-        {
-            _orderService.SentMailToChef(Jan1St1970.AddMilliseconds(miliSecFrom1970).Date,chefMail);
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
+       
 
         [HttpGet]
         [Route("notificationcheckorders")]

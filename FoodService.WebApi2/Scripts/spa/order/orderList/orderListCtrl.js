@@ -1,7 +1,7 @@
 ﻿(function (app) {
     "use strict";
     app.controller("orderListCtrl",
-        ["$scope", "$location", "orderService", "notificationService", function ($scope, $location, orderService, notificationService) {
+        ["$scope", "$location", "orderService", "notificationService", "reportService", function ($scope, $location, orderService, notificationService, reportService) {
 
             $scope.dishes = [];
             $scope.dishes.orderList = [];
@@ -87,16 +87,13 @@
             });
 
             $scope.sendToChef = function() {
-                orderService.sendMailToChef($scope.dateInputMiliSec,$scope.chefMail).then(
+                reportService.sendMailToChef($scope.dateInputMiliSec, $scope.chefMail).then(
                     function (data) {
                         notificationService.displaySuccess("Mail send.");
                     }, function (status) {
                         notificationService.displayError("Can`t send mail. Try again later.");
                     });
             }
-
-            
-
         }]);
 })(angular.module("orderModule"));
 

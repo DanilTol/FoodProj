@@ -11,7 +11,7 @@ namespace FoodService.Business.ServiceInterfaces
         void UpdateOrder(DateTime date, int[] arraInts,int[] dishNum, User user);
         IEnumerable<OrderInfo> GetOrderListOnWeek(DateTime date);
         void DeleteRangeOrders(int[] orderIds);
-        void SentMailToChef(DateTime date, string chefMail);
+        //void SentMailToChef(DateTime date, string chefMail);
         int NumberOfUnchecked();
         IEnumerable<OrderInfo> NotCheckedOrders();
         void Dispose();

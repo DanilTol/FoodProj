@@ -49,6 +49,7 @@
     <Compile Include="DTO\LogInUser.cs" />
     <Compile Include="DTO\OrderInfo.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="ServiceInterfaces\IReportService.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Mapping\InitMap.cs" />
     <Compile Include="ServiceInterfaces\IDaySetService.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="DTO\SetOnDay.cs" />
     <Compile Include="ServiceInterfaces\IDishService.cs" />
     <Compile Include="Services\DaySetService.cs" />
+    <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

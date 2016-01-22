@@ -1,0 +1,45 @@
+﻿<div class="row">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">List of orders on </h4>
+                    <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" style="width: 130px;"/>
+                    <button class="btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="saveChanges()"></button>
+                    <button class="btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="reportDif()"></button>
+                    <hr/>
+                    <table class="table table-striped text-center">
+                        <tr>
+                            <th class="text-center" ng-repeat="name in headerArray">{{name}}</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="order in dishes.orderList">
+                            <td>{{order.Id}}</td>
+                            <td>{{order.Date}}</td>
+                            <td>{{order.User.Name}}</td>
+                            <td>{{order.User.Role}}</td>
+                            <td>
+                                11
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" ng-click="deleteOrder(order)"><i class="glyphicon glyphicon-remove"></i></button>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                    
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="email" class="sr-only">Enter chef email</label>
+                        <input type="email" required class="form-control" id="email" ng-model="chefMail" style="width: 235px" placeholder="example@mail.com"/><br/>
+                        <button class="btn btn-default ng-isolate-scope" ng-csv="csvArr" csv-header="headerArray" filename="OrderListOn{{dateInput}}.csv" field-separator=",">Export to CSV</button>
+                        <input type="button" class="btn btn-primary" ng-click="sendToChef()" value="Send to Chef"/>
+                    </div>
+                    <div ng-bind-html="htmlDif"></div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>

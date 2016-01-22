@@ -97,3 +97,9 @@ textarea {
 .btn {
     margin-left: 2px;
 }
+del {
+    background: #ffe6e6;
+}
+ins {
+    background: #e6ffe6;
+}
