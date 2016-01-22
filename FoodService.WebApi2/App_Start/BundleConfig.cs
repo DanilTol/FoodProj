@@ -16,26 +16,26 @@ namespace FoodService.WebApi2
             bundles.Add(new ScriptBundle("~/bundles/Vendors/modernizr").Include(
                         "~/Scripts/Vendors/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/Vendors/bootstrap").Include(
-                "~/Scripts/Vendors/jquery.js",
-                "~/Scripts/Vendors/bootstrap.js",
-                      "~/Scripts/Vendors/respond.js"
+            //bundles.Add(new ScriptBundle("~/bundles/Vendors/bootstrap").Include(
+            //   // "~/Scripts/Vendors/jquery.js",
+            //    "~/Scripts/Vendors/bootstrap.js",
+            //          "~/Scripts/Vendors/respond.js"
 
-                      ));
+            //          ));
 
             bundles.Add(new ScriptBundle("~/bundles/Vendors").Include(
-              "~/Scripts/Vendors/jquery.js",
+              //"~/Scripts/Vendors/jquery.js",
               "~/Scripts/Vendors/jquery-1.10.2.min.js",
-              "~/Scripts/Vendors/bootstrap.js",
-              "~/Scripts/Vendors/respond.src.js",
+              "~/Scripts/Vendors/bootstrap.min.js",
+              //"~/Scripts/Vendors/respond.src.js",
               "~/Scripts/Vendors/diff_match_patch.js",
-              "~/Scripts/Vendors/angular.js",
-              "~/Scripts/Vendors/angular-route.js",
-              "~/Scripts/Vendors/angular-cookies.js",
-              "~/Scripts/Vendors/angular-validator.js",
-              "~/Scripts/Vendors/toastr.js",
+              "~/Scripts/Vendors/angular.min.js",
+              "~/Scripts/Vendors/angular-route.min.js",
+              "~/Scripts/Vendors/angular-cookies.min.js",
+              //"~/Scripts/Vendors/angular-validator.js",
+              "~/Scripts/Vendors/toastr.min.js",
               "~/Scripts/Vendors/ng-csv.min.js",
-              "~/Scripts/Vendors/angular-sanitize.js"
+              "~/Scripts/Vendors/angular-sanitize.min.js"
               
 
               ));
