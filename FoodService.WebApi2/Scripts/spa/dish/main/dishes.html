@@ -11,26 +11,21 @@
                 </div>
             </div>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-3 " ng-repeat="dish in Dishes">
+        <div class="panel-body row">
+                <div class="col-xs-6 col-sm-6 col-md-3" ng-repeat="dish in Dishes">
                     <div class="img-circle img-responsive text-center" id="{{dish.ID}}" ng-click="detailsRedirect('/dishes/'+dish.ID)"
                          style="margin: 15px; background-image: url(/Images/Dish/{{dish.ImagePath}}); background-size: cover; width: 160px; height: 160px;">
                         <p class="textOnImage">
                             {{dish.Name}}
                         </p>
                     </div>
-                </div>
-                <br/><br/>
             </div>
-
-        </div>
-        <div class="panel-footer">
             
-            <div class="text-center">
-                <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute"></pagination>
-            </div>
         </div>
+        <div class="panel-footer text-center" style="height: 80px">
+            <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute"></pagination>
+        </div>
+        
     </div>
-    
+    <br /><br />
 </div>

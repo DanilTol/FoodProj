@@ -1,23 +1,24 @@
 ﻿<div class="row">
     <div class="panel panel-primary">
         <div class="panel-body">
-            <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Choose day to show menu </h4>
-            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" />
-            <hr />
             <div class="row">
                 <!--here show list of menu on day-->
-                <div class="col-md-5 pull-left" style="margin-left: 60px;">
-                    <div>
-                        <h3>
-                            Dish menu
-                            <span class="pull-right">
-                                <button class="btn btn btn-primary glyphicon glyphicon-floppy-disk" ng-click="editDayMenu();"></button>
-                                <button class="btn btn btn-danger glyphicon glyphicon-remove" ng-click="clearMenu();"></button>
-                            </span>
+                <div class="col-md-5 col-sm-5 col-xs-5 pull-left" style="margin-left: 35px; margin-top: 20px">
+                    <div class="row" style="margin-bottom: 10px">
+                        <div class="col-md-7 col-xs-12 " style="margin-bottom: 3px">
+                            <span style="font-size: 20px;">Menu on </span><input type="date" style="height: 25px; width: 135px; font-size: 14px;" ng-model="dateInput"/>
+                        </div>
+                        <div class="col-md-5 col-xs-12">
+                            <div class="btn btn btn-default" style="height: 34px; width: 40px; margin-bottom: -1px; background-image: url(/Images/ProjectImages/csv-128.png); background-size: cover;">
+                                <input type="file" on-read-file="showContent($fileContent)" class="btn btn btn-default" style="opacity: 0;"/>
+                            </div>
+                            <button class="btn btn-default ng-isolate-scope glyphicon glyphicon-download" ng-csv="dishes.set" filename="OrderListOn{{dateInput}}.csv" field-separator=","></button>
+                            <button class="btn btn btn-primary glyphicon glyphicon-floppy-disk" ng-click="editDayMenu();"></button>
+                            <button class="btn btn btn-danger glyphicon glyphicon-remove" ng-click="clearMenu();"></button>
+                        </div>
 
-                        </h3>
                     </div>
-                   
+
                     <div class="dishDnDZone"
                          x-lvl-drop-target="true"
                          x-on-drop="editDishSet(someDish)"
@@ -36,14 +37,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-5 pull-right" style="margin-right: 60px;">
+                <div class="col-md-6 col-sm-5 col-xs-5 pull-right" style="margin-right: 45px;">
                     <h3>All availible dishes</h3>
                     <div class="input-group pull-left">
-                        <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 70%" placeholder="Filter, search dishes..">
+                        <input id="inputSearchDishes" type="search" ng-model="filterDishes" class="form-control" style="width: 65%" placeholder="Filter, search dishes..">
                         <button class="btn btn-primary" ng-click="filterClick();"><i class="glyphicon glyphicon-search"></i></button>
                         <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
                     </div>
-                    <br /><br /><br />
+                    <br/><br/><br/>
                     <div id="allDishes">
                         <div ng-repeat="dish in dishes.allDishes | unchosenDishes:dishes.set" id="{{dish.ID}}1">
                             <div class="col-md-6 img-circle" id={{dish.ID}}
@@ -56,13 +57,13 @@
                         </div>
                     </div>
                     <div class="text-center" style="clear: both;">
-                        <hr />
+                        <hr/>
                         <pagination page="{{page}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" page-route="pageRoute"></pagination>
                     </div>
                 </div>
             </div>
-            <br />
-           
+            <br/>
+
         </div>
     </div>
 </div>

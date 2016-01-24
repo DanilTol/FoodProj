@@ -23,7 +23,7 @@ textarea {
 }
 
 .shortInputSearch {
-    width: 300px !important;
+    width: 270px !important;
     float: right !important;
 }
 
@@ -87,7 +87,7 @@ textarea {
     border: 1px solid #aaaaaa;
     height: 100%;
     /*min-height: 200px;*/
-    max-width:100%;
+    max-width:95.5%;
     max-height:100%;
     overflow:auto ;
 }

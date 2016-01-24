@@ -69,6 +69,9 @@ namespace FoodService.WebApi2
                "~/Scripts/spa/services/fileUploadService.js",
                "~/Scripts/spa/services/notificationService.js",
                "~/Scripts/spa/services/DnD.directive.js",
+               "~/Scripts/spa/services/FileRead.directive.js",
+
+               
 
                 //home
                 "~/Scripts/spa/home/index/indexCtrl.js",

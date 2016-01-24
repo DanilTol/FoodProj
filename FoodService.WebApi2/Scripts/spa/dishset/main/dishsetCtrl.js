@@ -6,7 +6,8 @@
             $scope.dishes = [];
             $scope.dateInput = new Date();
             $scope.dateInputMiliSec = $scope.dateInput.getTime();
-            $scope.DateShow = new Date($location.search().date);
+            //$scope.DateShow = new Date($location.search().date);
+            //$scope.headerArray = ["Dish id", "Name", "Path"];
 
             $scope.editDayMenu = function () {
                 var dishId = [];
@@ -19,24 +20,24 @@
                     });
             }
 
-            function convertDate(date) {
-                date = new Date(date);
-                var day = date.getDate();        // yields day
-                day = day < 10 ? "0" + day : day;
-                var month = (date.getMonth() + 1);    // yields month
-                month = month < 10 ? "0" + month : month;
-                var year = date.getFullYear();  // yields year
+            //function convertDate(date) {
+            //    date = new Date(date);
+            //    var day = date.getDate();        // yields day
+            //    day = day < 10 ? "0" + day : day;
+            //    var month = (date.getMonth() + 1);    // yields month
+            //    month = month < 10 ? "0" + month : month;
+            //    var year = date.getFullYear();  // yields year
 
-                // After this construct a string with the above results as below
-                var time = day + "/" + month + "/" + year;
-                console.log(time);
+            //    // After this construct a string with the above results as below
+            //    var time = day + "/" + month + "/" + year;
+            //    console.log(time);
 
-                return time;
-            }
+            //    return time;
+            //}
 
             function loadDishset() {
                 $location.search("date", $scope.dateInputMiliSec);
-                $scope.DateShow = convertDate($scope.dateInputMiliSec);
+                //$scope.DateShow = convertDate($scope.dateInputMiliSec);
                
                 $scope.dishes.set = {};
 
@@ -114,6 +115,26 @@
                 $scope.dishes.set = $.grep($scope.dishes.set, function (e) { return e.ID != id; });
 
             }
+
+            $scope.showContent = function ($fileContent) {
+                //$scope.content = $fileContent;
+                var c = $scope.content.split("\n");
+                var k = [];
+                for (var row in c) {
+                    k.push(c[row].split(","));
+                }
+                k.pop(k[0]);
+                $scope.dishes.set = [];
+                for (var index in k) {
+                    var dish = {};
+                    if (k[index][0] != "" && k[index][1] != "" && k[index][2] != "") {
+                        dish.ID = k[index][0];
+                        dish.Name = k[index][2];
+                        dish.ImagePath = k[index][1];
+                        $scope.dishes.set.push(dish);
+                    }
+                }
+            };
 
 
             search();

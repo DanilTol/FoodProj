@@ -396,6 +396,7 @@
     <Content Include="Scripts\spa\order\main\orderCtrl.js" />
     <Content Include="Scripts\spa\order\orderModule.js" />
     <Content Include="Scripts\spa\order\orderService.js" />
+    <Content Include="Scripts\spa\services\FileRead.directive.js" />
     <Content Include="Scripts\spa\services\fileUploadService.js" />
     <Content Include="Scripts\spa\services\notificationService.js" />
     <Content Include="Scripts\spa\services\sessionInjector.js" />
