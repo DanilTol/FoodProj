@@ -1,7 +1,7 @@
 ﻿(function (app) {
     "use strict";
     app.controller("registerCtrl", [
-        "$scope", "accountService", "$location", function($scope, accountService, $location) {
+        "$scope", "accountService", "$location", "notificationService", function ($scope, accountService, $location, notificationService) {
             $scope.user = {};
 
             $scope.register = function() {
@@ -9,7 +9,10 @@
                     //success
                     function() {
                         $location.path("/");
-                        $scope.userData.LogInUser = $scope.user;
+                        notificationService.displaySuccess("Welcome " + $scope.user.Name);
+                        //$scope.userData.LogInUser = $scope.user;
+                    }, function() {
+                        notificationService.displayError("Can`t registrate user.");
                     });
 
             }

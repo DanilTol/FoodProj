@@ -16,12 +16,17 @@ namespace FoodService.Business.Services
             Database = uow;
         }
 
-        public void CreateUser(UserDTO userDto)
+        public bool CreateUser(UserDTO userDto)
         {
+            if (Database.User.QueryToTable.Any(x => x.EmailAddress == userDto.EmailAddress))
+            {
+                return false;
+            }
             var user = Mapper.Map<UserDTO, User>(userDto);
             user.Role = Database.Role.QueryToTable.FirstOrDefault(x => x.Name == "user");
             Database.User.Add(user);
             Database.Save();
+            return true;
         }
 
         public bool EditUser(UserDTO userDto)

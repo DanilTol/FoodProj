@@ -56,11 +56,9 @@
             $http.post("/api/account/register", user).
                 success(function (data) {
                     sessionStorage.foodServiceToken = data;
-
                     deferred.resolve(data);
                 }).
-                error(function (data, status) {
-
+                error(function (status) {
                     deferred.reject(status);
                 });
             return deferred.promise;

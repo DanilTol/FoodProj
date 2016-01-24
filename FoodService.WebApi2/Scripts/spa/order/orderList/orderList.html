@@ -1,46 +1,52 @@
 ﻿<div class="row">
     <div class="panel">
         <div class="panel-body">
-            <!--<h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">List of orders on </h4>
-            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput"/>
-            <hr/>-->
             <div class="row">
                 <div class="col-md-9">
                     <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">List of orders on </h4>
-                    <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" style="width: 130px; height: 25px;"/>
+                    <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" style="width: 130px; height: 25px;" />
                     <div class="pull-right">
-                        <button class="btn btn-default ng-isolate-scope glyphicon glyphicon-download" ng-csv="csvArr" csv-header="headerArray" filename="OrderListOn{{dateInput}}.csv" field-separator=","></button>
+                        <button class="btn btn-default ng-isolate-scope glyphicon glyphicon-download" ng-csv="dishes.orderList" csv-header="headerArray" filename="OrderListOn{{dateInput}}.csv" field-separator=","></button>
                         <button class="btn btn-success glyphicon glyphicon-floppy-disk" ng-click="saveChanges()"></button>
                     </div>
-                             <hr/>
+                    <hr />
                     <table class="table table-striped text-center">
                         <tr>
-                            <th class="text-center" ng-repeat="name in headerArray">{{name}}</th>
+                            <th class="text-center">Sent</th>
+                            <th class="text-center">Order id</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">User</th>
+                            <th class="text-center">Dishes</th>
+                            <th class="text-center"></th>
                             <th></th>
                         </tr>
                         <tr ng-repeat="order in dishes.orderList">
+                            <td>
+                                <i ng-if="order.Checked" class="glyphicon glyphicon-check"></i>
+                                <i ng-if="!order.Checked" class="glyphicon glyphicon-unchecked"></i>
+                            </td>
                             <td>{{order.Id}}</td>
                             <td>{{order.Date}}</td>
-                            <td>{{order.User.Name}}</td>
-                            <td>{{order.User.Role}}</td>
+                            <td>{{order.User}}</td>
                             <td>{{order.Dishes}}</td>
                             <td>
                                 <button class="btn btn-danger" ng-click="deleteOrder(order)"><i class="glyphicon glyphicon-remove"></i></button>
                             </td>
                         </tr>
-
-
                     </table>
-
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="email" class="sr-only">Enter chef email</label>
-                            <input type="email" required class="form-control" id="email" ng-model="chefMail" style="width: 200px" placeholder="example@mail.com" />
-                            <input type="button" class="btn btn-primary" ng-click="sendToChef()" value="Send to Chef" />
+                        Send report to chef. Just enter chef email
+                        <div class="input-group">
+                            <input type="email" required class="form-control" ng-model="chefMail" placeholder="example@mail.com">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" ng-click="sendToChef()" type="button">Send</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
-</div>
 </div>

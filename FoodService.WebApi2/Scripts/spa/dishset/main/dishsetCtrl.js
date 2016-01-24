@@ -1,14 +1,12 @@
 ﻿(function (app) {
     "use strict";
     app.controller("dishsetCtrl", [
-        "$scope", "$location", "dishService", "dishsetService", function ($scope, $location, dishService, dishsetService) {
+        "$scope", "$location", "dishService", "dishsetService", "notificationService", function ($scope, $location, dishService, dishsetService, notificationService) {
 
             $scope.dishes = [];
             $scope.dateInput = new Date();
             $scope.dateInputMiliSec = $scope.dateInput.getTime();
-            //$scope.DateShow = new Date($location.search().date);
-            //$scope.headerArray = ["Dish id", "Name", "Path"];
-
+            
             $scope.editDayMenu = function () {
                 var dishId = [];
                 for (var i = 0; i <  $scope.dishes.set.length; i++) {
@@ -16,37 +14,21 @@
                 }
                 dishsetService.editDayMenu($scope.dateInputMiliSec, dishId).then(
                     //success
-                    function (data) {
+                    function () {
+                        notificationService.displaySuccess("Menu has been edited.");
+                    }, function() {
+                        notificationService.displayError("Can`t edit menu. Try again later.");
                     });
             }
 
-            //function convertDate(date) {
-            //    date = new Date(date);
-            //    var day = date.getDate();        // yields day
-            //    day = day < 10 ? "0" + day : day;
-            //    var month = (date.getMonth() + 1);    // yields month
-            //    month = month < 10 ? "0" + month : month;
-            //    var year = date.getFullYear();  // yields year
-
-            //    // After this construct a string with the above results as below
-            //    var time = day + "/" + month + "/" + year;
-            //    console.log(time);
-
-            //    return time;
-            //}
-
             function loadDishset() {
                 $location.search("date", $scope.dateInputMiliSec);
-                //$scope.DateShow = convertDate($scope.dateInputMiliSec);
-               
                 $scope.dishes.set = {};
 
                 dishsetService.filterDayMenu($scope.dateInputMiliSec,"").then(
                     //success
                     function (data) {
-                        //data = {};
                         $scope.dishes.set = data;
-                        //$scope.allDishesFilter = $filter('unchosenDishes')($scope.dishes.allDishes, $scope.dishes.set);
                     });
             }
 
@@ -65,12 +47,13 @@
                      .then(
                          //success
                          function (data) {
-                             //data = {};
                              $scope.dishes.allDishes = data.Items;
                              $scope.page = data.Page;
                              $scope.pagesCount = data.TotalPages;
                              $scope.totalCount = data.TotalCount;
-                         });;
+                         }, function() {
+                            notificationService.displayError("Can`t load availible dishes.");
+                        });
             }
 
             $scope.clearSearch = function () {
@@ -117,8 +100,7 @@
             }
 
             $scope.showContent = function ($fileContent) {
-                //$scope.content = $fileContent;
-                var c = $scope.content.split("\n");
+                var c = $fileContent.split("\n");
                 var k = [];
                 for (var row in c) {
                     k.push(c[row].split(","));
@@ -135,7 +117,6 @@
                     }
                 }
             };
-
 
             search();
         }]);

@@ -54,6 +54,17 @@ namespace FoodService.Business.Services
 
             foreach (var order in ordersDb)
             {
+                if(order.OrderDishes.Count<1)
+                    Database.Order.Delete(order);
+                else
+                {
+                    order.Checked = true;
+                    Database.Order.Update(order);
+                }
+            }
+
+            foreach (var order in ordersDb)
+            {
                 foreach (var orderDish in order.OrderDishes)
                 {
                     if (dishOrder.ContainsKey(orderDish.Dish.Name))

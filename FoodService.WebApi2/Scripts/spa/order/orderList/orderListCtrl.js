@@ -6,67 +6,42 @@
             $scope.dishes = [];
             $scope.dishes.orderList = [];
             $scope.dishes.deletedOrders = [];
-            $scope.dateInput = new Date();
-            $scope.dateInputMiliSec = $scope.dateInput.getTime();
+            $scope.dateInput = getMonday(new Date());
             $scope.chefMail = "";
-            $scope.headerArray = ["Order id", "Date", "User", "Role", "Dishes"];
-            $scope.csvArr = [];
+            $scope.headerArray = ["Order id", "User", "Dishes","Date", "Sent"];
 
-            function prepareArrayToCsv() {
-                var csvArr = [];
-                for (var order in $scope.dishes.orderList) {
-                    var row = {};
-                    row.id = $scope.dishes.orderList[order].Id;
-                    row.date = $scope.dishes.orderList[order].Date;
-                    row.user = $scope.dishes.orderList[order].User.Name;
-                    row.role = $scope.dishes.orderList[order].User.Role;
-                    row.dishes = "";
-                    for (var dish in $scope.dishes.orderList[order].Dishes) {
-                        row.dishes += $scope.dishes.orderList[order].Dishes[dish].Name + " * " + $scope.dishes.orderList[order].Dishes[dish].Number + " ";
-                    }
-                    csvArr.push(row);
-                }
-                $scope.csvArr = csvArr;
-                //return csvArr;
+            function getMonday(date) {
+                var d = new Date(date);
+                var day = d.getDay(),
+                    diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+                return  new Date(d.setDate(diff));
             }
-            
+
             function loadList() {
-                $location.search("date", $scope.dateInputMiliSec);
-                orderService.getOrderList($scope.dateInputMiliSec).then(
+                var dateInputMiliSec = getMonday($scope.dateInput).getTime();
+                $location.search("date", dateInputMiliSec);
+
+                orderService.getOrderList(dateInputMiliSec).then(
                     //success
                     function (data) {
-                        $scope.dishes.orderList = [];
-                        if (data != null) {
-                            for (var order in data) {
-                                var orderItem = {};
-                                orderItem.Id = data[order].Id;
-                                orderItem.Date = data[order].Date.substring(0, 10);
-                                orderItem.User = data[order].User;
-                                orderItem.Dishes = [];
-                                if (!angular.isUndefined(data[order].Dishes.length)) {
-                                    for (var i = 0; i < data[order].Dishes.length; i++) {
-                                        if (angular.isUndefined(orderItem.Dishes[data[order].Dishes[i]])) {
-                                            orderItem.Dishes[data[order].Dishes[i].ID] = {};
-                                        }
-                                        orderItem.Dishes[data[order].Dishes[i].ID].Number = 1 + (orderItem.Dishes[data[order].Dishes[i].ID].Number || 0);
-                                        if (orderItem.Dishes[data[order].Dishes[i].ID].Number == 1) {
-                                            orderItem.Dishes[data[order].Dishes[i].ID].ID = data[order].Dishes[i].ID;
-                                            orderItem.Dishes[data[order].Dishes[i].ID].Name = data[order].Dishes[i].Name;
-                                            orderItem.Dishes[data[order].Dishes[i].ID].ImagePath = data[order].Dishes[i].ImagePath;
-                                        }
-                                    }
-                                    $scope.dishes.orderList.push(orderItem);
-                                }
-                            }
-                           prepareArrayToCsv();
+                        $scope.dishes.orderList = data;
+                        for (var i = 0; i < $scope.dishes.orderList.length; i++) {
+                            $scope.dishes.orderList[i].Date = $scope.dishes.orderList[i].Date.substring(0, 10);
                         }
                     });
             }
 
             $scope.deleteOrder = function (order) {
                 $scope.dishes.deletedOrders.push(order.Id);
-                $scope.dishes.orderList.splice(order, 1);
-                prepareArrayToCsv();
+
+                for (var index in $scope.dishes.orderList) {
+                    if ($scope.dishes.orderList[index].Id == order.Id) {
+                        $scope.dishes.orderList[index].Dishes = "";
+                        $scope.dishes.orderList[index].Checked = false;
+                    }
+                }
+                
+                //$scope.dishes.orderList.splice(order, 1);
             }
 
             $scope.saveChanges = function () {
@@ -80,14 +55,11 @@
             }
 
             $scope.$watch("dateInput", function () {
-                var day = $scope.dateInput.getDay() + 6;
-                $scope.dateInput.setDate($scope.dateInput.getDate() - day);
-                $scope.dateInputMiliSec = $scope.dateInput.getTime();
                 loadList();
             });
 
             $scope.sendToChef = function() {
-                reportService.sendMailToChef($scope.dateInputMiliSec, $scope.chefMail).then(
+                reportService.sendMailToChef(getMonday($scope.dateInput).getTime(), $scope.chefMail).then(
                     function (data) {
                         notificationService.displaySuccess("Mail send.");
                     }, function (status) {

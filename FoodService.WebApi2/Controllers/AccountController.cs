@@ -61,7 +61,8 @@ namespace FoodService.WebApi2.Controllers
             if (ModelState.IsValid)
             {
                 newUser.Salt = newUser.Salt.GetHashCode().ToString();
-                _userService.CreateUser(newUser);
+                if (!_userService.CreateUser(newUser))
+                    return this.Request.CreateResponse(HttpStatusCode.BadRequest);
                 LogInUser a = new LogInUser() { Email = newUser.EmailAddress, Salt = newUser.Salt };
                 return Login(a);
             }
@@ -70,7 +71,6 @@ namespace FoodService.WebApi2.Controllers
 
 
         [HttpGet]
-        [MyAuth]
         [Route("profileInfo")]
         public HttpResponseMessage LoginUserName()
         {
@@ -85,7 +85,6 @@ namespace FoodService.WebApi2.Controllers
         }
 
         [HttpPost]
-        [MyAuth]
         [Route("edit")]
         public HttpResponseMessage EditProfile(UserDTO newProfileInfo)
         {
