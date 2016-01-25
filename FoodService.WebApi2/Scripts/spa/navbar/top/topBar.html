@@ -22,7 +22,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-if="userProfile().Role == 'admin'"><a href="#/reportdif">
-                        <div style="background-color: cornflowerblue; padding: 1px 15px; color: beige" class="img-circle">{{unCheckedOrders}}</div></a></li>
+                        <div style="background-color: cornflowerblue; padding: 1px 15px; color: beige" class="img-circle">{{unCheckedOrders()}}</div></a></li>
                     <li ng-if="isUserLoggedIn()" class="userinfo"><a href="#/profile">{{userProfile().Name}}<i class="fa fa-user fa-fw"></i><label class="label label-danger" ng-if="userProfile().Role == 'admin'" >Admin</label></a></li>
                     <li ng-if="isUserLoggedIn()" class="userinfo">
                         <button style="height: 50px; padding: 0; border: none; background: none; margin-right: 25px; margin-left: 20px;" ng-click="logout()">Log Out <i class="glyphicon glyphicon-log-out"> </i> </button></li>

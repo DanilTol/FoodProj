@@ -3,6 +3,9 @@
 
     app.factory("orderService", [
         "$http", "$q", function ($http, $q) {
+
+            var numberUnchecked;
+
             return {
                 getUserSet: function(date) {
                     date = date || new Date().getTime();
@@ -65,17 +68,36 @@
                         });
                     return deferred.promise;
                 },
-                notCheckedNotification: function() {
-                    var deferred = $q.defer();
-                    $http.get("api/order/notificationcheckorders").
-                        success(function(data) {
-                            deferred.resolve(data);
+                //notCheckedNotification: function() {
+                //    var deferred = $q.defer();
+                //    $http.get("api/order/notificationcheckorders").
+                //        success(function(data) {
+                //            deferred.resolve(data);
+                //        }).
+                //        error(function(status) {
+                //            deferred.reject(status);
+                //        });
+                //    return deferred.promise;
+                //},
+
+                notCheckedNotification: function () {
+                if (angular.isUndefined(numberUnchecked)) {
+                    numberUnchecked = {};
+                    $http.get("/api/order/notificationcheckorders").
+                        success(function(data1) {
+                            numberUnchecked = data1;
                         }).
-                        error(function(status) {
-                            deferred.reject(status);
+                        error(function() {
                         });
-                    return deferred.promise;
-                },
+                } else {
+                    return numberUnchecked;
+        }
+    },
+
+
+
+
+
                 notCheckedOrder: function() {
                 var deferred = $q.defer();
                     $http.get("api/order/uncheckorders").

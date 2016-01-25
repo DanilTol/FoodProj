@@ -15,21 +15,41 @@
             return deferred.promise;
         }
 
-        function getUserData() {
-            if (angular.isUndefined(userProfile) && isUserLoggedIn()) {
-                userProfile = {};
-                userProfile.Name = "";
-                $http.get("/api/account/profileInfo").
-                success(function (data1) {
-                    userProfile = data1;
-                }).
-                error(function (data1, status) {
-                });
+            function getUserData() {
+                if (angular.isUndefined(userProfile) && isUserLoggedIn()) {
+                    userProfile = {};
+                    userProfile.Name = "";
+                    $http.get("/api/account/profileInfo").
+                        success(function(data1) {
+                            userProfile = data1;
+                        }).
+                        error(function() {
+                        });
+                } else {
+                    return userProfile;
+                }
             }
-            return userProfile;
-        }
 
-        function login(user) {
+        //function getUserData() {
+        //    if (angular.isUndefined(userProfile) && isUserLoggedIn()) {
+        //        userProfile = {};
+        //        userProfile.Name = "";
+        //        var deferred = $q.defer();
+        //        $http.get("/api/account/profileInfo").
+        //            success(function (data) {
+        //                deferred.resolve(data);
+        //            }).
+        //            error(function (data1, status) {
+        //                deferred.reject(status);
+        //            });
+        //        //return deferred.promise;
+        //    //} else {
+        //        return userProfile;
+        //    }
+        //}
+
+
+            function login(user) {
             var deferred = $q.defer();
             $http.post("/api/account/login", user).
                 success(function (data) {
