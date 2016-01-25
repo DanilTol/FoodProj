@@ -13,11 +13,6 @@
                       controller: "orderListCtrl"
                       ,reloadOnSearch: false
                   })
-                  // .when("/orderdif", {
-                  //    templateUrl: "scripts/spa/order/orderDif/orderDif.html",
-                  //    controller: "orderDifCtrl",
-                  //    reloadOnSearch: false
-                  //})
                  .otherwise({ redirectTo: "/" });
          });
 })();

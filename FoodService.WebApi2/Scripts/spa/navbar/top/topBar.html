@@ -10,14 +10,10 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <!--<li><a href="#/">Home</a></li>-->
                 <li><a href="#/dishes">Dishes</a></li>
                 <li ng-if="isUserLoggedIn()"><a href="#/order">Order</a></li>
-
-
                 <li ng-if="userProfile().Role == 'admin'"><a href="#/dishset">Menu</a></li>
                 <li ng-if="userProfile().Role == 'admin'"><a href="#/orderlist">Orders List</a></li>
-                <!--<li ng-if="userProfile().Role == 'admin'"><a href="#/report">Report</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav navbar-right">

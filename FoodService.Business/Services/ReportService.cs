@@ -120,31 +120,7 @@ namespace FoodService.Business.Services
 
         public string ReportsForMatch(DateTime dateTime)
         {
-            string oldReport = Database.Report.QueryToTable.FirstOrDefault(x => x.Date == dateTime.Date).ChefReport;
-
-            //     var friday = dateTime.AddDays(4);
-            //var ordersDb = Database.Order.QueryToTable.Where(x => x.Date >= dateTime.Date && x.Date <= friday);
-            //var dishOrder = new Dictionary<string, int>();
-
-            //foreach (var order in ordersDb)
-            //{
-            //    foreach (var orderDish in order.OrderDishes)
-            //    {
-            //        if (dishOrder.ContainsKey(orderDish.Dish.Name))
-            //            dishOrder[orderDish.Dish.Name] += orderDish.Count;
-            //        else
-            //            dishOrder.Add(orderDish.Dish.Name, orderDish.Count);
-            //    }
-            //}
-
-            //string chefReport = "";
-            //foreach (var dish in dishOrder)
-            //{
-            //    chefReport += dish.Key + " * " + dish.Value + "; ";
-            //}
-
-            //return new[] {chefReport,oldReport};
-            return oldReport;
+            return Database.Report.QueryToTable.FirstOrDefault(x => x.Date == dateTime.Date).ChefReport;
         }
 
         public void SentMailToChef(DateTime date, string chefMail)

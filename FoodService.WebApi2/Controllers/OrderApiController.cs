@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
-using FoodService.DAL.Entity;
 using FoodService.WebApi2.Attribute;
 
 namespace FoodService.WebApi2.Controllers
@@ -17,12 +15,10 @@ namespace FoodService.WebApi2.Controllers
         private readonly IOrderService _orderService;
         private readonly IUserService _userService;
         private static readonly DateTime Jan1St1970 = new DateTime(1970, 1, 1);
-        private static User user;
 
         public OrderApiController(IOrderService service, IUserService userService)
         {
             _orderService = service;
-            // here should get user entity from attr MyAuth
             _userService = userService;
         }
 
@@ -31,7 +27,7 @@ namespace FoodService.WebApi2.Controllers
         [Route("getuserset")]
         public HttpResponseMessage GetUserDishSetOnDay(long miliSecFrom1970)
         {
-            user = _userService.GetUserEntity(Int32.Parse(Thread.CurrentPrincipal.Identity.Name));
+            var user = _userService.GetUserEntity(Int32.Parse(Thread.CurrentPrincipal.Identity.Name));
             //var userEmail = Thread.CurrentPrincipal.Identity.Name;
             var date = Jan1St1970.AddMilliseconds(miliSecFrom1970);
             var dayInfo = _orderService.GetPlatesByDate(date, user);
@@ -43,7 +39,7 @@ namespace FoodService.WebApi2.Controllers
         [Route("edituserset")]
         public HttpResponseMessage UpdateOrder(SetOnDay setOnDay)
         {
-            user = _userService.GetUserEntity(Int32.Parse(Thread.CurrentPrincipal.Identity.Name));
+            var user = _userService.GetUserEntity(Int32.Parse(Thread.CurrentPrincipal.Identity.Name));
             _orderService.UpdateOrder(Jan1St1970.AddMilliseconds(setOnDay.Date), setOnDay.DishId, setOnDay.DishNum, user);
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }

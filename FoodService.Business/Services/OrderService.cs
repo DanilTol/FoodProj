@@ -161,7 +161,6 @@ namespace FoodService.Business.Services
                     }
                     order.Checked = false;
                     Database.Order.Update(order);
-                //Database.Order.Delete(Database.Order.QueryToTable.FirstOrDefault(x => x.id == orderId));
             }
             Database.Save();
         }

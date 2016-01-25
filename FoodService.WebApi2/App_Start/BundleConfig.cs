@@ -16,28 +16,16 @@ namespace FoodService.WebApi2
             bundles.Add(new ScriptBundle("~/bundles/Vendors/modernizr").Include(
                         "~/Scripts/Vendors/modernizr-*"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/Vendors/bootstrap").Include(
-            //   // "~/Scripts/Vendors/jquery.js",
-            //    "~/Scripts/Vendors/bootstrap.js",
-            //          "~/Scripts/Vendors/respond.js"
-
-            //          ));
-
             bundles.Add(new ScriptBundle("~/bundles/Vendors").Include(
-              //"~/Scripts/Vendors/jquery.js",
               "~/Scripts/Vendors/jquery-1.10.2.min.js",
               "~/Scripts/Vendors/bootstrap.min.js",
-              //"~/Scripts/Vendors/respond.src.js",
               "~/Scripts/Vendors/diff_match_patch.js",
               "~/Scripts/Vendors/angular.min.js",
               "~/Scripts/Vendors/angular-route.min.js",
               "~/Scripts/Vendors/angular-cookies.min.js",
-              //"~/Scripts/Vendors/angular-validator.js",
               "~/Scripts/Vendors/toastr.min.js",
               "~/Scripts/Vendors/ng-csv.min.js",
               "~/Scripts/Vendors/angular-sanitize.min.js"
-              
-
               ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -47,10 +35,8 @@ namespace FoodService.WebApi2
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
-                //"~/Scripts/Vendors/jquery-1.10.2.min.js",
                 //main
                 "~/Scripts/spa/app.js",
-
 
                 //module
                 "~/Scripts/spa/navbar/navbarModule.js",
@@ -58,11 +44,9 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/dish/dishModule.js",
                 "~/Scripts/spa/account/accountModule.js",
                 "~/Scripts/spa/services/common.core.js",
-                
                 "~/Scripts/spa/dishset/dishsetModule.js",
                 "~/Scripts/spa/order/orderModule.js",
                 "~/Scripts/spa/report/reportModule.js",
-
 
                //Services(common)
                "~/Scripts/spa/services/sessionInjector.js",
@@ -70,8 +54,6 @@ namespace FoodService.WebApi2
                "~/Scripts/spa/services/notificationService.js",
                "~/Scripts/spa/services/DnD.directive.js",
                "~/Scripts/spa/services/FileRead.directive.js",
-
-               
 
                 //home
                 "~/Scripts/spa/home/index/indexCtrl.js",
@@ -93,7 +75,6 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/dishset/dishsetService.js",
                 "~/Scripts/spa/dishset/main/dishsetCtrl.js",
                 "~/Scripts/spa/dishset/main/FilterForChosenDishes.js",
-                
 
                 //order
                 "~/Scripts/spa/order/orderService.js",
@@ -112,8 +93,6 @@ namespace FoodService.WebApi2
                 "~/Scripts/spa/navbar/pagination/pagination.directive.js"
                 
         ));
-            
-
         }
     }
 }

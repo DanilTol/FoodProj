@@ -6,7 +6,6 @@
         $scope.dishes = [];
         $scope.dateInput = new Date();
         $scope.dateInputMiliSec = $scope.dateInput.getTime();
-        $scope.DateShow = new Date($location.search().date);
         $scope.filterDishes = "";
         var maxNumberOfDish = 20;
 
@@ -14,11 +13,8 @@
             var dishId = [];
             var dishNum = [];
             for (var x in $scope.dishes.userSet) {
-               // for (var j = 0; j < $scope.dishes.userSet[x].Number; j++) 
-               {
                    dishId.push($scope.dishes.userSet[x].ID);
                    dishNum.push($scope.dishes.userSet[x].Count);
-               }
             }
             orderService.editUserSet($scope.dateInputMiliSec, dishId, dishNum).then(
                 //success
@@ -30,21 +26,7 @@
                 );
         }
 
-        function convertDate(date) {
-            date = new Date(date);
-            var day = date.getDate();        // yields day
-            day = day < 10 ? "0" + day : day;
-            var month = (date.getMonth() + 1);    // yields month
-            month = month < 10 ? "0" + month : month;
-            var year = date.getFullYear();  // yields year
-
-            // After this construct a string with the above results as below
-            var time = day + "/" + month + "/" + year;
-            console.log(time);
-
-            return time;
-        }
-
+       
         $scope.filterClick = function () {
             dishsetService.filterDayMenu($scope.dateInputMiliSec, $scope.filterDishes).then(
                 //success
@@ -55,7 +37,6 @@
 
         function loadUserSet() {
             $location.search("date", $scope.dateInputMiliSec);
-            $scope.DateShow = convertDate($scope.dateInputMiliSec);
 
             orderService.getUserSet($scope.dateInputMiliSec).then(
                 //success
@@ -63,18 +44,6 @@
                     $scope.dishes.userSet = [];
                     if (data != null) {
                         $scope.dishes.userSet = data;
-
-                        //for (var i = 0; i < data.length; i++) {
-                        //    if (angular.isUndefined($scope.dishes.userSet[data[i].ID])) {
-                        //        $scope.dishes.userSet[data[i].ID] = {};
-                        //    }
-                        //    $scope.dishes.userSet[data[i].ID].Number = 1 + ($scope.dishes.userSet[data[i].ID].Number || 0);
-                        //    if ($scope.dishes.userSet[data[i].ID].Number == 1) {
-                        //        $scope.dishes.userSet[data[i].ID].ID = data[i].ID;
-                        //        $scope.dishes.userSet[data[i].ID].Name = data[i].Name;
-                        //        $scope.dishes.userSet[data[i].ID].ImagePath = data[i].ImagePath;
-                        //    }
-                   // }
                     }
                 });
         }

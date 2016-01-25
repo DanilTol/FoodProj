@@ -68,14 +68,22 @@ namespace FoodService.WebApi2.Controllers
         [Route("profileInfo")]
         public HttpResponseMessage LoginUserName()
         {
-            var requestToken = this.Request.Headers.GetValues("Token").FirstOrDefault();
+            try
+            {
+                var requestToken = this.Request.Headers.GetValues("Token").FirstOrDefault();
 
-            var jsonPayload = JsonWebToken.DecodeToObject(requestToken, secretKey) as IDictionary<string, object>;
-            var userId = Int32.Parse(jsonPayload["id"].ToString());
+                var jsonPayload = JsonWebToken.DecodeToObject(requestToken, secretKey) as IDictionary<string, object>;
+                var userId = Int32.Parse(jsonPayload["id"].ToString());
 
-            var userInfo = _userService.GetUser(userId);
+                var userInfo = _userService.GetUser(userId);
 
-            return this.Request.CreateResponse(HttpStatusCode.OK, userInfo);
+                return this.Request.CreateResponse(HttpStatusCode.OK, userInfo);
+            }
+            catch (Exception)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            
         }
 
         [HttpPost]

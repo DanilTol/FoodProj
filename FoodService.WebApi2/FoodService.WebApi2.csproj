@@ -238,7 +238,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CustomMultipartFormDataStreamProvider.cs" />
-    <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -377,8 +376,6 @@
     <Content Include="Scripts\spa\navbar\navbarModule.js" />
     <Content Include="Scripts\spa\navbar\pagination\pagination.directive.js" />
     <Content Include="Scripts\spa\navbar\top\topBar.html" />
-    <Content Include="Scripts\spa\navbar\side\sideBar.html" />
-    <Content Include="Scripts\spa\home\index\indexCtrl.js" />
     <Content Include="Scripts\spa\navbar\top\topBar.directive.js" />
     <Content Include="Scripts\spa\order\main\order.html" />
     <Content Include="Scripts\spa\order\main\orderCtrl.js" />
@@ -421,7 +418,6 @@
     <Content Include="Scripts\Vendors\angular-sanitize.min.js.map" />
     <Content Include="Scripts\Vendors\angular-route.min.js.map" />
     <Content Include="Scripts\spa\home\index\index.html" />
-    <Content Include="Scripts\spa\navbar\side\sideBar.directive.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />

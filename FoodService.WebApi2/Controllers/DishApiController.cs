@@ -10,14 +10,13 @@ using System.Web.Security;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
 using FoodService.WebApi2.Attribute;
-using FoodService.WebApi2.Infrastructure.Core;
 using FoodService.WebApi2.Models;
 using FoodService.WebApi2.Infrastructure;
 
 namespace FoodService.WebApi2.Controllers
 {
     [RoutePrefix("api/dishes")]
-    public class DishApiController : ApiControllerBase
+    public class DishApiController : ApiController
     {
         private readonly IDishService _dishService;
 
@@ -31,11 +30,8 @@ namespace FoodService.WebApi2.Controllers
         [Route("details/{id:int}")]
         public HttpResponseMessage Get(int id)
         {
-            return CreateHttpResponse(this.Request, () =>
-            {
-                var detailsInfo = _dishService.GetDishById(id);
-                return this.Request.CreateResponse(HttpStatusCode.OK, detailsInfo);
-            });
+            var detailsInfo = _dishService.GetDishById(id);
+            return this.Request.CreateResponse(HttpStatusCode.OK, detailsInfo);
         }
 
         [HttpGet]
@@ -52,7 +48,7 @@ namespace FoodService.WebApi2.Controllers
             {
                 Page = page,
                 TotalCount = totalDishes,
-                TotalPages = (int) Math.Ceiling((decimal) totalDishes/pageSize),
+                TotalPages = (int)Math.Ceiling((decimal)totalDishes / pageSize),
                 Items = shortDish
             };
 
@@ -101,7 +97,7 @@ namespace FoodService.WebApi2.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-        
+
         [MyAuth("admin")]
         [HttpPost]
         [Route("update")]
@@ -135,7 +131,7 @@ namespace FoodService.WebApi2.Controllers
                     Price = Convert.ToInt32(provider.FormData.Get("Price")),
                     Weight = Convert.ToInt32(provider.FormData.Get("Weight"))
                 };
-                
+
                 _dishService.EditDish(detailsDish);
 
                 return Request.CreateResponse(HttpStatusCode.OK);

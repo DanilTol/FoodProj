@@ -38,7 +38,8 @@ namespace FoodService.Business.Services
             }
             userDb.Name = userEdit.Name;
             userDb.EmailAddress = userEdit.EmailAddress;
-            userDb.Salt = userEdit.NewSalt.GetHashCode().ToString();
+            if(string.IsNullOrEmpty(userEdit.NewSalt))
+                userDb.Salt = userEdit.NewSalt.GetHashCode().ToString();
             Database.User.Update(userDb);
             Database.Save();
 

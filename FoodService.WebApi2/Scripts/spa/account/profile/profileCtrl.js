@@ -3,15 +3,15 @@
 
     app.controller("profileCtrl", [
         "$scope", "accountService", "notificationService", function ($scope, accountService, notificationService) {
-            $scope.userProfile = {};
+            $scope.userProfile = accountService.getUserData();
+            $scope.userProfile.Salt = "";
+            //accountService.getUserAsync().
+            //    then(function (data) {
+            //        $scope.userProfile = data;
+            //        $scope.userProfile.Salt = "";
+            //    }, function () {
 
-            accountService.getUserAsync().
-                then(function (data) {
-                    $scope.userProfile = data;
-                    $scope.userProfile.Salt = "";
-                }, function () {
-
-                });
+            //    });
 
             $scope.editProfile = function () {
                 accountService.editProfile($scope.userProfile).

@@ -19,14 +19,12 @@ namespace FoodService.WebApi2.Controllers
             _reportService = report;
         }
 
-
         [HttpGet]
         [Route("getallreports")]
         public HttpResponseMessage GetReports()
         {
             return Request.CreateResponse(HttpStatusCode.OK, _reportService.GetReports());
         }
-
 
         [HttpGet]
         [Route("match")]
