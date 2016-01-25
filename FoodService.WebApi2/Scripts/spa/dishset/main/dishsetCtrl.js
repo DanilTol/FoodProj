@@ -23,12 +23,21 @@
 
             function loadDishset() {
                 $location.search("date", $scope.dateInputMiliSec);
-                $scope.dishes.set = {};
+                $scope.dishes.set = [];
 
                 dishsetService.filterDayMenu($scope.dateInputMiliSec,"").then(
                     //success
                     function (data) {
-                        $scope.dishes.set = data;
+                        //$scope.dishes.set = data;
+                        for (var i = 0; i < data.length; i++) {
+                            var dish = {};
+                            dish.ID = data[i].ID;
+                            dish.ImagePath = data[i].ImagePath;
+                            dish.Name = data[i].Name;
+                            
+
+                            $scope.dishes.set.push(dish);
+                        }
                     });
             }
 

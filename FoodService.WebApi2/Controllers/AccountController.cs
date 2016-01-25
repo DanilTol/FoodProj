@@ -52,7 +52,6 @@ namespace FoodService.WebApi2.Controllers
 
 
         [HttpPost]
-        [AllowAnonymous]
         [Route("register")]
         public HttpResponseMessage Register(UserDTO newUser)
         {

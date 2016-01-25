@@ -4,7 +4,7 @@
         ["$scope", "notificationService", "reportService", function ($scope, notificationService, reportService) {
 
             $scope.htmlDif = "";
-            $scope.chefMail = "";
+            $scope.chefMail = "fv";
             $scope.reports = [];
             $scope.dateReport = new Date();
             $scope.allowSend = false;

@@ -28,12 +28,12 @@
                     //success
                     function (data) {
                         notificationService.displaySuccess("Dish has been deleted.");
+                        $location.path("/dishes");
                     }, function () {
                         notificationService.displayError("Can`t delete this dish.");
                     }
                     );;
             }
-
 
             loadDetails();
         }]);

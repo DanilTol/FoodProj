@@ -34,7 +34,7 @@ namespace FoodService.Business.Services
             if (!reportsDb.Any(x => x.Date == today.Date))
             {
                 //were not sent
-                var friday = today.AddDays(4);
+                var friday = today.AddDays(6);
                 var ordersDb = Database.Order.QueryToTable.Where(x => x.Date >= today.Date && x.Date <= friday.Date);
                 var dishOrder = new Dictionary<string, int>();
                 
@@ -79,7 +79,7 @@ namespace FoodService.Business.Services
                  };
 
                 bool sent = true;
-                var friday = report.Date.AddDays(4);
+                var friday = report.Date.AddDays(6);
                 var ordersDb = Database.Order.QueryToTable.Where(x => x.Date >= report.Date && x.Date <= friday);
                 foreach (var order in ordersDb)
                 {
@@ -149,7 +149,7 @@ namespace FoodService.Business.Services
 
         public void SentMailToChef(DateTime date, string chefMail)
         {
-            var friday = date.AddDays(4);
+            var friday = date.AddDays(6);
             var ordersDb = Database.Order.QueryToTable.Where(x => x.Date >= date && x.Date <= friday);
             var dishOrder = new Dictionary<string, int>();
 

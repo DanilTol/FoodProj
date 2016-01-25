@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
@@ -10,41 +11,44 @@ using FoodService.WebApi2.Attribute;
 
 namespace FoodService.WebApi2.Controllers
 {
-    [MyAuth]
     [RoutePrefix("api/order")]
     public class OrderApiController : ApiController
     {
         private readonly IOrderService _orderService;
+        private readonly IUserService _userService;
         private static readonly DateTime Jan1St1970 = new DateTime(1970, 1, 1);
         private static User user;
-        int userId = 2;
 
         public OrderApiController(IOrderService service, IUserService userService)
         {
             _orderService = service;
             // here should get user entity from attr MyAuth
-            user = userService.GetUserEntity(userId);
+            _userService = userService;
         }
 
+        [MyAuth]
         [HttpGet]
         [Route("getuserset")]
         public HttpResponseMessage GetUserDishSetOnDay(long miliSecFrom1970)
         {
-
+            user = _userService.GetUserEntity(Int32.Parse(Thread.CurrentPrincipal.Identity.Name));
             //var userEmail = Thread.CurrentPrincipal.Identity.Name;
             var date = Jan1St1970.AddMilliseconds(miliSecFrom1970);
             var dayInfo = _orderService.GetPlatesByDate(date, user);
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 
+        [MyAuth]
         [HttpPost]
         [Route("edituserset")]
         public HttpResponseMessage UpdateOrder(SetOnDay setOnDay)
         {
+            user = _userService.GetUserEntity(Int32.Parse(Thread.CurrentPrincipal.Identity.Name));
             _orderService.UpdateOrder(Jan1St1970.AddMilliseconds(setOnDay.Date), setOnDay.DishId, setOnDay.DishNum, user);
             return this.Request.CreateResponse(HttpStatusCode.OK);
         }
 
+        [MyAuth("admin")]
         [HttpGet]
         [Route("orderlist")]
         public HttpResponseMessage GetListOfOrders(long miliSecFrom1970)
@@ -53,6 +57,7 @@ namespace FoodService.WebApi2.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, ordersList);
         }
 
+        [MyAuth("admin")]
         [HttpPost]
         [Route("ordersdelete")]
         public HttpResponseMessage DeleteRangeOrders(int[] orderInfos)
@@ -61,8 +66,7 @@ namespace FoodService.WebApi2.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-       
-
+        [MyAuth("admin")]
         [HttpGet]
         [Route("notificationcheckorders")]
         public HttpResponseMessage NotificationCheckedOrders()
@@ -70,6 +74,7 @@ namespace FoodService.WebApi2.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, _orderService.NumberOfUnchecked());
         }
 
+        [MyAuth("admin")]
         [HttpGet]
         [Route("uncheckorders")]
         public HttpResponseMessage NotCheckedOrders()

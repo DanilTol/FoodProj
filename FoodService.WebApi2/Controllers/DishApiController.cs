@@ -135,13 +135,7 @@ namespace FoodService.WebApi2.Controllers
                     Price = Convert.ToInt32(provider.FormData.Get("Price")),
                     Weight = Convert.ToInt32(provider.FormData.Get("Weight"))
                 };
-
-                //if (provider.FormFile)
-                //{
-                //    detailsDish.ImagePath = provider.FormData.Get("ImagePath");
-                //}
-
-
+                
                 _dishService.EditDish(detailsDish);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
@@ -150,31 +144,6 @@ namespace FoodService.WebApi2.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
-
-
-
-            //return CreateHttpResponse(this.Request, () =>
-            //{
-            //    HttpResponseMessage response;
-
-            //    if (!ModelState.IsValid)
-            //    {
-            //        response = this.Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            //    }
-            //    else
-            //    {
-            //        var dishDb = _dishService.GetDishById(dish.ID);
-            //        if (dishDb == null)
-            //            response = this.Request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid dish.");
-            //        else
-            //        {
-            //            _dishService.EditDish(dish);
-            //            response = this.Request.CreateResponse<DishModelDetailsInfo>(HttpStatusCode.OK, dish);
-            //        }
-            //    }
-
-            //    return response;
-            //});
         }
 
         [MyAuth("admin")]

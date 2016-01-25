@@ -3,13 +3,13 @@
         <img class="media-object img-rounded  img-responsive" style="margin: 0 auto; height: 320px;" ng-src="/Images/Dish/{{dish.ImagePath[0]}}" alt="{{dish.Name}}" alt="{{dish.Name}}" class="pull-left" />
         <div style="color: black "><i><i class="fa fa-quote-left"></i>{{dish.Description}}<i class="fa fa-quote-right"></i></i></div>
         <br />
-        <div class="btn-group">
+        <div ng-if="userProfile.Role == 'admin'" class="btn-group">
             <a ng-href="#/dishes/edit/{{dish.ID}}" class="btn btn-sm btn-default">Edit dish<i class="fa fa-pencil-square-o pull-right"></i></a>
         </div> <!-- end btn-group -->
     </div> <!-- end container -->
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" style="margin-bottom: 30px">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h5>{{dish.Name}}</h5>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="panel-footer clearfix">
-                <div class="pull-right">
+                <div ng-if="userProfile.Role == 'admin'"class="pull-right">
                     <a ng-href="#/dishes/edit/{{dish.ID}}" class="btn btn-default">Edit dish <i class="fa fa-pencil-square pull-right"></i></a>
                 </div>
             </div>

@@ -134,7 +134,7 @@ namespace FoodService.Business.Services
 
         public IEnumerable<OrderInfo> GetOrderListOnWeek(DateTime date)
         {
-            var friday = date.AddDays(4);
+            var friday = date.AddDays(6);
             var ordersDb = Database.Order.QueryToTable.Where(x => x.Date >= date && x.Date <= friday);
             var orderInfos = new List<OrderInfo>();
             foreach (var order in ordersDb)

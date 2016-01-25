@@ -86,6 +86,7 @@
 
         function logoutUser() {
             sessionStorage.clear();
+            userProfile = {};
         }
 
         function isUserLoggedIn() {

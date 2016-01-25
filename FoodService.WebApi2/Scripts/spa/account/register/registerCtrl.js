@@ -10,7 +10,7 @@
                     function () {
                         $location.path("/");
                         notificationService.displaySuccess("Welcome " + $scope.user.Name);
-                        //$scope.userData.LogInUser = $scope.user;
+                        
                     }, function () {
                         notificationService.displayError("Can`t registrate user.");
                     });

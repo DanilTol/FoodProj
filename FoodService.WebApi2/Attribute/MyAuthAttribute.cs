@@ -25,7 +25,6 @@ namespace FoodService.WebApi2.Attribute
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             bool auth = false;
-            //IEnumerable<string> headerValues;
             string requestToken;
             try
             {
@@ -37,8 +36,6 @@ namespace FoodService.WebApi2.Attribute
             }
 
             var userService = ServiceLocator.Current.GetInstance<IUserService>();
-            
-            //var requestToken = headerValues.FirstOrDefault();
 
             var secretKey = "G";
             try
@@ -46,27 +43,19 @@ namespace FoodService.WebApi2.Attribute
 
                 var jsonPayload = JsonWebToken.DecodeToObject(requestToken, secretKey) as IDictionary<string, object>;
                 var userId = Int32.Parse(jsonPayload["id"].ToString());
-                //var email = requestToken;
 
                 var user = userService.GetUser(userId);
 
                 if (user == null || (user.Role != _role && user.Role != "admin")) return auth;
 
-                GenericIdentity MyIdentity = new GenericIdentity(user.EmailAddress);
+                GenericIdentity MyIdentity = new GenericIdentity(user.Id.ToString());
 
                 // Create generic principal.
                 string[] MyStringArray = { user.Role };
                 GenericPrincipal MyPrincipal =
                     new GenericPrincipal(MyIdentity, MyStringArray);
-
-                //MembershipCreateStatus status;
-                //var c = Membership.CreateUser(user.Name, user.Salt, user.EmailAddress,null,null,true,null, out status);
-                //var n =Membership.GetAllUsers();
-                //HttpContext.Current.User = MyPrincipal;
-
-                Thread.CurrentPrincipal = MyPrincipal;
-
                 
+                Thread.CurrentPrincipal = MyPrincipal;
 
                 auth = true;
 

@@ -1,7 +1,7 @@
 ﻿(function (app) {
     "use strict";
     app.controller("dishDetailsCtrl", [
-        "$scope", "$routeParams", "$location", "dishService", function($scope, $routeParams, $location, dishService) {
+        "$scope", "$routeParams", "$location", "dishService", "accountService", function ($scope, $routeParams, $location, dishService, accountService) {
             function loadDetails() {
                 dishService.loadDishDetails($routeParams.id).then(
                     //success
@@ -18,6 +18,16 @@
             $scope.detailsRedirect = function (path) {
                 $location.path(path);
             }
+
+            $scope.userProfile = {};
+
+            accountService.getUserAsync().
+                then(function (data) {
+                    $scope.userProfile = data;
+                    $scope.userProfile.Salt = "";
+                }, function () {
+
+                });
 
             loadDetails();
         }]);

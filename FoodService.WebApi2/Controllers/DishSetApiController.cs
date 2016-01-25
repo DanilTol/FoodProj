@@ -4,9 +4,11 @@ using System.Net.Http;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
+using FoodService.WebApi2.Attribute;
 
 namespace FoodService.WebApi2.Controllers
 {
+    
     [RoutePrefix("api/dishset")]
     public class DishSetApiController : ApiController
     {
@@ -18,6 +20,7 @@ namespace FoodService.WebApi2.Controllers
             _daySetService = service;
         }
 
+        [MyAuth]
         [HttpGet]
         [Route("filterdishmenu")]
         public HttpResponseMessage GetFilterDishMenuOnDay(long miliSecFrom1970, string filter = "")
@@ -26,6 +29,7 @@ namespace FoodService.WebApi2.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, dayInfo);
         }
 
+        [MyAuth("admin")]
         [HttpPost]
         [Route("editdishmenu")]
         public HttpResponseMessage UpdatingMenuOnDay(SetOnDay setOnDay)
