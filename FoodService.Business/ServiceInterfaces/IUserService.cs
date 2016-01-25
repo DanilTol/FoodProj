@@ -7,7 +7,7 @@ namespace FoodService.Business.ServiceInterfaces
     public interface IUserService
     {
         bool CreateUser(UserDTO userDto);
-        bool EditUser(UserDTO userDto);
+        bool EditUser(UserEdit userDto);
         User Login(LogInUser inUser);
         UserDTO GetUser(int id);
         User GetUserEntity(int id);

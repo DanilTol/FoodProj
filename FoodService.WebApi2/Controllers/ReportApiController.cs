@@ -19,9 +19,18 @@ namespace FoodService.WebApi2.Controllers
             _reportService = report;
         }
 
+
+        [HttpGet]
+        [Route("getallreports")]
+        public HttpResponseMessage GetReports()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, _reportService.GetReports());
+        }
+
+
         [HttpGet]
         [Route("match")]
-        public HttpResponseMessage GetReportsForMatching(long miliSecFrom1970)
+        public HttpResponseMessage GetReportForMatching(long miliSecFrom1970)
         {
             return Request.CreateResponse(HttpStatusCode.OK,_reportService.ReportsForMatch(Jan1St1970.AddMilliseconds(miliSecFrom1970)));
         }

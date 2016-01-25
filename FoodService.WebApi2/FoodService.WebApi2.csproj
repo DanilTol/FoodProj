@@ -364,10 +364,8 @@
     <Content Include="Scripts\spa\dishset\main\dishsetCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
     <Content Include="Scripts\spa\dishset\dishsetService.js" />
-    <Content Include="Scripts\spa\report\main\report.html" />
     <Content Include="Scripts\spa\report\main\reportCtrl.js" />
-    <Content Include="Scripts\spa\report\reportDif\reportDifCtrl.js" />
-    <Content Include="Scripts\spa\report\reportDif\reportDif.html" />
+    <Content Include="Scripts\spa\report\main\report.html" />
     <Content Include="Scripts\spa\order\orderList\orderList.html" />
     <Content Include="Scripts\spa\order\orderList\orderListCtrl.js" />
     <Content Include="Scripts\spa\report\reportModule.js" />

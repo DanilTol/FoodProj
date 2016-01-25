@@ -8,11 +8,11 @@
                       controller: "reportCtrl",
                       reloadOnSearch: false
                   })
-                  .when("/reportdif", {
-                      templateUrl: "scripts/spa/report/reportDif/reportDif.html",
-                      controller: "reportDifCtrl",
-                      reloadOnSearch: false
-                  })
+                  //.when("/reportdif", {
+                  //    templateUrl: "scripts/spa/report/reportDif/reportDif.html",
+                  //    controller: "reportDifCtrl",
+                  //    reloadOnSearch: false
+                  //})
                  .otherwise({ redirectTo: "/" });
          });
 })();

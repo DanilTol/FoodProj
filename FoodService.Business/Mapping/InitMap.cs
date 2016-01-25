@@ -15,6 +15,7 @@ namespace FoodService.Business.Mapping
 
             Mapper.CreateMap<UserDTO, LogInUser>();
             Mapper.CreateMap<UserDTO, User>();
+            Mapper.CreateMap<UserEdit, User>();
             Mapper.CreateMap<User, UserDTO>();
         }
     }

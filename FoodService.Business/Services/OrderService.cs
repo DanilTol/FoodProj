@@ -124,7 +124,9 @@ namespace FoodService.Business.Services
                     {
                         Database.OrderDishes.Delete(orderDish);
                     }
-                    Database.Order.Delete(order);
+                    order.Checked = false;
+                    Database.Order.Update(order);
+                    //Database.Order.Delete(order);
                 }
             }
             Database.Save();
@@ -137,15 +139,12 @@ namespace FoodService.Business.Services
             var orderInfos = new List<OrderInfo>();
             foreach (var order in ordersDb)
             {
-                var userDto = Mapper.Map<User, UserDTO>(order.User);
-                userDto.Role = order.User.Role.Name;
-                var dishShort =
-                    Mapper.Map<IEnumerable<Dish>, List<DishModelShortInfo>>(order.OrderDishes.Select(dish => dish.Dish));
-                foreach (var dish in dishShort)
+                string dishshort = "";
+                foreach (var orderdish in order.OrderDishes)
                 {
-                    dish.Count = order.OrderDishes.FirstOrDefault(x => x.Dish.id == dish.ID).Count;
+                    dishshort += orderdish.Dish.Name + " * " + orderdish.Count;
                 }
-                orderInfos.Add(new OrderInfo { Date = order.Date, Id = order.id, User = userDto, Dishes = dishShort, Checked = order.Checked });
+                orderInfos.Add(new OrderInfo { Date = order.Date, Id = order.id, User = order.User.Name, Dishes = dishshort, Checked = order.Checked });
             }
             return orderInfos;
         }
@@ -154,7 +153,15 @@ namespace FoodService.Business.Services
         {
             foreach (var orderId in orderIds)
             {
-                Database.Order.Delete(Database.Order.QueryToTable.FirstOrDefault(x => x.id == orderId));
+                var order = Database.Order.QueryToTable.FirstOrDefault(x => x.id == orderId);
+                var orderDishes = order.OrderDishes.ToList();
+                    foreach (var orderdish in orderDishes)
+                    {
+                        Database.OrderDishes.Delete(orderdish);
+                    }
+                    order.Checked = false;
+                    Database.Order.Update(order);
+                //Database.Order.Delete(Database.Order.QueryToTable.FirstOrDefault(x => x.id == orderId));
             }
             Database.Save();
         }
@@ -171,15 +178,12 @@ namespace FoodService.Business.Services
             var orderInfos = new List<OrderInfo>();
             foreach (var order in ordersDb)
             {
-                var userDto = Mapper.Map<User, UserDTO>(order.User);
-                userDto.Role = order.User.Role.Name;
-                var dishShort =
-                    Mapper.Map<IEnumerable<Dish>, List<DishModelShortInfo>>(order.OrderDishes.Select(dish => dish.Dish));
-                foreach (var dish in dishShort)
+                string dishshort = "";
+                foreach (var orderdish in order.OrderDishes)
                 {
-                    dish.Count = order.OrderDishes.FirstOrDefault(x => x.Dish.id == dish.ID).Count;
+                    dishshort += orderdish.Dish.Name + " * " + orderdish.Count + "\n";
                 }
-                orderInfos.Add(new OrderInfo { Date = order.Date, Id = order.id, User = userDto, Dishes = dishShort, Checked = order.Checked });
+                orderInfos.Add(new OrderInfo { Date = order.Date, Id = order.id, User = order.User.Name, Dishes = dishshort, Checked = order.Checked });
             }
             return orderInfos;
         }

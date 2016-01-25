@@ -29,16 +29,17 @@ namespace FoodService.Business.Services
             return true;
         }
 
-        public bool EditUser(UserDTO userDto)
+        public bool EditUser(UserEdit userEdit)
         {
-            var userDb = Database.User.QueryToTable.FirstOrDefault(x => x.id == userDto.Id);
-            if (userDto.Salt.GetHashCode().ToString() != userDb.Salt)
+            var userDb = Database.User.QueryToTable.FirstOrDefault(x => x.id == userEdit.Id);
+            if (userEdit.Salt.GetHashCode().ToString() != userDb.Salt)
             {
                 return false;
             }
-            var user = Mapper.Map<UserDTO, User>(userDto);
-            user.Role = Database.Role.QueryToTable.FirstOrDefault(x => x.Name == userDto.Role);
-            Database.User.Update(user);
+            userDb.Name = userEdit.Name;
+            userDb.EmailAddress = userEdit.EmailAddress;
+            userDb.Salt = userEdit.NewSalt.GetHashCode().ToString();
+            Database.User.Update(userDb);
             Database.Save();
 
             return true;

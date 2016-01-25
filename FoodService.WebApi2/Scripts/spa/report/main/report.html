@@ -1,48 +1,47 @@
 ﻿<div class="row">
     <div class="panel">
         <div class="panel-body">
-            <!--<h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">List of orders on </h4>
-            <input type="date" id="dateInput" name="dateInput" ng-model="dateInput"/>
-            <hr/>-->
             <div class="row">
                 <div class="col-md-9">
-                    <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">List of orders on </h4>
-                    <input type="date" id="dateInput" name="dateInput" ng-model="dateInput" style="width: 130px;"/>
-                    <button class="btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="saveChanges()"></button>
-                    <button class="btn btn-primary pull-right glyphicon glyphicon-floppy-disk" ng-click="reportDif()"></button>
-                    <hr/>
+                    <h4 class="panel-title pull-left" style="padding-top: 7.5px; padding-right: 15px">Reports</h4>
+                    <button style="margin-bottom: 5px" class="btn btn-default pull-right ng-isolate-scope glyphicon glyphicon-download" ng-csv="reports" filename="Reports.csv" field-separator=","></button>
                     <table class="table table-striped text-center">
                         <tr>
-                            <th class="text-center" ng-repeat="name in headerArray">{{name}}</th>
+                            <th class="text-center">State</th>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Email</th>
                             <th></th>
                         </tr>
-                        <tr ng-repeat="order in dishes.orderList">
-                            <td>{{order.Id}}</td>
-                            <td>{{order.Date}}</td>
-                            <td>{{order.User.Name}}</td>
-                            <td>{{order.User.Role}}</td>
+                        <tr ng-repeat="rep in reports">
                             <td>
-                                11
+                                <i ng-if="rep.State==0">Changed</i>
+                                <i ng-if="rep.State==-1">New</i>
+                                <i ng-if="rep.State==1">Sent</i>
                             </td>
+                            <td>{{rep.Id}}</td>
+                            <td>{{rep.Date}}</td>
+                            <td>{{rep.Email}}</td>
                             <td>
-                                <button class="btn btn-danger" ng-click="deleteOrder(order)"><i class="glyphicon glyphicon-remove"></i></button>
+                                <button class="btn btn-danger" ng-click="reportDif(rep)">Show</button>
                             </td>
                         </tr>
-
-
                     </table>
+                </div>
 
-                </div>
                 <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="email" class="sr-only">Enter chef email</label>
-                        <input type="email" required class="form-control" id="email" ng-model="chefMail" style="width: 235px" placeholder="example@mail.com"/><br/>
-                        <button class="btn btn-default ng-isolate-scope" ng-csv="csvArr" csv-header="headerArray" filename="OrderListOn{{dateInput}}.csv" field-separator=",">Export to CSV</button>
-                        <input type="button" class="btn btn-primary" ng-click="sendToChef()" value="Send to Chef"/>
+                    <div class="form-group" ng-if="allowSend">
+                        Send report to chef. Just enter chef email
+                        <div class="input-group">
+                            <input type="email" required class="form-control" ng-model="chefMail" placeholder="example@mail.com">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" ng-click="sendToChef()" type="button">Send</button>
+                            </span>
+                        </div>
                     </div>
-                    <input type="text" ng-model="htmlDif"/>
+                    <div ng-bind-html="htmlDif"></div>
                 </div>
+            </div>
         </div>
     </div>
-</div>
 </div>

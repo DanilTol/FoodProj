@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
-using FoodService.DAL.Entity;
 using FoodService.WebApi2.Attribute;
 using JWT;
 
@@ -42,7 +41,6 @@ namespace FoodService.WebApi2.Controllers
                     {"exp", exp}
                 };
                 string token = JWT.JsonWebToken.Encode(payload, secretKey, JWT.JwtHashAlgorithm.HS256);
-                //token = user.Email;
                 response = this.Request.CreateResponse<string>(HttpStatusCode.OK, token);
             }
             else
@@ -58,15 +56,12 @@ namespace FoodService.WebApi2.Controllers
         [Route("register")]
         public HttpResponseMessage Register(UserDTO newUser)
         {
-            if (ModelState.IsValid)
-            {
-                newUser.Salt = newUser.Salt.GetHashCode().ToString();
-                if (!_userService.CreateUser(newUser))
-                    return this.Request.CreateResponse(HttpStatusCode.BadRequest);
-                LogInUser a = new LogInUser() { Email = newUser.EmailAddress, Salt = newUser.Salt };
-                return Login(a);
-            }
-            return this.Request.CreateResponse(HttpStatusCode.BadRequest);
+            if (!ModelState.IsValid) return this.Request.CreateResponse(HttpStatusCode.BadRequest);
+            newUser.Salt = newUser.Salt.GetHashCode().ToString();
+            if (!_userService.CreateUser(newUser))
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest);
+            LogInUser a = new LogInUser() { Email = newUser.EmailAddress, Salt = newUser.Salt };
+            return Login(a);
         }
 
 
@@ -86,13 +81,10 @@ namespace FoodService.WebApi2.Controllers
 
         [HttpPost]
         [Route("edit")]
-        public HttpResponseMessage EditProfile(UserDTO newProfileInfo)
+        public HttpResponseMessage EditProfile(UserEdit newProfileInfo)
         {
-            _userService.EditUser(newProfileInfo);
-            return Request.CreateResponse(HttpStatusCode.Accepted);
+            bool edited = _userService.EditUser(newProfileInfo);
+            return Request.CreateResponse(edited ? HttpStatusCode.Accepted : HttpStatusCode.Forbidden);
         }
-
-
-
     }
 }

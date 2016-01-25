@@ -9,11 +9,9 @@
                 then(function(data) {
                     $scope.userProfile = data;
                     $scope.userProfile.Salt = "";
-                    $scope.$apply();
-                },function(data) {
+                },function() {
                     
                 });
-            
             
             $scope.editProfile = function() {
                 accountService.editProfile($scope.userProfile).
