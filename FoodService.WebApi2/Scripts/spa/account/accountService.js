@@ -86,6 +86,42 @@
             return deferred.promise;
         }
 
+            function getAllUsers() {
+                var deferred = $q.defer();
+                $http.get("/api/account/getall").
+                    success(function (data) {
+                        deferred.resolve(data);
+                    }).
+                    error(function (data1, status) {
+                        deferred.reject(status);
+                    });
+                return deferred.promise;
+            }
+
+            function editAsAdmin(user) {
+                var deferred = $q.defer();
+                $http.post("/api/account/editasadmin", user).
+                    success(function (data) {
+                        deferred.resolve(data);
+                    }, function () {
+                        deferred.reject(status);
+                    });
+                return deferred.promise;
+            }
+
+
+        function removeUser(userId) {
+            var deferred = $q.defer();
+            $http.delete("/api/account/deleteUser?userId=" + userId).
+                success(function (data) {
+                    deferred.resolve(data);
+                }).
+                error(function (data1, status) {
+                    deferred.reject(status);
+                });
+            return deferred.promise;
+        }
+
         var service = {
             login: login,
             register: register,
@@ -93,7 +129,10 @@
             isUserLoggedIn: isUserLoggedIn,
             getUserData: getUserData,
             getUserAsync: getUserAsync,
-            editProfile: editProfile
+            editProfile: editProfile,
+            getAllUsers: getAllUsers,
+            removeUser: removeUser,
+            editAsAdmin: editAsAdmin
         }
         return service;
     }

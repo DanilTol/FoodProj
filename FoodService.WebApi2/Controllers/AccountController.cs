@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using FoodService.Business.DTO;
 using FoodService.Business.ServiceInterfaces;
@@ -63,6 +64,14 @@ namespace FoodService.WebApi2.Controllers
             return Login(a);
         }
 
+        [MyAuth("admin")]
+        [HttpGet]
+        [Route("getall")]
+        public HttpResponseMessage GetAllUsers( )
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, _userService.GetAll(Int32.Parse(Thread.CurrentPrincipal.Identity.Name)));
+        }
+
 
         [HttpGet]
         [Route("profileInfo")]
@@ -93,5 +102,23 @@ namespace FoodService.WebApi2.Controllers
             bool edited = _userService.EditUser(newProfileInfo);
             return Request.CreateResponse(edited ? HttpStatusCode.Accepted : HttpStatusCode.Forbidden);
         }
+
+        [HttpPost]
+        [Route("editasadmin")]
+        public HttpResponseMessage EditAsAdmin(UserEdit newProfileInfo)
+        {
+            _userService.EditAsAdmin(newProfileInfo);
+            return Request.CreateResponse(HttpStatusCode.Accepted);
+        }
+
+        [HttpDelete]
+        [Route("deleteUser")]
+        public HttpResponseMessage DeleteUser(int userId)
+        {
+            _userService.DeleteUser(userId);
+            return Request.CreateResponse(HttpStatusCode.Accepted);
+        }
+
+
     }
 }

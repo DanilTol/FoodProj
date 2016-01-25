@@ -11,6 +11,10 @@
                     templateUrl: "scripts/spa/account/profile/profile.html",
                     controller: "profileCtrl"
                 })
+                .when("/useredit", {
+                    templateUrl: "scripts/spa/account/useredit/useredit.html",
+                    controller: "usereditCtrl"
+                })
                 .when("/register", {
                     templateUrl: "scripts/spa/account/register/register.html",
                     controller: "registerCtrl"

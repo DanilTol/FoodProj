@@ -349,6 +349,8 @@
     <Content Include="Scripts\spa\account\register\register.html" />
     <Content Include="Scripts\spa\account\login\loginCtrl.js" />
     <Content Include="Scripts\spa\account\register\registerCtrl.js" />
+    <Content Include="Scripts\spa\account\useredit\useredit.html" />
+    <Content Include="Scripts\spa\account\useredit\usereditCtrl.js" />
     <Content Include="Scripts\spa\dishset\main\dishset.html" />
     <Content Include="Scripts\spa\dishset\main\dishsetCtrl.js" />
     <Content Include="Scripts\spa\dishset\dishsetModule.js" />
