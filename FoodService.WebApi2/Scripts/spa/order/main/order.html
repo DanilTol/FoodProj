@@ -1,12 +1,12 @@
 ﻿<div class="row">
     <div class="panel panel-primary">
-       <div class="panel-body">
+        <div class="panel-body">
             <div class="row">
                 <!--here show list of user set-->
                 <div class="col-md-5 col-sm-5 col-xs-5 pull-left" style="margin-left: 45px; margin-top: 20px">
                     <div class="row" style="margin-bottom: 10px">
                         <div class="col-md-9 col-xs-12 ">
-                            <span style="font-size: 20px;">Order on </span><input type="date" style="height: 25px; width: 135px; font-size: 14px;" ng-model="dateInput" />
+                            <span style="font-size: 20px;">Order on </span><input type="date" style="height: 25px; width: 135px; font-size: 14px;" ng-model="dateInput"/>
                         </div>
                         <div class="col-md-3 col-xs-12">
                             <button class="btn btn btn-primary glyphicon glyphicon-floppy-disk" ng-click="editUserSet();"></button>
@@ -28,7 +28,7 @@
                                 </p>
                                 <button class="btn btn-danger glyphicon glyphicon-remove cancelButton" ng-click="removeClickBtn($event)"></button>
                                 <div style="width: 60px; background-color: lightgray; padding: 3px; border-radius: 0.7em;">
-                                    <input type="number" min="1" max="20" data-ng-model="dish.Count" style="width: 40px" /><i class="glyphicon glyphicon-pushpin"></i>
+                                    <input type="number" class="countDish" min="1" max="20" data-ng-model="dish.Count" style="width: 40px"/><i class="glyphicon glyphicon-pushpin"></i>
                                 </div>
                             </div>
                         </div>

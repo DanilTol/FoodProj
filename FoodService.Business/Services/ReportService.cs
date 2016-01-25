@@ -115,7 +115,7 @@ namespace FoodService.Business.Services
                 reportDto.Add(dto);
             }
 
-            return reportDto;
+            return new List<ReportDTO>(reportDto.OrderByDescending(x => x.Date));
         } 
 
         public string ReportsForMatch(DateTime dateTime)

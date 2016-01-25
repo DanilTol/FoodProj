@@ -3,7 +3,7 @@
         <div class="panel-body">
             <div class="row">
                 <!--here show list of menu on day-->
-                <div class="col-md-5 col-sm-5 col-xs-5 pull-left" style="margin-left: 35px; margin-top: 20px">
+                <div class="col-md-5 col-sm-5 col-xs-5 pull-left" style="margin-left: 35px; margin-top: 20px; position: fixed">
                     <div class="row" style="margin-bottom: 10px">
                         <div class="col-md-7 col-xs-12 " style="margin-bottom: 3px">
                             <span style="font-size: 20px;">Menu on </span><input type="date" style="height: 25px; width: 135px; font-size: 14px;" ng-model="dateInput"/>
@@ -19,7 +19,7 @@
 
                     </div>
 
-                    <div class="dishDnDZone"
+                    <div class="dishDnDZone" 
                          x-lvl-drop-target="true"
                          x-on-drop="editDishSet(someDish)"
                          prompt="true" data-text="Drag disg here"

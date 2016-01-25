@@ -3,8 +3,9 @@
     app.controller("reportCtrl",
         ["$scope", "notificationService", "reportService", function ($scope, notificationService, reportService) {
 
+            $scope.VM = {};
             $scope.htmlDif = "";
-            $scope.chefMail = "fv";
+            $scope.VM.chefMail = "fv";
             $scope.reports = [];
             $scope.dateReport = new Date();
             $scope.allowSend = false;
@@ -22,7 +23,8 @@
 
             $scope.reportDif = function(rep) {
                 $scope.dateReport = new Date(rep.Date);
-                $scope.allowSend = true && rep.State != 1;
+                $scope.allowSend = true;
+                $scope.VM.chefMail = rep.Email;
                 $scope.htmlDif = "<h2>Changes in report on " + rep.Date + "</h2>";
                 if (rep.Id != 0) {
                     reportService.reportsformatch($scope.dateReport.getTime()).then(
@@ -44,7 +46,7 @@
             }
 
             $scope.sendToChef = function () {
-                reportService.sendMailToChef($scope.dateReport.getTime(), $scope.chefMail).then(
+                reportService.sendMailToChef($scope.dateReport.getTime(), $scope.VM.chefMail).then(
                     function (data) {
                         notificationService.displaySuccess("Mail send.");
                     }, function (status) {
