@@ -1,70 +1,70 @@
-﻿<div style=" background-image: url(/Images/ProjectImages/cook.jpg); background-size: cover; width:100%" id="editdishWrapper">
-    <div class="row" style="margin-left: 3px;">
-        <!-- left column -->
-        <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-            <div class="text-center" style="margin-top: 10px; margin-right: 5px; margin-bottom: 5px;">
-                <img ng-src="/Images/Dish/{{dish.ImagePath[0]}}" class="img-responsive img-rounded" alt="avatar">
-                <h6 style="color: white">Change photo...</h6>
-                <input type="file" name="attachment" class="form-control"
-                       data-ak-file-model="dish.Attachment" multiple />
-            </div>
+﻿<div style=" background-image url(/Images/ProjectImages/cook.jpg); background-size: cover; width:100%" id="editdishWrapper">
+<div class="row" style="margin-left: 3px;">
+    <!-- left column -->
+    <div class="col-xs-12 col-sm-12 col-md-4 text-center">
+        <div class="text-center" style="margin-top: 10px; margin-right: 5px; margin-bottom: 5px;">
+            <img ng-src="/Images/Dish/{{dish.ImagePath[0]}}" class="img-responsive img-rounded" alt="avatar">
+            <h6 style="color: white">Change photo...</h6>
+            <input type="file" name="attachment" class="form-control"
+                   data-ak-file-model="dish.Attachment" multiple />
         </div>
-        <!-- edit form column -->
-        <div class="col-xs-12 col-sm-12 col-md-8 ">
-            <form class="form-horizontal" role="form" name="editdishForm" ng-submit="UpdateDish()">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-8 col-md-12">
-                            <label class="control-label">Dish name</label>
-                            <input class="form-control" name="name" type="text" ng-model="dish.Name"
-                                   validate-on="blur" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row" style="margin-right: 5px">
-                        <div class="col-xs-4">
-                            <label class="control-label">Weight</label>
-                            <input class="form-control" type="number" ng-model="dish.Weight" name="weight" min="0" step="50"
-                                   validate-on="blur" required>
-                        </div>
-                        <div class="col-xs-4">
-                            <label class="control-label">Price</label>
-                            <input class="form-control" type="number" ng-model="dish.Price" name="price" min="1"
-                                   validate-on="blur" required>
-                        </div>
-                        <div class="col-xs-4">
-                            <label class="control-label">Energy</label>
-                            <input class="form-control" type="number" ng-model="dish.Energy" name="Energy" min="0" step="10"
-                                   validate-on="blur" required>
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-xs-12 col-sm-12 col-md-8 ">
+        <form class="form-horizontal" role="form" name="editdishForm" ng-submit="UpdateDish()">
+            <div class="form-group">
                 <div class="row">
-                    <div class="form-group col-md-6 col-sm-6">
-                        <label class="control-label">Description</label>
-                        <textarea class="form-control" ng-model="dish.Description" name="description" rows="7"
-                                  validate-on="blur" required></textarea>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Ingridients</label>
-                        <textarea class="form-control" rows="7" ng-model="dish.Ingridients" name="ingridients"
-                                  validate-on="blur" required></textarea>
+                    <div class="col-xs-8 col-md-12">
+                        <label class="control-label">Dish name</label>
+                        <input class="form-control" name="name" type="text" ng-model="dish.Name"
+                               validate-on="blur" required>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <div class="row" style="margin-right: 5px">
+                    <div class="col-xs-4">
+                        <label class="control-label">Weight</label>
+                        <input class="form-control" type="number" ng-model="dish.Weight" name="weight" min="0" step="50"
+                               validate-on="blur" required>
+                    </div>
+                    <div class="col-xs-4">
+                        <label class="control-label">Price</label>
+                        <input class="form-control" type="number" ng-model="dish.Price" name="price" min="1"
+                               validate-on="blur" required>
+                    </div>
+                    <div class="col-xs-4">
+                        <label class="control-label">Energy</label>
+                        <input class="form-control" type="number" ng-model="dish.Energy" name="Energy" min="0" step="10"
+                               validate-on="blur" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 col-sm-6">
+                    <label class="control-label">Description</label>
+                    <textarea class="form-control" ng-model="dish.Description" name="description" rows="7"
+                              validate-on="blur" required></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Ingridients</label>
+                    <textarea class="form-control" rows="7" ng-model="dish.Ingridients" name="ingridients"
+                              validate-on="blur" required></textarea>
+                </div>
+            </div>
 
-                <div class="row form-group "style="clear: both">
-                    <br />
-                <div class="col-xs-4" >
-                    <input type="submit" class="btn btn-primary" value="Update"/>
+            <div class="row form-group " style="clear: both">
+                <br />
+                <div class="col-xs-4">
+                    <input type="submit" class="btn btn-primary" value="Update" />
                     <span></span>
                     <a class="btn btn-default" ng-href="#/dishes/{{dish.ID}}">Cancel</a>
                     |
                     <button class="btn btn-danger" ng-click="deleteDish();">Delete <i class="fa fa-remove"></i></button>
-                    <br/> <br/>
+                    <br /> <br />
                 </div>
-                    </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
 </div>

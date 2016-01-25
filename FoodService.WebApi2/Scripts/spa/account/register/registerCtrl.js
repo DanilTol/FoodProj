@@ -4,14 +4,14 @@
         "$scope", "accountService", "$location", "notificationService", function ($scope, accountService, $location, notificationService) {
             $scope.user = {};
 
-            $scope.register = function() {
+            $scope.register = function () {
                 accountService.register($scope.user).then(
                     //success
-                    function() {
+                    function () {
                         $location.path("/");
                         notificationService.displaySuccess("Welcome " + $scope.user.Name);
                         //$scope.userData.LogInUser = $scope.user;
-                    }, function() {
+                    }, function () {
                         notificationService.displayError("Can`t registrate user.");
                     });
 

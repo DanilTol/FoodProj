@@ -6,18 +6,18 @@
             $scope.userProfile = {};
 
             accountService.getUserAsync().
-                then(function(data) {
+                then(function (data) {
                     $scope.userProfile = data;
                     $scope.userProfile.Salt = "";
-                },function() {
-                    
+                }, function () {
+
                 });
-            
-            $scope.editProfile = function() {
+
+            $scope.editProfile = function () {
                 accountService.editProfile($scope.userProfile).
-                    then(function() {
+                    then(function () {
                         notificationService.displaySuccess("Profile changed");
-                    }, function() {
+                    }, function () {
                         notificationService.displayError("Can`t edit profile.");
                     });
             }

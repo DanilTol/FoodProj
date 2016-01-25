@@ -343,16 +343,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-2.2.0-vsdoc.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.2.0.js" />
-    <Content Include="Scripts\jquery-2.2.0.min.js" />
-    <Content Include="Scripts\moment-with-locales.js" />
-    <Content Include="Scripts\moment-with-locales.min.js" />
-    <Content Include="Scripts\moment.js" />
-    <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\spa\account\accountModule.js" />
     <Content Include="Scripts\spa\account\accountService.js" />
     <Content Include="Scripts\spa\account\profile\profileCtrl.js" />
@@ -441,7 +431,6 @@
     <Content Include="Scripts\spa\services\common.core.js" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <Content Include="Scripts\jquery-2.2.0.min.map" />
     <None Include="Scripts\Vendors\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Vendors\jquery-1.10.2.min.js" />
     <Content Include="Scripts\Vendors\modernizr-2.6.2.js" />

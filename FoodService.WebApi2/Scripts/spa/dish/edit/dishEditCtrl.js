@@ -9,8 +9,8 @@
                     //success
                     function () {
                         notificationService.displaySuccess("Dish edited");
-                        $location.path("/dishes/"+$scope.dish.ID);
-                    }, function() {
+                        $location.path("/dishes/" + $scope.dish.ID);
+                    }, function () {
                         notificationService.displayError("Can`t edit dish. Try again later.");
                     });;
             }
@@ -23,12 +23,12 @@
                     });;
             }
 
-            $scope.deleteDish = function() {
+            $scope.deleteDish = function () {
                 dishService.deleteDish($scope.dish.ID).then(
                     //success
                     function (data) {
                         notificationService.displaySuccess("Dish has been deleted.");
-                    },function() {
+                    }, function () {
                         notificationService.displayError("Can`t delete this dish.");
                     }
                     );;

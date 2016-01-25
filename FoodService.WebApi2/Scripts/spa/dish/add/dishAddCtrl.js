@@ -8,7 +8,7 @@
                     function () {
                         notificationService.displaySuccess("Dish successfully added.");
                         $location.path("/dishes");
-                    }, function() {
+                    }, function () {
                         notificationService.displayError("Can`t add dish try again later.");
                     });;
             };

@@ -7,10 +7,10 @@
         function editProfile(user) {
             var deferred = $q.defer();
             $http.post("/api/account/edit", user).
-                success(function(data) {
-                     deferred.resolve(data);
-                }, function() {
-                     deferred.reject(status);
+                success(function (data) {
+                    deferred.resolve(data);
+                }, function () {
+                    deferred.reject(status);
                 });
             return deferred.promise;
         }
@@ -73,16 +73,16 @@
         }
 
         function getUserAsync() {
-                            var deferred = $q.defer();
-                            $http.get("/api/account/profileInfo").
-                                success(function (data) {
-                                    deferred.resolve(data);
-                                }).
-                                error(function (data1, status) {
-                                    deferred.reject(status);
-                                });
-                            return deferred.promise;
-                        }
+            var deferred = $q.defer();
+            $http.get("/api/account/profileInfo").
+                success(function (data) {
+                    deferred.resolve(data);
+                }).
+                error(function (data1, status) {
+                    deferred.reject(status);
+                });
+            return deferred.promise;
+        }
 
 
 
